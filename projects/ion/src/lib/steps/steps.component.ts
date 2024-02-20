@@ -9,7 +9,7 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { IonIconComponent } from '../icon';
-import { IonStepsProps, Status, StatusType, Step } from './types';
+import { IonStepsProps, Status, Step, StepStatusType } from './types';
 
 @Component({
   standalone: true,
@@ -50,13 +50,13 @@ export class IonStepsComponent implements OnInit, OnChanges {
     this.changeStep(index);
   }
 
-  private stepStatus(step: Step, currentIndex: number): StatusType {
+  private stepStatus(step: Step, currentIndex: number): StepStatusType {
     if (step.index && step.index < currentIndex) return Status.checked;
     if (step.index === currentIndex) return Status.selected;
     return Status.default;
   }
 
-  private checkStartedStatus(step: Step, currentIndex: number): StatusType {
+  private checkStartedStatus(step: Step, currentIndex: number): StepStatusType {
     return step.status ? step.status : this.stepStatus(step, currentIndex);
   }
 

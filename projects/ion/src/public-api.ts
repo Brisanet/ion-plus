@@ -10,6 +10,7 @@ export * from './lib/breadcrumb';
 export * from './lib/button';
 export * from './lib/divider';
 export * from './lib/icon';
+export * from './lib/popconfirm';
 export * from './lib/no-data';
 export * from './lib/spinner';
 export * from './lib/tab';
