@@ -19,6 +19,7 @@ export * from './lib/tag';
 export * from './lib/steps';
 export * from './lib/switch';
 export * from './lib/avatar';
+export * from './lib/skeleton';
 export * from './lib/message';
 export * from './lib/sidebar';
 export * from './lib/utils/commonTypes';
