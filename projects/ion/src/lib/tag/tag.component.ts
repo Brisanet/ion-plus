@@ -28,7 +28,7 @@ export class IonTagComponent {
   );
 
   protected getTagColorAndBackground = computed(() =>
-    this.validateHexColor(this.color()) ? this.color() : ''
+    this.validateHexColor(this.color()) ? this.color()! : ''
   );
 
   private validateHexColor(color?: string): boolean {

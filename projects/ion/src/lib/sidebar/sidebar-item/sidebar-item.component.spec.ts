@@ -1,22 +1,30 @@
-import { render, screen } from '@testing-library/angular';
+import { RenderResult, render, screen } from '@testing-library/angular';
 import userEvent from '@testing-library/user-event';
+import { OutputEmitterRef } from '@angular/core';
 import { SafeAny } from '../../utils/safe-any';
 import { IonSidebarItemComponent } from './sidebar-item.component';
+import { SidebarItem } from '../types';
 
 const defaultTestId = 'ion-sidebar-item';
 const defaultClass = 'ion-sidebar-item';
+const emit = jest.fn();
 
 const sut = async (
-  props: Partial<IonSidebarItemComponent> = {}
-): Promise<void> => {
-  await render(IonSidebarItemComponent, {
-    componentProperties: { ...props },
+  props: Partial<SidebarItem> & { selectedChange?: OutputEmitterRef<boolean> }
+): Promise<RenderResult<IonSidebarItemComponent, IonSidebarItemComponent>> => {
+  const { selectedChange, ...rest } = props;
+
+  return await render(IonSidebarItemComponent, {
+    componentInputs: { ...rest },
+    componentOutputs: { selectedChange },
   });
 };
 
+let detectChangesFn: () => void;
+
 describe('SidebarItem', () => {
   it('should render sidebar item', async () => {
-    await sut();
+    await sut({});
     expect(screen.getByTestId(defaultTestId)).toBeInTheDocument();
   });
   it('should render a given text', async () => {
@@ -30,7 +38,7 @@ describe('SidebarItem', () => {
     expect(document.getElementById(`ion-icon-${icon}`)).toBeInTheDocument();
   });
   it('should render unselected by default', async () => {
-    await sut();
+    await sut({});
     expect(screen.getByTestId(defaultTestId)).toHaveClass(defaultClass);
   });
   it('should render selected when prop is passed as true', async () => {
@@ -40,9 +48,14 @@ describe('SidebarItem', () => {
     );
   });
   it('should select on click', async () => {
-    await sut({ selected: false });
+    const { detectChanges } = await sut({
+      selected: false,
+      selectedChange: { emit } as SafeAny,
+    });
+    detectChangesFn = detectChanges;
     const element = screen.getByTestId(defaultTestId);
     await userEvent.click(element);
+    detectChangesFn();
     expect(element).toHaveClass(`${defaultClass}--selected`);
   });
   it('should render disabled when prop is passed as true', async () => {
@@ -54,8 +67,7 @@ describe('SidebarItem', () => {
     expect(document.getElementById('ion-icon-block')).toBeInTheDocument();
   });
   it('should emit an event when click', async () => {
-    const emit = jest.fn();
-    await sut({ ionOnClick: { emit } as SafeAny });
+    await sut({ selectedChange: { emit } as SafeAny });
     await userEvent.click(screen.getByTestId(defaultTestId));
     expect(emit).toHaveBeenCalled();
   });
