@@ -1,4 +1,4 @@
-import { EventEmitter } from '@angular/core';
+import { OutputEmitterRef } from '@angular/core';
 
 /**
  * @typedef {'sm' | 'md' | 'lg'} SwitchSize Size of the switch
@@ -42,11 +42,11 @@ export type IonSwitchProps = {
 
   /**
    * Event emitted when the value of the switch changes
-   * @event IonSwitchComponent#atValueChange - Emit the new value of the switch
+   * @event IonSwitchComponent#valueChange - Emit the new value of the switch
    * @param value - New value of the switch
    * @type {EventEmitter<boolean>}
    * @example
-   * <ion-switch atValueChange={(value) => console.log(value)} />
+   * <ion-switch valueChange={(value) => console.log(value)} />
    */
-  atValueChange: EventEmitter<boolean>;
+  valueChange: OutputEmitterRef<boolean>;
 };

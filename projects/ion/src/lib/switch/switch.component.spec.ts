@@ -8,15 +8,15 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import {
+  RenderResult,
   fireEvent,
   render,
-  RenderResult,
   screen,
 } from '@testing-library/angular';
 
 import { SafeAny } from '../utils/safe-any';
 import { IonSwitchComponent } from './switch.component';
-import { SwitchSize } from './types';
+import { IonSwitchProps, SwitchSize } from './types';
 
 let ionSwitch: HTMLElement;
 
@@ -31,10 +31,13 @@ const getSwitchByTestId = (): HTMLElement => {
 };
 
 const sut = async (
-  customProps: Partial<IonSwitchComponent> = {}
+  customProps: Partial<IonSwitchProps> = {}
 ): Promise<ComponentFixture<IonSwitchComponent>> => {
+  const { valueChange, ...rest } = customProps;
+
   const { fixture } = await render(IonSwitchComponent, {
-    componentProperties: { ...customProps, atValueChange: emitValue },
+    componentInputs: { ...rest },
+    componentOutputs: { valueChange: valueChange || emitValue },
   });
 
   return fixture;
@@ -43,7 +46,7 @@ const sut = async (
 describe('IonSwitchComponent', () => {
   describe('General', () => {
     beforeEach(async () => {
-      await sut();
+      await sut({ key: 'switch' });
     });
     it('should render switch', async () => {
       expect(getSwitchByTestId()).toBeInTheDocument();

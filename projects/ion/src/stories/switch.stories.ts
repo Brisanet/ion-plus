@@ -1,6 +1,11 @@
+import { action } from '@storybook/addon-actions';
 import { IonSwitchComponent } from '../lib/switch';
 
 import type { Meta, StoryObj } from '@storybook/angular';
+
+export const actionsData = {
+  valueChange: action('valueChange'),
+};
 
 const meta: Meta<IonSwitchComponent> = {
   title: 'Ion/Data Entry/Switch',
@@ -9,6 +14,7 @@ const meta: Meta<IonSwitchComponent> = {
   render: args => ({
     props: {
       ...args,
+      valueChange: actionsData.valueChange,
     },
   }),
   argTypes: {
