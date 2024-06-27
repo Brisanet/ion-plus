@@ -30,7 +30,8 @@
             "configDir": "projects/ion/.storybook",
             "browserTarget": "ion:build",
             "compodoc": false,
-            "port": 6006
+            "port": 6006,
+            "styles": ["projects/ion/src/styles/index.scss"]
           }
         },
         "build-storybook": {
@@ -39,7 +40,8 @@
             "configDir": "projects/ion/.storybook",
             "browserTarget": "ion:build",
             "compodoc": false,
-            "outputDir": "dist/storybook/ion"
+            "outputDir": "dist/storybook/ion",
+            "styles": ["projects/ion/src/styles/index.scss"]
           }
         }
       }

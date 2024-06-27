@@ -1,0 +1,67 @@
+import { moduleMetadata } from '@storybook/angular';
+import { Canvas, Meta, Story } from '@storybook/blocks';
+
+import { IonInputDirective } from '../public-api';
+
+<Meta title="Ion/Data Entry/Input" />
+
+# Input
+
+O componente input é um campo de entrada de texto que permite ao usuário inserir e editar texto.
+
+<Canvas>
+  <Story
+    name="Default Input"
+    decorators={[
+      () => {
+        return {
+          template: `<input ionInput placeholder="Digite aqui">`,
+        };
+      },
+      moduleMetadata({
+        imports: [IonInputDirective],
+      }),
+    ]}></Story>
+</Canvas>
+
+<Canvas>
+  <Story
+    name="Input disabled"
+    decorators={[
+      () => {
+        return {
+          template: `<input ionInput disabled placeholder="Desabilitado">`,
+        };
+      },
+      moduleMetadata({
+        imports: [IonInputDirective],
+      }),
+    ]}></Story>
+</Canvas>
+
+<Canvas>
+  <Story
+    name="Input invalid"
+    decorators={[
+      () => {
+        return {
+          template: `<input ionInput [invalid]="true" placeholder="Inválido">`,
+        };
+      },
+      moduleMetadata({
+        imports: [IonInputDirective],
+      }),
+    ]}></Story>
+</Canvas>
+
+# Use em seu Projeto
+
+Para usar IonInput em seu projeto, você também precisará importar os estilos predefinidos em sua aplicação Angular.
+
+1. **Importe o estilo em seu arquivo SCSS:**
+
+   ```scss
+   @import '../node_modules/@brisanet/ion/styles/index.scss';
+   ```
+
+   Certifique-se de que o caminho para os estilos da biblioteca Ion esteja correto com base na estrutura do seu projeto. Sinta-se à vontade para ajustar os caminhos de importação.
