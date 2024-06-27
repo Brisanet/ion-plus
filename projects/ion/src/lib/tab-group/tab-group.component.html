@@ -1,16 +1,16 @@
 <div data-testid="ion-tab-group" class="ion-tab-group">
-  <div [class.ion-tab-group__column-inner]="direction === 'vertical'">
-    @for (tab of tabs; track tab.label) {
+  <div [class.ion-tab-group__column-inner]="direction() === 'vertical'">
+    @for (tab of tabs(); track tab.label) {
       <ion-tab
         [attr.data-testid]="'ion-tab-in-group-' + tab.label"
-        [selected]="tab.selected"
         [label]="tab.label"
         [iconType]="tab?.iconType"
-        [tabSize]="size"
-        [direction]="border"
+        [tabSize]="size()"
+        [direction]="border()"
         [badge]="tab?.badge"
-        [disabled]="tab?.disabled"
-        (click)="handleClick(tab)" />
+        [disabled]="!!tab?.disabled"
+        [selected]="tab.selected"
+        (selectedChange)="handleSelectedTab(tab)" />
     }
   </div>
 </div>

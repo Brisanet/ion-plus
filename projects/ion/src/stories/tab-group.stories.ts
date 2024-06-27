@@ -1,13 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/angular';
-import type { IonTabGroupProps } from '../lib/tab-group';
 import { IonTabGroupComponent } from '../lib/tab-group';
 import { iconsPaths } from '../public-api';
 
-const tabs: IonTabGroupProps['tabs'] = [];
+const tabs = [];
 for (let index = 1; index <= 8; index++) {
   tabs.push({
     label: 'Tab ' + index,
-
     selected: false,
   });
 }
@@ -53,7 +51,7 @@ const meta: Meta<IonTabGroupComponent> = {
       defaultValue: { summary: `sm` },
       description: 'Tamanho da tab. Pode ser `sm`, `md` ou `lg`.',
     },
-    selected: {
+    tabSelected: {
       action: { handles: 'click' },
       description:
         'Emite um evento quando alguma tab é clicada. Caso a tab esteja desabilitada, nenhum evento será disparado.',

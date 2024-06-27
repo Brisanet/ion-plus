@@ -1,8 +1,10 @@
-import { EventEmitter } from '@angular/core';
+import { OutputEmitterRef } from '@angular/core';
 import { IonTabProps, TabSize } from '../tab/types';
 import { BorderDirectionType, DirectionType } from '../utils/commonTypes';
 
-export interface TabInGroup extends IonTabProps {
+type Tab = Partial<IonTabProps> & Pick<IonTabProps, 'label'>;
+
+export interface TabInGroup extends Tab {
   /**
    * Tab selected
    * @param selected - Indicates whether the tab is selected. In this type (TabInGroup), it is mandatory to use.
@@ -32,7 +34,7 @@ export interface IonTabGroupProps {
    * @example
    * <ion-tab-group border = 'bottom' />
    */
-  border?: BorderDirectionType;
+  border: BorderDirectionType;
 
   /**
    * Tabs direction
@@ -52,15 +54,15 @@ export interface IonTabGroupProps {
    * @example
    * <ion-tab-group size = `sm`/>
    */
-  size?: TabSize;
+  size: TabSize;
 
   /**
    * Tabs selected event
    * @event IonTabGroupComponent#selected - Event triggered when some tab is clicked.
-   * @type {'EventEmitter<TabInGroup>'}
+   * @type {'OutputEmitterRef<TabInGroup>'}
    * @description This event is emitted when some tab is clicked. It returns tab properties of clicked tab.
    * @example
    * <ion-tab-group (selected)="yourFunction()" />
    */
-  selected: EventEmitter<TabInGroup>;
+  tabSelected: OutputEmitterRef<TabInGroup>;
 }

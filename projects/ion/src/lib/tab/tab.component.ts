@@ -1,5 +1,10 @@
 import { CommonModule, NgClass } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  input,
+  model,
+} from '@angular/core';
 import { IonBadgeComponent } from '../badge';
 import { IonIconComponent } from '../icon';
 import { IonTabProps } from './types';
@@ -11,22 +16,23 @@ import { IonTabProps } from './types';
   templateUrl: './tab.component.html',
   styleUrls: ['./tab.component.scss'],
   host: {
-    '[attr.data-size]': 'tabSize',
-    '[attr.data-direction]': 'direction',
+    '[attr.data-size]': 'tabSize()',
+    '[attr.data-direction]': 'direction()',
   },
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IonTabComponent {
-  @Input() label!: IonTabProps['label'];
-  @Input() tabSize: IonTabProps['tabSize'] = 'sm';
-  @Input() disabled: IonTabProps['disabled'] = false;
-  @Input() selected: IonTabProps['selected'] = false;
-  @Input() direction?: IonTabProps['direction'] = 'bottom';
-  @Input() iconType?: IonTabProps['iconType'];
-  @Input() badge?: IonTabProps['badge'];
+  label = input.required<IonTabProps['label']>();
+  tabSize = input<IonTabProps['tabSize']>('sm');
+  disabled = input<IonTabProps['disabled']>(false);
+  selected = model<IonTabProps['selected']>(false);
+  direction = input<IonTabProps['direction']>('bottom');
+  iconType = input<IonTabProps['iconType']>();
+  badge = input<IonTabProps['badge']>();
 
   public handleClick(): void {
-    if (!this.disabled) {
-      this.selected = true;
+    if (!this.disabled()) {
+      this.selected.set(true);
     }
   }
 }
