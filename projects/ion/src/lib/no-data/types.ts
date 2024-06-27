@@ -8,7 +8,7 @@ export interface IonNoDataProps {
    * @example
    * <ion-no-data label = `no data text` />
    */
-  label?: string;
+  label: string;
 
   /**
    * No data icon
@@ -17,5 +17,5 @@ export interface IonNoDataProps {
    * @example
    * <ion-no-data [iconType]="play" />
    */
-  iconType?: IconType;
+  iconType: IconType;
 }

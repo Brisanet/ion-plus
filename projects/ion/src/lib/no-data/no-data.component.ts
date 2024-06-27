@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { IonIconComponent } from '../icon';
 import { IonNoDataProps } from './types';
 
@@ -9,8 +9,9 @@ import { IonNoDataProps } from './types';
   imports: [CommonModule, IonIconComponent],
   templateUrl: './no-data.component.html',
   styleUrls: ['./no-data.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IonNoDataComponent {
-  @Input() iconType: IonNoDataProps['iconType'] = 'exclamation-rounded';
-  @Input() label: IonNoDataProps['label'] = 'Não há dados';
+  label = input<IonNoDataProps['label']>('Não há dados');
+  iconType = input<IonNoDataProps['iconType']>('exclamation-solid');
 }

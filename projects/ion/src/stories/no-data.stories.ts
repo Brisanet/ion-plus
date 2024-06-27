@@ -31,6 +31,4 @@ const meta: Meta<IonNoDataComponent> = {
 
 export default meta;
 type Story = StoryObj<IonNoDataComponent>;
-export const Default: Story = {
-  args: {} as IonNoDataComponent,
-};
+export const Default: Story = {};
