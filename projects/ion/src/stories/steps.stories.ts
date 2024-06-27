@@ -1,3 +1,4 @@
+import { action } from '@storybook/addon-actions';
 import type { Meta, StoryObj } from '@storybook/angular';
 
 import { IonStepsComponent } from '../lib/steps';
@@ -9,6 +10,7 @@ const meta: Meta<IonStepsComponent> = {
   render: args => ({
     props: {
       ...args,
+      currentChange: action('currentChange'),
     },
   }),
   argTypes: {
@@ -41,7 +43,7 @@ const meta: Meta<IonStepsComponent> = {
         'Indica se usuário pode selecionar um passo através de um clique nele.',
       defaultValue: { summary: false },
     },
-    indexChange: {
+    currentChange: {
       action: { handles: 'click' },
       description:
         'Emite um evento quando algum passo é selecionado pelo clique. Para usá-lo, a propriedade "clickable" deve estar ativada. Ele emite o índex da etapa selecionada.',
