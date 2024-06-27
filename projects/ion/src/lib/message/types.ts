@@ -19,10 +19,10 @@ export interface IonMessageProps {
    * @type {MessageStatusType}
    * @default 'positive'
    */
-  type?: MessageStatusType;
+  type: MessageStatusType;
   /**
    * @description The `iconType` parameter represents the icon that will be displayed.
    * @type {IconType}
    */
-  iconType?: IconType;
+  iconType: IconType;
 }

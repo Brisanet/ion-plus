@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { RenderResult, render, screen } from '@testing-library/angular';
 
+import { IonIconComponent } from '../icon';
 import { IonMessageComponent } from './message.component';
 import { IonMessageProps, MessageStatusType } from './types';
-import { IonIconComponent } from '../icon';
 
-const defaultValue: IonMessageProps = {
+const defaultValue: Partial<IonMessageProps> = {
   label: 'Message',
 };
 
@@ -19,13 +19,13 @@ export const iconTypes: MessageStatusType[] = [
 ];
 
 const sut = async (
-  customProps: IonMessageProps = defaultValue
+  customProps: Partial<IonMessageProps> = defaultValue
 ): Promise<{
   fixture: RenderResult<IonMessageComponent>;
   element: HTMLElement;
 }> => {
   const fixture = await render(IonMessageComponent, {
-    componentProperties: customProps,
+    componentInputs: customProps,
     imports: [CommonModule, IonIconComponent],
   });
   const element = fixture.fixture.nativeElement as HTMLElement;
@@ -47,7 +47,7 @@ describe('MessageComponent', () => {
 
   it('should have a message', async () => {
     await sut();
-    expect(screen.getAllByText(defaultValue.label)).toHaveLength(1);
+    expect(screen.getAllByText(defaultValue.label!)).toHaveLength(1);
   });
 });
 
