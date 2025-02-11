@@ -29,3 +29,5 @@ export * from './lib/sidebar';
 export * from './lib/input';
 export * from './lib/simple-menu';
 export * from './lib/utils/commonTypes';
+export * from './lib/checkbox';
+export * from './lib/radio';
