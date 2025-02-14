@@ -10,7 +10,6 @@ import { SafeAny } from '../../utils/safe-any';
 import { IonAccordionItemProps } from '../types';
 
 @Component({
-  standalone: true,
   imports: [CommonModule, IonIconComponent],
   selector: 'ion-accordion-item',
   templateUrl: './accordion-item.component.html',

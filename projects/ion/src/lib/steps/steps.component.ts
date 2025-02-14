@@ -12,7 +12,6 @@ import { IonIconComponent } from '../icon';
 import { IonStepsProps, Status, StatusType } from './types';
 
 @Component({
-  standalone: true,
   selector: 'ion-steps',
   imports: [CommonModule, IonIconComponent],
   templateUrl: './steps.component.html',

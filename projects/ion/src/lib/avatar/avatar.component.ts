@@ -8,7 +8,6 @@ import { IonAvatarProps } from './types';
 
 @Component({
   selector: 'ion-avatar',
-  standalone: true,
   imports: [CommonModule, IonIconComponent, DefaultImageDirective],
   templateUrl: './avatar.component.html',
   styleUrl: './avatar.component.scss',

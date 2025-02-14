@@ -1,3 +1,4 @@
+/* eslint-disable */
 import type { Meta, StoryObj } from '@storybook/angular';
 
 import { IonAvatarComponent } from '../lib/avatar';

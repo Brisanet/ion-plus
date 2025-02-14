@@ -15,7 +15,6 @@ const CLASS_PREFIX = 'ion-btn';
 const ANIMATION_TIME = 300;
 
 @Component({
-  standalone: true,
   selector: 'ion-button',
   imports: [CommonModule, IonIconComponent, NgClass],
   templateUrl: './button.component.html',

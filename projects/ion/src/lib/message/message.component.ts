@@ -19,7 +19,6 @@ const iconTypes: Record<MessageStatusType, IconType> = {
 
 @Component({
   selector: 'ion-message',
-  standalone: true,
   imports: [IonIconComponent],
   templateUrl: './message.component.html',
   styleUrl: './message.component.scss',

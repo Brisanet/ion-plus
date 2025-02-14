@@ -18,7 +18,6 @@ const DEFAULT_STYLE = {
 };
 
 @Component({
-  standalone: true,
   selector: 'ion-icon',
   imports: [CommonModule],
   templateUrl: './icon.component.html',

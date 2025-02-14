@@ -4,7 +4,6 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { IonSpinnerProps } from './types';
 
 @Component({
-  standalone: true,
   selector: 'ion-spinner',
   imports: [CommonModule],
   templateUrl: './spinner.component.html',

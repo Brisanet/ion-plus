@@ -15,7 +15,6 @@ const ICON_SIZE = {
 
 @Component({
   selector: 'ion-badge',
-  standalone: true,
   imports: [IonIconComponent],
   templateUrl: './badge.component.html',
   styleUrls: ['./badge.component.scss'],

@@ -18,7 +18,6 @@ export const alertIconTypes: Record<IonAlertStatus, IconType> = {
 };
 
 @Component({
-  standalone: true,
   selector: 'ion-alert',
   templateUrl: './alert.component.html',
   styleUrl: './alert.component.scss',

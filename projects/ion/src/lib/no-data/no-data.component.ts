@@ -4,7 +4,6 @@ import { IonIconComponent } from '../icon';
 import { IonNoDataProps } from './types';
 
 @Component({
-  standalone: true,
   selector: 'ion-no-data',
   imports: [CommonModule, IonIconComponent],
   templateUrl: './no-data.component.html',

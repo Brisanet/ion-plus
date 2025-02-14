@@ -16,7 +16,6 @@ const SIZES = {
 };
 
 @Component({
-  standalone: true,
   imports: [CommonModule, IonIconComponent, NgClass],
   selector: 'ion-link',
   templateUrl: './link.component.html',

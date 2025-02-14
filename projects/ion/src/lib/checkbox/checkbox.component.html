@@ -1,0 +1,19 @@
+<div class="ion-checkbox">
+  <input
+    type="checkbox"
+    [id]="value()"
+    [name]="value()"
+    [value]="value()"
+    [disabled]="disabled()"
+    [checked]="checked()"
+    [indeterminate]="indeterminate()"
+    (click)="change()" />
+  @if (label(); as label) {
+    <label
+      class="ion-checkbox__label"
+      [class.ion-checkbox__label--disabled]="disabled()"
+      [for]="value()"
+      >{{ label }}</label
+    >
+  }
+</div>

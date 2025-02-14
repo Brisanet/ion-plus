@@ -15,7 +15,6 @@ import { SimpleMenuProps } from './types';
 
 @Component({
   selector: 'ion-simple-menu',
-  standalone: true,
   imports: [IonButtonComponent, IonAvatarComponent, IonTabGroupComponent],
   templateUrl: './simple-menu.component.html',
   styleUrl: './simple-menu.component.scss',

@@ -10,7 +10,6 @@ import { IonIconComponent } from '../icon';
 import { IonTabProps } from './types';
 
 @Component({
-  standalone: true,
   selector: 'ion-tab',
   imports: [CommonModule, IonIconComponent, IonBadgeComponent, NgClass],
   templateUrl: './tab.component.html',

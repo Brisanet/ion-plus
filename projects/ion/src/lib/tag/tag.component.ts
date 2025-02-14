@@ -9,7 +9,6 @@ import { IonIconComponent } from '../icon';
 import { IonTagProps } from './types';
 
 @Component({
-  standalone: true,
   selector: 'ion-tag',
   imports: [CommonModule, IonIconComponent],
   templateUrl: './tag.component.html',

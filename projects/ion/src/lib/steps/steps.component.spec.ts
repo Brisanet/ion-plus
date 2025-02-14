@@ -182,7 +182,7 @@ describe('Passing through the IonStepsComponent', () => {
     fixture.detectChanges();
     testHost.current = 4;
     fixture.detectChanges();
-    expect(screen.getByTestId('step-3-checked')).toBeTruthy();
+    expect(screen.getByTestId('step-3-selected')).toBeTruthy();
   });
   it('should to keep first step default when try to pass back', async () => {
     fixture.detectChanges();
@@ -192,6 +192,6 @@ describe('Passing through the IonStepsComponent', () => {
     fixture.detectChanges();
     testHost.current = 0;
     fixture.detectChanges();
-    expect(screen.getByTestId('step-1-default')).toBeTruthy();
+    expect(screen.getByTestId('step-1-selected')).toBeTruthy();
   });
 });

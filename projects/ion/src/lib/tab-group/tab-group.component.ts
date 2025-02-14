@@ -14,7 +14,6 @@ import { BorderDirectionType } from '../utils/commonTypes';
 import { IonTabGroupProps, TabInGroup } from './types';
 
 @Component({
-  standalone: true,
   selector: 'ion-tab-group',
   imports: [CommonModule, IonTabComponent],
   templateUrl: './tab-group.component.html',

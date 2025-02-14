@@ -21,7 +21,11 @@ const clickOnElement = async (element: Element) => {
   await userEvent.click(element);
   detectChangesFn();
 };
-const logo: IonSidebarProps['logo'] = 'logo.svg';
+const logoConfig: IonSidebarProps['logoConfig'] = {
+  src: 'logo.svg',
+  action: actionMock,
+};
+
 const items: IonSidebarProps['items'] = [
   {
     title: 'Item 1',
@@ -57,11 +61,14 @@ const items: IonSidebarProps['items'] = [
     ],
   },
 ];
-const defaultProps = { logo: '', items: [], closeOnSelect: false };
+const defaultProps: Partial<IonSidebarProps> = {
+  items: [],
+  closeOnSelect: false,
+};
 
-const sut = async (props: IonSidebarProps = defaultProps) => {
+const sut = async (props: Partial<IonSidebarProps> = defaultProps) => {
   const result = await render(IonSidebarComponent, {
-    componentInputs: props,
+    componentInputs: { ...props },
   });
   detectChangesFn = result.detectChanges;
   return result;
@@ -70,7 +77,7 @@ const sut = async (props: IonSidebarProps = defaultProps) => {
 describe('Sidebar', () => {
   describe('Not visible', () => {
     beforeEach(async () => {
-      await sut({ ...defaultProps, items, logo });
+      await sut({ ...defaultProps, items, logoConfig });
     });
     afterEach(() => {
       jest.clearAllMocks();
@@ -89,8 +96,7 @@ describe('Sidebar', () => {
       await sut({
         ...defaultProps,
         items,
-        logo,
-        logoAction: actionMock,
+        logoConfig,
       });
 
       await clickOnElement(getByTestId('toggleVisibility').firstElementChild!);
@@ -104,10 +110,11 @@ describe('Sidebar', () => {
       expect(getByTestId('sidebar')).toBeInTheDocument();
     });
     it('should render logo on sidebar', () => {
-      expect(screen.getByRole('img')).toHaveAttribute('src', logo);
+      expect(screen.getByRole('img')).toHaveAttribute('src', logoConfig.src);
     });
-    it('should call sidebar logo action', async () => {
+    it('should emit when clicking in the sidebar logo', async () => {
       await userEvent.click(screen.getByRole('img'));
+      detectChangesFn();
       expect(actionMock).toHaveBeenCalledTimes(1);
     });
     it('should render toggle sidebar visibility button', () => {
@@ -234,7 +241,7 @@ describe('Sidebar', () => {
       await sut({
         ...defaultProps,
         items: [...items],
-        logo,
+        logoConfig,
       });
 
       await clickOnElement(getByTestId('toggleVisibility').firstElementChild!);
@@ -277,7 +284,7 @@ describe('Sidebar', () => {
       await sut({
         ...defaultProps,
         items: items,
-        logo,
+        logoConfig,
         closeOnSelect: true,
       });
 

@@ -10,7 +10,6 @@ import { BreadcrumbItem, BreadcrumbProps } from './types';
 
 @Component({
   selector: 'ion-breadcrumb',
-  standalone: true,
   imports: [CommonModule, IonIconComponent],
   templateUrl: './breadcrumb.component.html',
   styleUrl: './breadcrumb.component.scss',

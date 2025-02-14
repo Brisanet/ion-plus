@@ -12,7 +12,6 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { IonSwitchProps } from './types';
 
 @Component({
-  standalone: true,
   imports: [CommonModule, NgClass],
   selector: 'ion-switch',
   templateUrl: './switch.component.html',

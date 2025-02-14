@@ -11,7 +11,6 @@ import { IonAccordionItemComponent } from './accordion-item/accordion-item.compo
 import { AccordionItem, IonAccordionProps } from './types';
 
 @Component({
-  standalone: true,
   imports: [CommonModule, IonAccordionItemComponent],
   selector: 'ion-accordion',
   templateUrl: 'accordion.component.html',

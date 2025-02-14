@@ -1,5 +1,9 @@
-import { EventEmitter } from '@angular/core';
 import { IconType } from '../icon';
+
+type LogoConfig = {
+  src: string;
+  action: () => void;
+};
 
 export interface SidebarItem {
   /**
@@ -32,7 +36,6 @@ export interface SidebarItem {
    * @type {() => void}
    */
   action?: () => void;
-  ionOnClick?: EventEmitter<void>;
 }
 
 export interface SidebarGroup extends SidebarItem {
@@ -47,22 +50,10 @@ export interface SidebarGroup extends SidebarItem {
    * @param haveGroupAction - Defines if the click on the group title will trigger an action.
    * @type {boolean}
    */
-  haveGroupAction?: boolean;
+  haveGroupAction: boolean;
 }
 
 export interface IonSidebarProps {
-  /**
-   * Sidebar logo.
-   * @param logo - Defines the of the logo to be rendered
-   * @type {string}
-   */
-  logo: string;
-  /**
-   * Sidebar logoAction.
-   * @param logoAction - Defines the to be executed when clicking the logo
-   * @type {() => void}
-   */
-  logoAction?: () => void;
   /**
    * Sidebar items.
    * @param items - Defines the sidebar items or group of items to be rendered
@@ -74,5 +65,11 @@ export interface IonSidebarProps {
    * @param closeOnSelect - Defines if the sidebar should close after selecting an item
    * @type {boolean}
    */
-  closeOnSelect?: boolean;
+  closeOnSelect: boolean;
+  /**
+   * Sidebar logoConfig.
+   * @param logoConfig - Defines the logo configuration, with its image path and click action
+   * @type {LogoConfig}
+   */
+  logoConfig: LogoConfig;
 }
