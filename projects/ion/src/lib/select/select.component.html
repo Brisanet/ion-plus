@@ -1,1 +1,9 @@
-<p>ion-select</p>
+<input type="text" [placeholder]="placeholder()" (click)="toggleDropdown()" />
+
+@if (isDropdownOpen()) {
+  <div>
+    @for (option of options(); track option.label) {
+      <p>{{ option.label }}</p>
+    }
+  </div>
+}
