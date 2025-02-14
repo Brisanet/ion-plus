@@ -51,7 +51,11 @@ export class IonDropdownDirective<T extends IonDropdownOption>
       this.destroyOverlay();
     }
 
-    this.overlayRef ? this.destroyOverlay() : this.createOverlay();
+    if (this.overlayRef) {
+      this.destroyOverlay();
+    } else {
+      this.createOverlay();
+    }
   }
 
   private createOverlay(): void {
