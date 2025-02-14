@@ -1,0 +1,21 @@
+@mixin scrollbar($width) {
+  ::-webkit-scrollbar {
+    width: $width;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    border-radius: 20px;
+    background: $neutral-3;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: $neutral-4;
+  }
+}
