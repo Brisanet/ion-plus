@@ -1,0 +1,122 @@
+@import '../../../styles/index.scss';
+
+@mixin set-colors($bgColor, $text-color) {
+  background-color: $bgColor;
+  color: $text-color;
+}
+
+@mixin set-icon-color($color) {
+  ::ng-deep {
+    ion-icon svg {
+      fill: $color;
+    }
+  }
+}
+
+.dropdown-menu {
+  padding: spacing(1.5) spacing(1);
+  background-color: $neutral-1;
+  box-shadow: $double-shadow;
+  border-radius: 8px;
+  margin: 0;
+  list-style: none;
+  width: max-content;
+  min-width: 182px;
+  display: flex;
+  flex-direction: column;
+  gap: spacing(0.5);
+
+  & ul {
+    display: flex;
+    flex-direction: column;
+    padding-left: 0;
+    margin: 0;
+    gap: spacing(0.5);
+    max-height: 244px;
+    overflow-y: auto;
+  }
+
+  &--loading {
+    align-items: center;
+  }
+
+  &__item {
+    cursor: pointer;
+    padding: spacing(1) spacing(1.5);
+    background-color: $neutral-1;
+    border-radius: 8px;
+    font-family: 'Source Sans Pro', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: $neutral-7;
+    border: none;
+    width: 100%;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: spacing(1);
+
+    & span {
+      flex: 1;
+      text-align: left;
+    }
+
+    &:hover {
+      @include set-colors($primary-1, $neutral-7);
+    }
+
+    &:active {
+      @include set-colors($primary-2, $primary-6);
+      @include set-icon-color($primary-6);
+    }
+
+    &--selected {
+      @include set-colors($primary-1, $primary-color);
+      @include set-icon-color($primary-color);
+
+      &:hover {
+        @include set-colors($primary-1, $primary-4);
+        @include set-icon-color($primary-4);
+      }
+
+      &:active {
+        @include set-colors($primary-2, $primary-6);
+        @include set-icon-color($primary-6);
+      }
+    }
+
+    &--disabled {
+      color: $neutral-5;
+      @include set-icon-color($neutral-5);
+
+      &:hover {
+        @include set-colors($neutral-1, $neutral-5);
+        cursor: not-allowed;
+      }
+
+      &:active {
+        @include set-colors($neutral-1, $neutral-5);
+      }
+
+      &.dropdown-menu__item--selected {
+        background-color: $neutral-2;
+        @include set-icon-color($neutral-5);
+      }
+    }
+  }
+}
+
+.clear-btn {
+  margin-top: spacing(1);
+
+  ::ng-deep {
+    button {
+      width: 100%;
+    }
+  }
+}
+
+@include scrollbar(8px);

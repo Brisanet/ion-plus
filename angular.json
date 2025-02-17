@@ -31,7 +31,7 @@
             "browserTarget": "ion:build",
             "compodoc": false,
             "port": 6006,
-            "styles": ["projects/ion/src/styles/index.scss"]
+            "styles": ["projects/ion/src/styles/index.scss", "./node_modules/@angular/cdk/overlay-prebuilt.css"]
           }
         },
         "build-storybook": {
@@ -41,7 +41,7 @@
             "browserTarget": "ion:build",
             "compodoc": false,
             "outputDir": "dist/storybook/ion",
-            "styles": ["projects/ion/src/styles/index.scss"]
+            "styles": ["projects/ion/src/styles/index.scss", "./node_modules/@angular/cdk/overlay-prebuilt.css"]
           }
         }
       }
