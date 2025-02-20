@@ -2,7 +2,7 @@ import { Meta, StoryObj } from '@storybook/angular';
 import { OpenDropdownComponent } from '../lib/directives/dropdown/mocks/open-dropdown.component';
 
 const meta: Meta<OpenDropdownComponent> = {
-  title: 'Ion/Navigation/Dropdown/Directive',
+  title: 'Ion/Directive/Dropdown',
   component: OpenDropdownComponent,
   tags: ['autodocs'],
   render: args => ({

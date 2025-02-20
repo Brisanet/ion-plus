@@ -1,9 +1,12 @@
-import { IonDropdownConfig } from './types';
 import { fireEvent, render, screen } from '@testing-library/angular';
 import { IonDropdownComponent } from './dropdown.component';
-import { IonDropdownProps, IonDropdownOption } from '.';
-import { SafeAny } from '../../utils/safe-any';
 import { ComponentFixture } from '@angular/core/testing';
+import {
+  IonDropdownConfig,
+  IonDropdownOption,
+  IonDropdownProps,
+} from '../directives/dropdown/types';
+import { SafeAny } from '../utils/safe-any';
 
 interface MockOption extends IonDropdownOption {
   name?: string;

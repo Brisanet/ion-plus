@@ -7,11 +7,14 @@ import {
   signal,
 } from '@angular/core';
 
-import { IonDropdownOption, IonDropdownProps } from './types';
-import { IonIconComponent } from '../../icon';
-import { IonNoDataComponent } from '../../no-data';
-import { IonSpinnerComponent } from '../../spinner';
-import { IonButtonComponent } from '../../button';
+import {
+  IonDropdownOption,
+  IonDropdownProps,
+} from '../directives/dropdown/types';
+import { IonIconComponent } from '../icon';
+import { IonNoDataComponent } from '../no-data';
+import { IonSpinnerComponent } from '../spinner';
+import { IonButtonComponent } from '../button';
 
 @Component({
   standalone: true,

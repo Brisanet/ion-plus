@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from '@storybook/angular';
-import { IonDropdownComponent } from '../lib/directives/dropdown/dropdown.component';
+import { IonDropdownComponent } from '../lib/dropdown/dropdown.component';
 import { IonDropdownOption } from '../lib/directives/dropdown';
 
 interface Character extends IonDropdownOption {
