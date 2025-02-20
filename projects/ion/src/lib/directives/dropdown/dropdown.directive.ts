@@ -13,7 +13,7 @@ import {
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { IonDropdownOption, IonDropdownProps } from '.';
-import { IonDropdownComponent } from './dropdown.component';
+import { IonDropdownComponent } from '../../dropdown/dropdown.component';
 
 @Directive({
   selector: '[ionDropdown]',
