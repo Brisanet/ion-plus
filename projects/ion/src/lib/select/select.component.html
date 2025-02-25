@@ -1,9 +1,23 @@
-<input type="text" [placeholder]="placeholder()" (click)="toggleDropdown()" />
-
-@if (isDropdownOpen()) {
-  <div>
-    @for (option of options(); track option.label) {
-      <p>{{ option.label }}</p>
+<div class="ion-select">
+  <div class="ion-select-container">
+    @for (option of visibleOptions; track option.label) {
+      @if (option.selected) {
+        <ion-select-item [label]="option.label"></ion-select-item>
+      }
     }
+    <input
+      type="text"
+      [placeholder]="placeholder()"
+      [(ngModel)]="inputValue"
+      (input)="onSearchChange()"
+      ionDropdown
+      [dropdownConfig]="{
+        required: required(),
+        multiple: mode() === 'multiple',
+        clearButton: mode() === 'multiple',
+      }"
+      [dropdownOptions]="visibleOptions"
+      (dropdownEvent)="selected($event)" />
   </div>
-}
+  <ion-icon [type]="isDropdownOpen() ? 'semi-up' : 'semi-down'"></ion-icon>
+</div>

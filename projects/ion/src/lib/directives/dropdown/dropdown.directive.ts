@@ -9,6 +9,7 @@ import {
   OnDestroy,
   OutputRefSubscription,
   SimpleChanges,
+  output,
 } from '@angular/core';
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
@@ -25,7 +26,7 @@ export class IonDropdownDirective<T extends IonDropdownOption>
   dropdownConfig = input.required<IonDropdownProps<T>['dropdownConfig']>({});
   dropdownLoading = input<IonDropdownProps<T>['dropdownLoading']>(false);
   dropdownOptions = model<IonDropdownProps<T>['dropdownOptions']>([]);
-
+  dropdownEvent = output<IonDropdownProps<T>['dropdownOptions']>();
   private overlayRef: OverlayRef | null = null;
   private dropdownRef?: ComponentRef<IonDropdownComponent<T>>;
   private optionsSubscription?: OutputRefSubscription;
@@ -118,6 +119,12 @@ export class IonDropdownDirective<T extends IonDropdownOption>
         });
     }
     this.updateProperties();
+
+    this.dropdownRef.instance.dropdownOptionsChange.subscribe(
+      (event: IonDropdownProps<T>['dropdownOptions']) => {
+        this.dropdownEvent.emit(event);
+      }
+    );
 
     this.overlayRef.backdropClick().subscribe(() => {
       this.destroyOverlay();

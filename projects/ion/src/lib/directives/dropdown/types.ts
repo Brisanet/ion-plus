@@ -4,6 +4,12 @@ import { IonNoDataProps } from '../../no-data';
 
 export interface IonDropdownOption {
   /**
+   * Option key.
+   * @param label - Define the key of the option.
+   * @type {string}
+   */
+  key: string;
+  /**
    * Option label.
    * @param label - Define the visible label.
    * @type {string}
