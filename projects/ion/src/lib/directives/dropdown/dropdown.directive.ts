@@ -27,10 +27,12 @@ export class IonDropdownDirective<T extends IonDropdownOption>
   dropdownLoading = input<IonDropdownProps<T>['dropdownLoading']>(false);
   dropdownOptions = model<IonDropdownProps<T>['dropdownOptions']>([]);
   dropdownEvent = output<IonDropdownProps<T>['dropdownOptions']>();
+  dropdownOpened = output<IonDropdownProps<T>['dropdownOpened']>();
+
   private overlayRef: OverlayRef | null = null;
   private dropdownRef?: ComponentRef<IonDropdownComponent<T>>;
   private optionsSubscription?: OutputRefSubscription;
-
+  private optionsRef!: IonDropdownProps<T>['dropdownOptions'];
   constructor(
     private elementRef: ElementRef,
     private overlay: Overlay
@@ -118,15 +120,24 @@ export class IonDropdownDirective<T extends IonDropdownOption>
           this.dropdownOptions.set(data);
         });
     }
+
     this.updateProperties();
 
-    this.dropdownRef.instance.dropdownOptionsChange.subscribe(
-      (event: IonDropdownProps<T>['dropdownOptions']) => {
-        this.dropdownEvent.emit(event);
-      }
-    );
+    this.dropdownRef.instance.dropdownOptionsChange.subscribe(() => {
+      console.log(this.dropdownOptions());
+      this.dropdownOptions().forEach(option => {
+        this.optionsRef.forEach(ref => {
+          if (option.key === ref.key) {
+            ref.selected = option.selected;
+          }
+        });
+      });
+      this.dropdownEvent.emit(this.optionsRef);
+    });
 
+    this.dropdownOpened.emit(true);
     this.overlayRef.backdropClick().subscribe(() => {
+      this.dropdownOpened.emit(false);
       this.destroyOverlay();
     });
   }
@@ -145,5 +156,6 @@ export class IonDropdownDirective<T extends IonDropdownOption>
     this.dropdownRef.instance.dropdownLoading.set(this.dropdownLoading());
     this.dropdownRef.instance.dropdownConfig.set(this.dropdownConfig());
     this.dropdownRef.instance.dropdownOptions.set(this.dropdownOptions());
+    this.optionsRef = [...this.dropdownOptions()];
   }
 }

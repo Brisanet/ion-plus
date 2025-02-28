@@ -1,23 +1,37 @@
-<div class="ion-select">
+<div
+  class="ion-select"
+  ionDropdown
+  [dropdownConfig]="{
+    required: required(),
+    multiple: mode() === 'multiple',
+    clearButton: mode() === 'multiple',
+    maxSelected: maxSelect(),
+    shouldRender: disabled(),
+  }"
+  [dropdownLoading]="loading()"
+  [dropdownOptions]="visibleOptions"
+  (dropdownOpened)="handleClick($event)"
+  (dropdownEvent)="selected($event)"
+  [class.ion-select--required]="isValid"
+  [class.ion-select--disabled]="disabled()">
   <div class="ion-select-container">
-    @for (option of visibleOptions; track option.label) {
+    @for (option of options(); track option.label) {
       @if (option.selected) {
-        <ion-select-item [label]="option.label"></ion-select-item>
+        <ion-select-item
+          [label]="option.label"
+          [disabled]="disabled()"
+          (unselect)="unselectOption(option)"></ion-select-item>
       }
     }
     <input
+      #ionSelectInput
       type="text"
-      [placeholder]="placeholder()"
+      [placeholder]="!hasSelectedOption() ? placeholder() : ''"
+      [required]="required()"
+      [disabled]="disabled()"
       [(ngModel)]="inputValue"
-      (input)="onSearchChange()"
-      ionDropdown
-      [dropdownConfig]="{
-        required: required(),
-        multiple: mode() === 'multiple',
-        clearButton: mode() === 'multiple',
-      }"
-      [dropdownOptions]="visibleOptions"
-      (dropdownEvent)="selected($event)" />
+      (input)="onSearchChange()" />
+
+    <ion-icon [type]="isDropdownOpen() ? 'semi-up' : 'semi-down'"></ion-icon>
   </div>
-  <ion-icon [type]="isDropdownOpen() ? 'semi-up' : 'semi-down'"></ion-icon>
 </div>
