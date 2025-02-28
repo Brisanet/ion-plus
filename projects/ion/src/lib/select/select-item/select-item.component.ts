@@ -18,6 +18,7 @@ export class SelectItemComponent {
   label = input<string>('');
   disabled = input<boolean>(false);
   unselect = output<void>();
+  iconSize = 15;
 
   onUnselect(): void {
     this.unselect.emit();

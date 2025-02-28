@@ -1,6 +1,9 @@
 <div class="ion-select-item">
   <div class="ion-select-item__content">{{ label() }}</div>
-  @if (!disabled) {
-    <!-- <ion-icon type="close" size="15" (click)="onUnselect()"></ion-icon> -->
+  @if (!disabled()) {
+    <ion-icon
+      [type]="'close'"
+      [size]="iconSize"
+      (click)="onUnselect()"></ion-icon>
   }
 </div>

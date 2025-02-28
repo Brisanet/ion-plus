@@ -90,6 +90,12 @@ export interface IonDropdownConfig<T extends IonDropdownOption> {
    * @type {IonNoDataProps}
    */
   noDataConfig?: IonNoDataProps;
+  /**
+   * Dropdown should render.
+   * @param shouldRender - Define if the dropdown should render when click event happpens.
+   * @type {boolean}
+   */
+  shouldRender?: boolean;
 }
 
 export interface IonDropdownProps<T extends IonDropdownOption> {
@@ -118,4 +124,10 @@ export interface IonDropdownProps<T extends IonDropdownOption> {
    * @description This event is triggered an option is selected, unselected or hovered.
    */
   dropdownOptionsChange: OutputEmitterRef<T[]>;
+  /**
+   * @event  dropdownOpened - Event triggered when a the element is created or destroyed.
+   * @type {boolean}
+   * @description This event is triggered when the dropdown overlay is created or destroyed.
+   */
+  dropdownOpened: boolean;
 }

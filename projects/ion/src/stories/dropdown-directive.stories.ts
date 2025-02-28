@@ -13,14 +13,15 @@ const meta: Meta<OpenDropdownComponent> = {
 };
 
 const options = [
-  { label: 'Rem', name: 'Name 1', icon: 'config', value: 0 },
-  { label: 'Ram', name: 'Name 2', icon: 'star', value: 1 },
-  { label: 'Emilia', name: 'Name 3', icon: 'star', value: 3 },
+  { label: 'Rem', name: 'Name 1', icon: 'config', value: 0, key: 'name 1' },
+  { label: 'Ram', name: 'Name 2', icon: 'star', value: 1, key: 'name 2' },
+  { label: 'Emilia', name: 'Name 3', icon: 'star', value: 3, key: 'name 3' },
   {
     label: 'Beatrice',
     name: 'Name 4',
     icon: 'star',
     value: 4,
+    key: 'name 4',
   },
 ];
 
