@@ -1,4 +1,3 @@
-import { EventEmitter } from '@angular/core';
 import { IonDropdownOption } from '../../public-api';
 
 export type Mode = 'default' | 'multiple';
@@ -61,7 +60,20 @@ export interface IonSelectProps {
 }
 
 export interface IonSelectItemProps {
+  /**
+   * @param label - Defines the text that will be displayed.
+   * @type {string}
+   */
   label: string;
+  /**
+   * @param disabled - Set the disabled state.
+   * @type {string}
+   */
   disabled?: boolean;
-  unselect?: EventEmitter<void>;
+  /**
+   * @event unselect - Event triggered when the options is unselected.
+   * @type {void}
+   * @description - The event is triggered when the close icon is clicked.
+   */
+  unselect?: void;
 }
