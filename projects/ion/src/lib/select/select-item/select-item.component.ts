@@ -5,6 +5,7 @@ import {
   output,
 } from '@angular/core';
 import { IonIconComponent } from '../../icon';
+import { IonSelectItemProps } from '../types';
 
 @Component({
   standalone: true,
@@ -14,10 +15,10 @@ import { IonIconComponent } from '../../icon';
   styleUrls: ['./select-item.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SelectItemComponent {
-  label = input<string>('');
-  disabled = input<boolean>(false);
-  unselect = output<void>();
+export class IonSelectItemComponent {
+  label = input<IonSelectItemProps['label']>('');
+  disabled = input<IonSelectItemProps['disabled']>(false);
+  unselect = output<IonSelectItemProps['unselect']>();
   iconSize = 15;
 
   onUnselect(): void {

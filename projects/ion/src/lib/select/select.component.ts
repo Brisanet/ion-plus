@@ -9,8 +9,6 @@ import {
   HostBinding,
 } from '@angular/core';
 import { IonSelectProps } from './types';
-import { IonDropdownComponent } from '../directives/dropdown/dropdown.component';
-import { SelectItemComponent } from './select-item/select-item.component';
 import { IonIconComponent } from '../icon';
 import { FormsModule } from '@angular/forms';
 import { IonDropdownDirective } from '../directives/dropdown/dropdown.directive';
@@ -19,13 +17,7 @@ import { IonDropdownOption } from '../directives/dropdown';
 
 @Component({
   selector: 'ion-select',
-  imports: [
-    IonDropdownComponent,
-    SelectItemComponent,
-    IonIconComponent,
-    FormsModule,
-    IonDropdownDirective,
-  ],
+  imports: [IonIconComponent, FormsModule, IonDropdownDirective],
   templateUrl: 'select.component.html',
   styleUrls: ['./select.component.scss'],
 })

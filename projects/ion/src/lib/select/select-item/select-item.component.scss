@@ -1,16 +1,19 @@
 @import '../../../styles/index.scss';
 
 .ion-select-item {
+  gap: 4px;
+  padding: 4px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 4px;
-  padding: 4px;
+
+  font-size: 14px;
+  border-radius: 100px;
+
+  cursor: default;
+
   color: $neutral-7;
   background-color: $neutral-2;
-  border-radius: 100px;
-  font-size: 14px;
-  cursor: default;
 
   .ion-select-item__content {
     white-space: nowrap;
@@ -29,9 +32,10 @@
   }
 
   &--disabled {
-    background-color: $neutral-3;
+    cursor: not-allowed;
+
     color: $neutral-5;
     border: $neutral-4;
-    cursor: not-allowed;
+    background-color: $neutral-3;
   }
 }
