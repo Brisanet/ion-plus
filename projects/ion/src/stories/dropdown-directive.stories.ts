@@ -31,6 +31,9 @@ type Story = StoryObj<OpenDropdownComponent>;
 export const Default: Story = {
   args: {
     dropdownOptions: options,
+    dropdownConfig: {
+      shouldRender: true,
+    },
   },
 };
 
@@ -38,6 +41,9 @@ export const Loading: Story = {
   args: {
     dropdownOptions: options,
     dropdownLoading: true,
+    dropdownConfig: {
+      shouldRender: true,
+    },
   },
 };
 
@@ -46,6 +52,7 @@ export const Multiple: Story = {
     dropdownOptions: options,
     dropdownConfig: {
       multiple: true,
+      shouldRender: true,
     },
   },
 };
@@ -56,6 +63,7 @@ export const MultipleWithMaxSelected: Story = {
     dropdownConfig: {
       multiple: true,
       maxSelected: 2,
+      shouldRender: true,
     },
   },
 };
@@ -66,6 +74,7 @@ export const MultipleWithClearButton: Story = {
     dropdownConfig: {
       multiple: true,
       clearButton: true,
+      shouldRender: true,
     },
   },
 };
@@ -76,6 +85,7 @@ export const MultipleRequired: Story = {
     dropdownConfig: {
       multiple: true,
       required: true,
+      shouldRender: true,
     },
   },
 };
@@ -86,6 +96,7 @@ export const WithPropLabel: Story = {
     dropdownConfig: {
       multiple: true,
       propLabel: 'name',
+      shouldRender: true,
     },
   },
 };
@@ -95,6 +106,7 @@ export const WithCloseOnScroll: Story = {
     dropdownOptions: options,
     dropdownConfig: {
       closeOnScroll: true,
+      shouldRender: true,
     },
   },
 };

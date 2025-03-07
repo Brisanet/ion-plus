@@ -14,10 +14,16 @@ import { FormsModule } from '@angular/forms';
 import { IonDropdownDirective } from '../directives/dropdown/dropdown.directive';
 import { SafeAny } from '../utils/safe-any';
 import { IonDropdownOption } from '../directives/dropdown';
+import { IonSelectItemComponent } from './select-item/select-item.component';
 
 @Component({
   selector: 'ion-select',
-  imports: [IonIconComponent, FormsModule, IonDropdownDirective],
+  imports: [
+    FormsModule,
+    IonIconComponent,
+    IonSelectItemComponent,
+    IonDropdownDirective,
+  ],
   templateUrl: 'select.component.html',
   styleUrls: ['./select.component.scss'],
 })
@@ -28,10 +34,9 @@ export class IonSelectComponent implements OnChanges {
   placeholder = input<IonSelectProps['placeholder']>('');
   mode = input<IonSelectProps['mode']>('default');
   maxSelect = input<IonSelectProps['maxSelected']>();
-  required = input<IonSelectProps['required']>(true);
+  required = input<IonSelectProps['required']>(false);
   loading = input<IonSelectProps['loading']>(false);
   disabled = input<IonSelectProps['disabled']>(false);
-  propLabel = input<IonSelectProps['propLabel']>('label');
   events = output<IonSelectProps['events']>();
   search = output<IonSelectProps['search']>();
   isDropdownOpen = signal(false);
@@ -70,13 +75,14 @@ export class IonSelectComponent implements OnChanges {
   }
 
   handleClick(event: boolean) {
-    this.isDropdownOpen.set(!this.isDropdownOpen());
-    this.focusInput();
     if (!event) {
       this.touched = true;
       this.inputValue = '';
       this.visibleOptions = this.options();
     }
+
+    this.isDropdownOpen.set(!this.isDropdownOpen());
+    this.focusInput();
   }
 
   @HostBinding('class.ion-select__required')
@@ -84,6 +90,7 @@ export class IonSelectComponent implements OnChanges {
     if (!this.required()) {
       return false;
     }
+
     return this.touched && !this.hasValue;
   }
 

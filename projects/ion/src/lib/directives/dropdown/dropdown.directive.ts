@@ -54,10 +54,10 @@ export class IonDropdownDirective<T extends IonDropdownOption>
       this.destroyOverlay();
     }
 
-    if (this.overlayRef) {
-      this.destroyOverlay();
-    } else {
+    if (!this.overlayRef && this.dropdownConfig().shouldRender) {
       this.createOverlay();
+    } else {
+      this.destroyOverlay();
     }
   }
 
@@ -121,10 +121,7 @@ export class IonDropdownDirective<T extends IonDropdownOption>
         });
     }
 
-    this.updateProperties();
-
     this.dropdownRef.instance.dropdownOptionsChange.subscribe(() => {
-      console.log(this.dropdownOptions());
       this.dropdownOptions().forEach(option => {
         this.optionsRef.forEach(ref => {
           if (option.key === ref.key) {
@@ -136,18 +133,22 @@ export class IonDropdownDirective<T extends IonDropdownOption>
     });
 
     this.dropdownOpened.emit(true);
+    this.updateProperties();
+
     this.overlayRef.backdropClick().subscribe(() => {
-      this.dropdownOpened.emit(false);
       this.destroyOverlay();
     });
   }
 
   private destroyOverlay() {
-    if (this.overlayRef) {
-      this.overlayRef.detach();
-      this.overlayRef.dispose();
-      this.overlayRef = null;
-    }
+    this.dropdownOpened.emit(false);
+    setTimeout(() => {
+      if (this.overlayRef) {
+        this.overlayRef.detach();
+        this.overlayRef.dispose();
+        this.overlayRef = null;
+      }
+    }, 100);
   }
 
   private updateProperties(): void {

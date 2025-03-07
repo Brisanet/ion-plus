@@ -43,11 +43,6 @@ export interface IonSelectProps {
    */
   loading: boolean;
   /**
-   * @param propLabel - Defines a property from the option so the value will be used as the visible label.
-   * @type {string}
-   */
-  propLabel: string;
-  /**
    * @param disabled - Set the disabled state.
    * @type {boolean}
    */

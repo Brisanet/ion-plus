@@ -16,7 +16,7 @@ import { IonSelectItemProps } from '../types';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IonSelectItemComponent {
-  label = input<IonSelectItemProps['label']>('');
+  label = input<IonSelectItemProps['label']>();
   disabled = input<IonSelectItemProps['disabled']>(false);
   unselect = output<IonSelectItemProps['unselect']>();
   iconSize = 15;

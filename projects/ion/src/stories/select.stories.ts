@@ -1,5 +1,6 @@
 import { Meta, StoryObj } from '@storybook/angular';
 import { IonSelectComponent } from '../lib/select';
+import { IonSelectItemComponent } from '../lib/select/select-item/select-item.component';
 
 const options = [
   { label: 'Option 1', value: 1, selected: false, key: '1' },
@@ -19,6 +20,9 @@ const meta: Meta<IonSelectComponent> = {
   component: IonSelectComponent,
   tags: ['autodocs'],
   render: args => ({
+    moduleMetadata: {
+      imports: [IonSelectItemComponent],
+    },
     props: {
       ...args,
     },
@@ -62,13 +66,5 @@ export const DisabledSelectedOptions: Story = {
   args: {
     options: fruitOptions,
     disabled: true,
-  },
-};
-
-export const CustomLabel: Story = {
-  args: {
-    options,
-    placeholder: 'Select a option',
-    propLabel: 'name',
   },
 };
