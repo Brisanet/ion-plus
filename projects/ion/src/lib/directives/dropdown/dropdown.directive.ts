@@ -49,15 +49,15 @@ export class IonDropdownDirective<T extends IonDropdownOption>
     this.optionsSubscription?.unsubscribe();
   }
 
-  @HostListener('click', ['$event']) handleClick(): void {
+  @HostListener('click', ['$event']) async handleClick(): Promise<void> {
     if (this.overlayRef && !this.overlayRef.hasAttached()) {
-      this.destroyOverlay();
+      await this.destroyOverlay();
     }
 
     if (!this.overlayRef && this.dropdownConfig().shouldRender) {
       this.createOverlay();
     } else {
-      this.destroyOverlay();
+      await this.destroyOverlay();
     }
   }
 
@@ -135,20 +135,20 @@ export class IonDropdownDirective<T extends IonDropdownOption>
     this.dropdownOpened.emit(true);
     this.updateProperties();
 
-    this.overlayRef.backdropClick().subscribe(() => {
-      this.destroyOverlay();
+    this.overlayRef.backdropClick().subscribe(async () => {
+      await this.destroyOverlay();
     });
   }
 
-  private destroyOverlay() {
+  private async destroyOverlay(): Promise<void> {
     this.dropdownOpened.emit(false);
-    setTimeout(() => {
-      if (this.overlayRef) {
-        this.overlayRef.detach();
-        this.overlayRef.dispose();
-        this.overlayRef = null;
-      }
-    }, 100);
+
+    await new Promise(resolve => setTimeout(resolve, 50));
+    if (this.overlayRef) {
+      this.overlayRef.detach();
+      this.overlayRef.dispose();
+      this.overlayRef = null;
+    }
   }
 
   private updateProperties(): void {
