@@ -8,14 +8,14 @@ import userEvent from '@testing-library/user-event';
 const sut = async (
   customProps: IonSelectProps
 ): Promise<ComponentFixture<IonSelectComponent>> => {
-  const { events, search, ...rest } = customProps;
+  const { selected, searchChange, ...rest } = customProps;
   const { fixture } = await render(IonSelectComponent, {
     componentInputs: {
       ...rest,
     },
     componentOutputs: {
-      events: events as SafeAny,
-      search: search as SafeAny,
+      selected: selected as SafeAny,
+      searchChange: searchChange as SafeAny,
     },
   });
 
@@ -43,7 +43,7 @@ describe('IonSelecComponent - mode: default', () => {
     await sut({
       placeholder: customPlaceholder,
       options,
-      events: [],
+      selected: [],
       maxSelected: 0,
       required: false,
       loading: false,
@@ -60,7 +60,7 @@ describe('IonSelecComponent - mode: default', () => {
     await sut({
       options: getCopyOptions(),
       placeholder: '',
-      events: [],
+      selected: [],
       maxSelected: 0,
       required: false,
       loading: false,
@@ -78,7 +78,7 @@ describe('IonSelecComponent - mode: default', () => {
     await sut({
       options: getCopyOptions(),
       placeholder: '',
-      events: [],
+      selected: [],
       maxSelected: 0,
       required: false,
       loading: false,
@@ -95,7 +95,7 @@ describe('IonSelecComponent - mode: default', () => {
     await sut({
       options: getCopyOptions(),
       placeholder: '',
-      events: [],
+      selected: [],
       maxSelected: 0,
       required: false,
       loading: false,
@@ -115,7 +115,7 @@ describe('IonSelecComponent - mode: default', () => {
       options: getCopyOptions(),
       disabled: true,
       placeholder: '',
-      events: [],
+      selected: [],
       maxSelected: 0,
       required: false,
       loading: false,
@@ -131,7 +131,7 @@ describe('IonSelecComponent - mode: default', () => {
       options: getCopyOptions(),
       disabled: true,
       placeholder: '',
-      events: [],
+      selected: [],
       maxSelected: 0,
       required: false,
       loading: false,
@@ -149,7 +149,7 @@ describe('IonSelecComponent - mode: multiple', () => {
       options: getCopyOptions(),
       mode: 'multiple',
       placeholder: '',
-      events: [],
+      selected: [],
       maxSelected: 0,
       required: false,
       loading: false,
@@ -171,7 +171,7 @@ describe('IonSelecComponent - mode: multiple', () => {
       options: getCopyOptions(),
       mode: 'multiple',
       placeholder: '',
-      events: [],
+      selected: [],
       maxSelected: 0,
       required: false,
       loading: false,
@@ -188,7 +188,7 @@ describe('IonSelecComponent - mode: multiple', () => {
       options: getCopyOptions(),
       mode: 'multiple',
       placeholder: '',
-      events: [],
+      selected: [],
       maxSelected: 0,
       required: false,
       loading: false,
@@ -210,11 +210,11 @@ describe('IonSelecComponent - mode: multiple', () => {
     const selectEvent = jest.fn();
     await sut({
       options: getCopyOptions(),
-      search: {
+      searchChange: {
         emit: selectEvent,
       } as SafeAny,
       placeholder: '',
-      events: [],
+      selected: [],
       maxSelected: 0,
       required: false,
       loading: false,
@@ -234,7 +234,7 @@ describe('IonSelecComponent - mode: multiple', () => {
         options: getCopyOptions(),
         required: true,
         placeholder: '',
-        events: [],
+        selected: [],
         maxSelected: 0,
         loading: false,
         disabled: false,
@@ -254,7 +254,7 @@ describe('IonSelecComponent - mode: multiple', () => {
       await sut({
         options: getCopyOptions(),
         placeholder: '',
-        events: [],
+        selected: [],
         maxSelected: 0,
         required: false,
         loading: false,
@@ -275,7 +275,7 @@ describe('IonSelecComponent - mode: multiple', () => {
         required: true,
         mode: 'multiple',
         placeholder: '',
-        events: [],
+        selected: [],
         maxSelected: 0,
         loading: false,
         disabled: false,
