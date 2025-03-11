@@ -1,0 +1,42 @@
+<div
+  class="ion-select"
+  data-testid="ion-select"
+  [class.ion-select--required]="isValid"
+  [class.ion-select--disabled]="disabled()">
+  <div
+    class="ion-select-container"
+    data-testid="ion-select-container"
+    ionDropdown
+    [dropdownConfig]="{
+      required: required(),
+      multiple: mode() === 'multiple',
+      clearButton: mode() === 'multiple',
+      maxSelected: maxSelect(),
+      shouldRender: !disabled(),
+    }"
+    [dropdownLoading]="loading()"
+    [dropdownOptions]="visibleOptions"
+    (dropdownOpened)="handleClick($event)"
+    (dropdownEvent)="onSelect($event)">
+    @for (option of options(); track option.label; let i = $index) {
+      @if (option.selected) {
+        <ion-select-item
+          [attr.data-testid]="'ion-select-item-selected-' + i"
+          [label]="option.label"
+          [disabled]="disabled()"
+          (unselect)="unselectOption(option)"></ion-select-item>
+      }
+    }
+    <input
+      #ionSelectInput
+      type="text"
+      data-testid="ion-select-input"
+      [placeholder]="!hasSelectedOption() ? placeholder() : ''"
+      [required]="required()"
+      [disabled]="disabled()"
+      [(ngModel)]="inputValue"
+      (input)="onSearchChange()" />
+
+    <ion-icon [type]="isDropdownOpen() ? 'semi-up' : 'semi-down'"></ion-icon>
+  </div>
+</div>

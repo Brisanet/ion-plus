@@ -10,27 +10,33 @@ interface MockOption extends IonDropdownOption {
 }
 
 const mockOptions: MockOption[] = [
-  { label: 'Option 1', value: 1 },
-  { label: 'Option 2', value: 2 },
-  { label: 'Option 3', value: 3 },
+  { label: 'Option 1', key: 'option_1', value: 1 },
+  { label: 'Option 2', key: 'option_1', value: 2 },
+  { label: 'Option 3', key: 'option_1', value: 3 },
 ];
 
 const mockOptionsWithDisabled: MockOption[] = [
-  { label: 'Option 1', disabled: true, selected: true, value: 1 },
-  { label: 'Option 2', value: 2 },
-  { label: 'Option 3', value: 3 },
+  {
+    label: 'Option 1',
+    key: 'option_1',
+    disabled: true,
+    selected: true,
+    value: 1,
+  },
+  { label: 'Option 2', key: 'option_1', value: 2 },
+  { label: 'Option 3', key: 'option_1', value: 3 },
 ];
 
 const mockOptionsWithSelected: MockOption[] = [
-  { label: 'Option 1', selected: true, value: 1 },
-  { label: 'Option 2', selected: false, value: 2 },
-  { label: 'Option 3', selected: false, value: 3 },
+  { label: 'Option 1', key: 'option_1', selected: true, value: 1 },
+  { label: 'Option 2', key: 'option_1', selected: false, value: 2 },
+  { label: 'Option 3', key: 'option_1', selected: false, value: 3 },
 ];
 
 const mockOptionsWithPropLabel: MockOption[] = [
-  { label: 'Option 1', name: 'Name 1', value: 1 },
-  { label: 'Option 2', name: 'Name 2', value: 2 },
-  { label: 'Option 3', name: 'Name 3', value: 3 },
+  { label: 'Option 1', key: 'option_1', name: 'Name 1', value: 1 },
+  { label: 'Option 2', key: 'option_2', name: 'Name 2', value: 2 },
+  { label: 'Option 3', key: 'option_2', name: 'Name 3', value: 3 },
 ];
 
 const MockOptionsWithIcons = mockOptions.map(option => {

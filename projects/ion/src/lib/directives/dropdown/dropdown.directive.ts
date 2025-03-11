@@ -9,6 +9,7 @@ import {
   OnDestroy,
   OutputRefSubscription,
   SimpleChanges,
+  output,
 } from '@angular/core';
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
@@ -25,11 +26,13 @@ export class IonDropdownDirective<T extends IonDropdownOption>
   dropdownConfig = input.required<IonDropdownProps<T>['dropdownConfig']>({});
   dropdownLoading = input<IonDropdownProps<T>['dropdownLoading']>(false);
   dropdownOptions = model<IonDropdownProps<T>['dropdownOptions']>([]);
+  dropdownEvent = output<IonDropdownProps<T>['dropdownOptions']>();
+  dropdownOpened = output<IonDropdownProps<T>['dropdownOpened']>();
 
   private overlayRef: OverlayRef | null = null;
   private dropdownRef?: ComponentRef<IonDropdownComponent<T>>;
   private optionsSubscription?: OutputRefSubscription;
-
+  private optionsRef!: IonDropdownProps<T>['dropdownOptions'];
   constructor(
     private elementRef: ElementRef,
     private overlay: Overlay
@@ -46,15 +49,15 @@ export class IonDropdownDirective<T extends IonDropdownOption>
     this.optionsSubscription?.unsubscribe();
   }
 
-  @HostListener('click', ['$event']) handleClick(): void {
+  @HostListener('click', ['$event']) async handleClick(): Promise<void> {
     if (this.overlayRef && !this.overlayRef.hasAttached()) {
-      this.destroyOverlay();
+      await this.destroyOverlay();
     }
 
-    if (this.overlayRef) {
-      this.destroyOverlay();
-    } else {
+    if (!this.overlayRef && this.dropdownConfig().shouldRender) {
       this.createOverlay();
+    } else {
+      await this.destroyOverlay();
     }
   }
 
@@ -62,6 +65,7 @@ export class IonDropdownDirective<T extends IonDropdownOption>
     const repositionOnScroll = this.overlay.scrollStrategies.reposition();
     const closeOnScroll = this.overlay.scrollStrategies.close();
     const nativeElement = this.elementRef.nativeElement;
+    const hostWidth = nativeElement.offsetWidth;
     const positionStrategy = this.overlay
       .position()
       .flexibleConnectedTo(nativeElement)
@@ -104,6 +108,7 @@ export class IonDropdownDirective<T extends IonDropdownOption>
       scrollStrategy: this.dropdownConfig().closeOnScroll
         ? closeOnScroll
         : repositionOnScroll,
+      width: hostWidth,
     });
 
     const dropdownComponent = IonDropdownComponent<T>;
@@ -117,14 +122,30 @@ export class IonDropdownDirective<T extends IonDropdownOption>
           this.dropdownOptions.set(data);
         });
     }
+
+    this.dropdownRef.instance.dropdownOptionsChange.subscribe(() => {
+      this.dropdownOptions().forEach(option => {
+        this.optionsRef.forEach(ref => {
+          if (option.key === ref.key) {
+            ref.selected = option.selected;
+          }
+        });
+      });
+      this.dropdownEvent.emit(this.optionsRef);
+    });
+
+    this.dropdownOpened.emit(true);
     this.updateProperties();
 
-    this.overlayRef.backdropClick().subscribe(() => {
-      this.destroyOverlay();
+    this.overlayRef.backdropClick().subscribe(async () => {
+      await this.destroyOverlay();
     });
   }
 
-  private destroyOverlay() {
+  private async destroyOverlay(): Promise<void> {
+    this.dropdownOpened.emit(false);
+
+    await new Promise(resolve => setTimeout(resolve, 50));
     if (this.overlayRef) {
       this.overlayRef.detach();
       this.overlayRef.dispose();
@@ -138,5 +159,6 @@ export class IonDropdownDirective<T extends IonDropdownOption>
     this.dropdownRef.instance.dropdownLoading.set(this.dropdownLoading());
     this.dropdownRef.instance.dropdownConfig.set(this.dropdownConfig());
     this.dropdownRef.instance.dropdownOptions.set(this.dropdownOptions());
+    this.optionsRef = [...this.dropdownOptions()];
   }
 }

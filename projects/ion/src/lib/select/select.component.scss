@@ -1,0 +1,103 @@
+@import '../../styles/index.scss';
+
+::ng-deep {
+  ion-dropdown {
+    width: 100%;
+    position: relative;
+
+    .dropdown-menu {
+      left: 0 !important;
+      right: 0 !important;
+      width: 100% !important;
+      margin-top: 6px !important;
+    }
+  }
+}
+
+.ion-select {
+  display: flex;
+  position: relative;
+  align-items: center;
+  padding: 4px 6px 4px 4px;
+
+  min-width: 120px;
+  min-height: 26px;
+
+  border-radius: 8px;
+  background: $neutral-1;
+  border: 1px solid $neutral-5;
+
+  &:hover {
+    border-color: $primary-4;
+  }
+
+  &:focus-within,
+  &:active {
+    border-color: $primary-4;
+    box-shadow: 0 0 0 2px $primary-2;
+  }
+
+  div.ion-select-container {
+    flex: 1;
+    gap: 4px;
+    display: flex;
+    overflow: hidden;
+    flex-direction: row;
+  }
+
+  input {
+    padding: 0;
+    width: 100%;
+    border: none;
+    outline: none;
+    color: $neutral-7;
+    background: transparent;
+
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+  }
+
+  &--required {
+    border-color: $negative-5;
+
+    &:hover {
+      border-color: $negative-6;
+    }
+
+    &:focus-within,
+    &:active {
+      border-color: $negative-6;
+      box-shadow: 0 0 0 2px $negative-2;
+    }
+
+    ::ng-deep svg {
+      fill: $negative-5;
+    }
+  }
+
+  &--disabled {
+    cursor: not-allowed;
+    border-color: $neutral-4;
+    background-color: $neutral-2;
+
+    &:hover,
+    &:focus-within,
+    &:active {
+      border-color: $neutral-4;
+      box-shadow: none;
+    }
+
+    input {
+      cursor: not-allowed;
+
+      &::placeholder {
+        color: $neutral-4;
+      }
+    }
+
+    ::ng-deep svg {
+      fill: $neutral-5;
+    }
+  }
+}

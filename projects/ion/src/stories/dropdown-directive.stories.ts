@@ -13,14 +13,15 @@ const meta: Meta<OpenDropdownComponent> = {
 };
 
 const options = [
-  { label: 'Rem', name: 'Name 1', icon: 'config', value: 0 },
-  { label: 'Ram', name: 'Name 2', icon: 'star', value: 1 },
-  { label: 'Emilia', name: 'Name 3', icon: 'star', value: 3 },
+  { label: 'Rem', name: 'Name 1', icon: 'config', value: 0, key: 'name 1' },
+  { label: 'Ram', name: 'Name 2', icon: 'star', value: 1, key: 'name 2' },
+  { label: 'Emilia', name: 'Name 3', icon: 'star', value: 3, key: 'name 3' },
   {
     label: 'Beatrice',
     name: 'Name 4',
     icon: 'star',
     value: 4,
+    key: 'name 4',
   },
 ];
 
@@ -30,6 +31,9 @@ type Story = StoryObj<OpenDropdownComponent>;
 export const Default: Story = {
   args: {
     dropdownOptions: options,
+    dropdownConfig: {
+      shouldRender: true,
+    },
   },
 };
 
@@ -37,6 +41,9 @@ export const Loading: Story = {
   args: {
     dropdownOptions: options,
     dropdownLoading: true,
+    dropdownConfig: {
+      shouldRender: true,
+    },
   },
 };
 
@@ -45,6 +52,7 @@ export const Multiple: Story = {
     dropdownOptions: options,
     dropdownConfig: {
       multiple: true,
+      shouldRender: true,
     },
   },
 };
@@ -55,6 +63,7 @@ export const MultipleWithMaxSelected: Story = {
     dropdownConfig: {
       multiple: true,
       maxSelected: 2,
+      shouldRender: true,
     },
   },
 };
@@ -65,6 +74,7 @@ export const MultipleWithClearButton: Story = {
     dropdownConfig: {
       multiple: true,
       clearButton: true,
+      shouldRender: true,
     },
   },
 };
@@ -75,6 +85,7 @@ export const MultipleRequired: Story = {
     dropdownConfig: {
       multiple: true,
       required: true,
+      shouldRender: true,
     },
   },
 };
@@ -85,6 +96,7 @@ export const WithPropLabel: Story = {
     dropdownConfig: {
       multiple: true,
       propLabel: 'name',
+      shouldRender: true,
     },
   },
 };
@@ -94,6 +106,7 @@ export const WithCloseOnScroll: Story = {
     dropdownOptions: options,
     dropdownConfig: {
       closeOnScroll: true,
+      shouldRender: true,
     },
   },
 };
