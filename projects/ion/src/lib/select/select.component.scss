@@ -1,15 +1,15 @@
 @import '../../styles/index.scss';
 
-:host {
-  position: relative;
-  width: 100%;
+::ng-deep {
+  ion-dropdown {
+    width: 100%;
+    position: relative;
 
-  ::ng-deep ion-dropdown {
     .dropdown-menu {
-      left: 0;
-      right: 0;
-      width: auto !important;
-      margin-top: 4px;
+      left: 0 !important;
+      right: 0 !important;
+      width: 100% !important;
+      margin-top: 6px !important;
     }
   }
 }
@@ -77,9 +77,9 @@
   }
 
   &--disabled {
-    background-color: $neutral-2;
-    border-color: $neutral-4;
     cursor: not-allowed;
+    border-color: $neutral-4;
+    background-color: $neutral-2;
 
     &:hover,
     &:focus-within,

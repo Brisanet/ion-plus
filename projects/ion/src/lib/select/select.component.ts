@@ -7,12 +7,12 @@ import {
   OnChanges,
   ViewChild,
   HostBinding,
+  ElementRef,
 } from '@angular/core';
 import { IonSelectProps } from './types';
 import { IonIconComponent } from '../icon';
 import { FormsModule } from '@angular/forms';
 import { IonDropdownDirective } from '../directives/dropdown/dropdown.directive';
-import { SafeAny } from '../utils/safe-any';
 import { IonDropdownOption } from '../directives/dropdown';
 import { IonSelectItemComponent } from './select-item/select-item.component';
 
@@ -29,7 +29,7 @@ import { IonSelectItemComponent } from './select-item/select-item.component';
 })
 export class IonSelectComponent implements OnChanges {
   constructor() {}
-  @ViewChild('ionSelectInput', { static: true }) ionSelectInput: SafeAny;
+  @ViewChild('ionSelectInput', { static: true }) ionSelectInput!: ElementRef;
   options = input.required<IonSelectProps['options']>();
   placeholder = input<IonSelectProps['placeholder']>('');
   mode = input<IonSelectProps['mode']>('default');
@@ -75,6 +75,10 @@ export class IonSelectComponent implements OnChanges {
   }
 
   handleClick(event: boolean) {
+    if (this.disabled()) {
+      return;
+    }
+
     if (!event) {
       this.touched = true;
       this.inputValue = '';

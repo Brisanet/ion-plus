@@ -65,6 +65,7 @@ export class IonDropdownDirective<T extends IonDropdownOption>
     const repositionOnScroll = this.overlay.scrollStrategies.reposition();
     const closeOnScroll = this.overlay.scrollStrategies.close();
     const nativeElement = this.elementRef.nativeElement;
+    const hostWidth = nativeElement.offsetWidth;
     const positionStrategy = this.overlay
       .position()
       .flexibleConnectedTo(nativeElement)
@@ -107,6 +108,7 @@ export class IonDropdownDirective<T extends IonDropdownOption>
       scrollStrategy: this.dropdownConfig().closeOnScroll
         ? closeOnScroll
         : repositionOnScroll,
+      width: hostWidth,
     });
 
     const dropdownComponent = IonDropdownComponent<T>;
