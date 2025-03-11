@@ -1,21 +1,23 @@
 <div
   class="ion-select"
   data-testid="ion-select"
-  ionDropdown
-  [dropdownConfig]="{
-    required: required(),
-    multiple: mode() === 'multiple',
-    clearButton: mode() === 'multiple',
-    maxSelected: maxSelect(),
-    shouldRender: !disabled(),
-  }"
-  [dropdownLoading]="loading()"
-  [dropdownOptions]="visibleOptions"
-  (dropdownOpened)="handleClick($event)"
-  (dropdownEvent)="selected($event)"
   [class.ion-select--required]="isValid"
   [class.ion-select--disabled]="disabled()">
-  <div class="ion-select-container">
+  <div
+    class="ion-select-container"
+    data-testid="ion-select-container"
+    ionDropdown
+    [dropdownConfig]="{
+      required: required(),
+      multiple: mode() === 'multiple',
+      clearButton: mode() === 'multiple',
+      maxSelected: maxSelect(),
+      shouldRender: !disabled(),
+    }"
+    [dropdownLoading]="loading()"
+    [dropdownOptions]="visibleOptions"
+    (dropdownOpened)="handleClick($event)"
+    (dropdownEvent)="selected($event)">
     @for (option of options(); track option.label; let i = $index) {
       @if (option.selected) {
         <ion-select-item

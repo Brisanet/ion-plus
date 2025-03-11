@@ -22,7 +22,8 @@ const sut = async (
   return fixture;
 };
 
-const getIonSelect = (): HTMLElement => screen.getByTestId('ion-select');
+const getIonSelect = (): HTMLElement =>
+  screen.getByTestId('ion-select-container');
 
 const getIonSelectInput = (): HTMLElement =>
   screen.getByTestId('ion-select-input');
@@ -239,12 +240,14 @@ describe('IonSelecComponent - mode: multiple', () => {
         disabled: false,
         mode: 'default',
       });
-      const select = await screen.getByTestId('ion-select');
+      const select = await screen.getByTestId('ion-select-container');
 
       await userEvent.click(select);
       await userEvent.click(select);
 
-      expect(select).toHaveClass('ion-select--required');
+      expect(screen.getByTestId('ion-select')).toHaveClass(
+        'ion-select--required'
+      );
     });
 
     it('should not apply the required class if the parameter is false', async () => {
@@ -258,7 +261,7 @@ describe('IonSelecComponent - mode: multiple', () => {
         disabled: false,
         mode: 'multiple',
       });
-      const select = await screen.getByTestId('ion-select');
+      const select = await screen.getByTestId('ion-select-container');
 
       await userEvent.click(select);
       userEvent.dblClick(document.body);
@@ -278,7 +281,7 @@ describe('IonSelecComponent - mode: multiple', () => {
         disabled: false,
       });
 
-      const select = await screen.getByTestId('ion-select');
+      const select = await screen.getByTestId('ion-select-container');
 
       await userEvent.click(select);
       userEvent.click(screen.getByTestId(options[0].key));
