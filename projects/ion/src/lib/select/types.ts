@@ -16,22 +16,22 @@ export interface IonSelectProps {
    */
   placeholder: string;
   /**
-   * @event events - Event triggered when a change occurs on the select options.
+   * @event selected - Event triggered when a change occurs on the select options.
    * @type {IonDropdownOption[]}
    * @description This event is triggered when a option is selected or unselected.
    */
-  events: IonDropdownOption[];
+  selected: IonDropdownOption[];
   /**
    * @param maxSelected - Defines the maximum number of selected options if the select component is multiple.
    * @type {number}
    */
   maxSelected: number;
   /**
-   * @event search - Event triggered when a change occurs on select input.
+   * @event searchChange - Event triggered when a change occurs on select input.
    * @type {string}
    * @description - This event is triggered when the input receives a value.
    */
-  search?: string;
+  searchChange?: string;
   /**
    * @param required - Defines if is mandatory a option being selected when select component is clicked.
    * @type {boolean}

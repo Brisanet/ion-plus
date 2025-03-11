@@ -37,15 +37,16 @@ export class IonSelectComponent implements OnChanges {
   required = input<IonSelectProps['required']>(false);
   loading = input<IonSelectProps['loading']>(false);
   disabled = input<IonSelectProps['disabled']>(false);
-  events = output<IonSelectProps['events']>();
-  search = output<IonSelectProps['search']>();
+  selected = output<IonSelectProps['selected']>();
+  searchChange = output<IonSelectProps['searchChange']>();
   isDropdownOpen = signal(false);
   inputValue = '';
   visibleOptions: IonSelectProps['options'] = [];
   private touched = false;
   private hasValue = false;
 
-  selected(selectedOptions: IonSelectProps['options']) {
+  onSelect(selectedOptions: IonSelectProps['options']) {
+    this.selected.emit(selectedOptions);
     this.inputValue = '';
     this.visibleOptions = selectedOptions;
     this.hasValue = !!selectedOptions.length;
@@ -57,7 +58,7 @@ export class IonSelectComponent implements OnChanges {
 
   unselectOption(currentOption: IonDropdownOption): void {
     currentOption.selected = false;
-    this.events.emit(this.options().filter(option => option.selected));
+    this.selected.emit(this.options().filter(option => option.selected));
     this.hasValue =
       this.mode() === 'default' ? false : this.hasSelectedOption();
   }
@@ -67,7 +68,7 @@ export class IonSelectComponent implements OnChanges {
       return option.label.toLowerCase().includes(this.inputValue.toLowerCase());
     });
 
-    this.search.emit(this.inputValue);
+    this.searchChange.emit(this.inputValue);
   }
 
   focusInput(): void {
