@@ -1,0 +1,56 @@
+<div class="ion-table">
+    <table data-testid="ion-table">
+        <thead>
+            <tr class="border-header">
+                @for (column of columns(); track $index) {
+                    <th
+                        [attr.data-testid]="'column-' + column.key"
+                        [ngStyle]="{ width: column.width + '%' }"
+                    >
+                        <div class="header-style">
+                            <span
+                                class="th-span"
+                                [attr.data-testid]="'th-span-' + column.key"
+                                >
+                                {{column.label}}
+                            </span>
+                        </div>
+                    </th>
+                }
+            </tr>
+        </thead>
+
+        <tbody>
+            @for (row of smartData; track $index) {
+                <ng-container>
+                    <tr>
+                        @for (column of columns(); track $index) {
+                            <td [attr.data-testid]="'row-' + $index + '-' + column.key">
+                                <span class="td-span">{{ getValueRow(row, column.key) }}</span>
+                            </td>
+                        }
+                    </tr>
+                </ng-container>
+            } @empty {
+                <tr style="width: 100%;">
+                    <h1>DDSDS</h1>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    @if (!smartData.length) {
+        <div class="noData">
+            @if (!!loading()) {
+                <ion-spinner [size]="42" [color]="'primary'" [textSize]="'sm'"></ion-spinner>
+            } @else {
+                <ion-icon
+                    [type]="'exclamation-rounded'"
+                    [size]="40"
+                    [highlight]="'none'"
+                ></ion-icon>
+                <span>Não há dados</span>
+            }
+        </div>
+    }
+</div>
