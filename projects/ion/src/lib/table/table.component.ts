@@ -3,23 +3,36 @@ import {
   ChangeDetectionStrategy,
   Component,
   input,
+  OnChanges,
+  OnInit,
   SimpleChanges,
 } from '@angular/core';
-import { IonTableProps } from './types';
+import { BaseRow, IonTableProps } from './types';
 import { IonIconComponent } from '../icon';
 import { IonSpinnerComponent } from '../spinner';
+import { BaseTable } from '../utils/baseTable';
+import { IonButtonComponent } from '../button';
 
 @Component({
   selector: 'ion-table',
-  imports: [CommonModule, IonIconComponent, IonSpinnerComponent],
+  imports: [
+    CommonModule,
+    IonIconComponent,
+    IonSpinnerComponent,
+    IonButtonComponent,
+  ],
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class IonTableComponent<RowType> {
+export class IonTableComponent<RowType extends BaseRow>
+  extends BaseTable<RowType>
+  implements OnChanges, OnInit
+{
   data = input.required<IonTableProps<RowType>['data']>();
   columns = input.required<IonTableProps<RowType>['columns']>();
   loading = input<IonTableProps<RowType>['loading']>();
+  actions = input<IonTableProps<RowType>['actions']>();
 
   public smartData: RowType[] = [];
 
@@ -39,5 +52,4 @@ export class IonTableComponent<RowType> {
     this.smartData = this.data();
     console.log('aaa', this.smartData);
   }
-  
 }

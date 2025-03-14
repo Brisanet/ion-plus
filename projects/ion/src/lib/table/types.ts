@@ -11,6 +11,7 @@ export enum EventTable {
   REFRESH_FILTER = 'refresh_filter',
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export interface Column<RowType> {
   /**
    * Column label.
@@ -47,7 +48,7 @@ export interface Column<RowType> {
    * @type {TagRow}
    */
   tag?: TagRow;
-  
+
   /**
    * Column sorting direction.
    * @param desc - Defines if sorting is descending

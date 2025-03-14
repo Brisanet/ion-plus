@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 
-import { IonTableComponent } from '../lib/table';
+import { ActionTable, IonTableComponent } from '../lib/table';
+import { SafeAny } from '../lib/utils/safe-any';
 
 interface Disco {
   id: number;
@@ -11,6 +12,7 @@ interface Disco {
   year?: number;
   icon?: string;
   active?: boolean;
+  selected?: boolean;
 }
 
 const meta: Meta<IonTableComponent<Disco>> = {
@@ -23,11 +25,11 @@ const meta: Meta<IonTableComponent<Disco>> = {
     },
   }),
   argTypes: {
-    // config: {
-    //   control: {
-    //     type: 'object'
-    //   }
-    // },
+    loading: {
+      control: {
+        type: 'boolean',
+      },
+    },
   },
 };
 
@@ -63,15 +65,40 @@ const data: Disco[] = [
   },
 ];
 
+const actions: ActionTable[] = [
+  {
+    label: 'Excluir',
+    icon: 'trash',
+    show: (row: SafeAny): boolean => {
+      return !row.deleted;
+    },
+    call: (row: SafeAny): void => {
+      row.name += ' DELETED';
+    },
+    confirm: {
+      title: 'Você realmente deseja deletar?',
+    },
+  },
+  {
+    label: 'Editar',
+    icon: 'pencil',
+  },
+  {
+    label: 'Desabilitado',
+    icon: 'pencil',
+    disabled: (row: SafeAny): boolean => !!row,
+  },
+];
+
 export default meta;
 type Story = StoryObj<IonTableComponent<Disco>>;
 export const Default: Story = {
   args: {
     data,
     columns,
+    actions,
   },
 };
-
 
 export const NoData: Story = {
   args: {
@@ -84,6 +111,6 @@ export const Loading: Story = {
   args: {
     data: [],
     columns,
-    loading: true
+    loading: true,
   },
 };
