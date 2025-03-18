@@ -32,3 +32,4 @@ export * from './lib/utils/commonTypes';
 export * from './lib/directives/dropdown';
 export * from './lib/checkbox';
 export * from './lib/radio';
+export * from './lib/chip';
