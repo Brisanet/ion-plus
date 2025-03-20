@@ -60,7 +60,7 @@
     "@testing-library/angular": "^17.3.5",
     "@types/jest": "^29.5.14",
     "@typescript-eslint/eslint-plugin": "^8.26.1",
-    "@typescript-eslint/parser": "^8.26.1",
+    "@typescript-eslint/parser": "^8.27.0",
     "chromatic": "^11.25.1",
     "eslint": "^9.19.0",
     "eslint-config-prettier": "^10.0.1",
