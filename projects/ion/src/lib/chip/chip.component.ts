@@ -35,7 +35,7 @@ export class IonChipComponent implements OnInit, OnChanges, DoCheck {
   public disabled = input<IonChipProps['disabled']>(false);
   public size = input<IonChipProps['size']>('sm');
   public icon = input<IonChipProps['icon']>('');
-  public multiple = input<IonChipProps['multiple']>(true);
+  public multiple = input<IonChipProps['multiple']>(false);
   public iconPosition = input<IonChipProps['iconPosition']>('left');
   public required = input<IonChipProps['required']>(false);
   public hasDropdown = input<IonChipProps['hasDropdown']>(false);

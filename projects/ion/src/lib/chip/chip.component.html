@@ -4,8 +4,8 @@
   [disabled]="disabled()"
   [class]="'ion-chip chip-' + size()"
   [ngClass]="{
-    chip: !selected,
-    'chip-selected': selected,
+    chip: !selected(),
+    'chip-selected': selected(),
   }"
   ionDropdown
   [dropdownConfig]="{
