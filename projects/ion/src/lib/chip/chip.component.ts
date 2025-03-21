@@ -74,19 +74,12 @@ export class IonChipComponent implements OnInit, OnChanges, DoCheck {
   selectDropdownItem(selecteds: IonDropdownOption[]): void {
     this.visibleOptions = selecteds;
     this.dropdownEvents.emit(selecteds);
-    if (selecteds.length) {
-      if (this.multiple()) {
-        this.setBadgeValue();
-        return;
-      }
-      this.setPlaceHolder(selecteds[0].label, selecteds[0].icon as string);
-    } else {
-      this.clearBadgeValue();
-    }
-  }
 
-  clearBadgeValue(): void {
-    this.setBadgeValue();
+    if (this.multiple()) {
+      this.setBadgeValue();
+      return;
+    }
+    this.setPlaceHolder(selecteds[0].label, selecteds[0].icon as string);
   }
 
   setPlaceHolder(label: string, icon: IconType): void {
@@ -136,9 +129,8 @@ export class IonChipComponent implements OnInit, OnChanges, DoCheck {
   }
 
   firstUpdateLabel(): void {
-    if (!this.multiple && this.options()) {
+    if (!this.multiple() && this.options()) {
       const optionSelected = this.options().find(option => option.selected);
-      console.log('entrando aqui');
       if (optionSelected) {
         this.placeholder = optionSelected.label || '';
         this.iconPlaceholder = optionSelected.icon || '';
