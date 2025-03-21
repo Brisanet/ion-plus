@@ -1,0 +1,41 @@
+@import '../../../styles/index.scss';
+
+.ion-select-item {
+  gap: 4px;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 14px;
+  border-radius: 100px;
+
+  cursor: default;
+
+  color: $neutral-7;
+  background-color: $neutral-2;
+
+  .ion-select-item__content {
+    white-space: nowrap;
+  }
+
+  ion-icon {
+    cursor: pointer;
+
+    ::ng-deep svg {
+      fill: $neutral-5;
+    }
+
+    &:hover ::ng-deep svg {
+      fill: $neutral-7;
+    }
+  }
+
+  &--disabled {
+    cursor: not-allowed;
+
+    color: $neutral-5;
+    border: $neutral-4;
+    background-color: $neutral-3;
+  }
+}
