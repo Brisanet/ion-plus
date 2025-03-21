@@ -51,6 +51,7 @@ export class IonChipComponent implements OnInit, OnChanges, DoCheck {
   });
   public chipSelected = output<IonChipProps['chipSelected']>();
   public dropdownEvents = output<IonChipProps['dropdownEvents']>();
+
   visibleOptions: IonChipProps['options'] = [];
   showDropdown = signal(false);
   selected = signal(false);
@@ -88,11 +89,6 @@ export class IonChipComponent implements OnInit, OnChanges, DoCheck {
     this.selected.set(false);
   }
 
-  private setBadgeValue(): void {
-    const newValue = this.getSelectedOptions().length;
-    this.badge = { ...this.badge, value: newValue };
-  }
-
   getSelectedOptions(): IonDropdownOption[] {
     return (this.visibleOptions || []).filter(
       (option: IonDropdownOption) => option.selected
@@ -121,13 +117,6 @@ export class IonChipComponent implements OnInit, OnChanges, DoCheck {
     this.iconPlaceholder = selectedOption.icon as string;
   }
 
-  private updateDropdownWithIcon(): void {
-    if ((this.options() && !this.options().length) || !this.options()) {
-      return;
-    }
-    this.dropdownWithIcon = !!this.options()[0].icon;
-  }
-
   firstUpdateLabel(): void {
     if (!this.multiple() && this.options()) {
       const optionSelected = this.options().find(option => option.selected);
@@ -142,13 +131,25 @@ export class IonChipComponent implements OnInit, OnChanges, DoCheck {
     this.firstCheck = false;
   }
 
-  ngDoCheck(): void {
+  private setBadgeValue(): void {
+    const newValue = this.getSelectedOptions().length;
+    this.badge = { ...this.badge, value: newValue };
+  }
+
+  private updateDropdownWithIcon(): void {
+    if ((this.options() && !this.options().length) || !this.options()) {
+      return;
+    }
+    this.dropdownWithIcon = !!this.options()[0].icon;
+  }
+
+  public ngDoCheck(): void {
     this.updateLabel();
     this.setBadgeValue();
     this.updateDropdownWithIcon();
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.chipId = generateIDs('chip-', 'chip');
     this.dropdownId = generateIDs('dropdown-', 'dropdown');
     const selecteds = this.getSelectedOptions();
@@ -157,7 +158,7 @@ export class IonChipComponent implements OnInit, OnChanges, DoCheck {
     }
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  public ngOnChanges(changes: SimpleChanges): void {
     if (changes['options']) {
       this.visibleOptions = changes['options'].currentValue;
     }
