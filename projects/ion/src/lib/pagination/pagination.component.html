@@ -1,0 +1,96 @@
+<div class="ion-pagination">
+  <ion-button
+    [icon]="{ type: 'left2' }"
+    data-testid="arrow-left"
+    type="secondary"
+    [size]="size"
+    shape="rounded"
+    [disabled]="loading || !hasPrevius()"
+    (ionOnClick)="previous()" />
+
+  @if (isJumpButtonsVisible()) {
+    <div
+      class="ion-pagination__advanced-list"
+      data-testid="advanced-pagination">
+      <ion-button
+        [label]="pages()[0].page_number.toString()"
+        [attr.data-testid]="'page-' + pages()[0].page_number"
+        type="secondary"
+        class="ion-pagination__button--rounded"
+        [class.ion-pagination__button--selected]="pages()[0].selected"
+        [size]="size"
+        [disabled]="loading"
+        (ionOnClick)="selectPageOnClick(pages()[0].page_number)" />
+      @if (jumpButtons.left.visible()) {
+        <ion-button
+          [icon]="{ type: jumpButtons.left.hover ? 'left3' : 'more' }"
+          data-testid="more-left"
+          type="secondary"
+          [size]="size"
+          shape="rounded"
+          [disabled]="loading"
+          (mouseenter)="changeIconHover('left', IS_HOVER)"
+          (mouseleave)="changeIconHover('left', !IS_HOVER)"
+          (ionOnClick)="jumpPagesBackward()" />
+      }
+
+      @for (page of currentVisibleButtons; track page.page_number) {
+        <ion-button
+          [label]="page.page_number.toString()"
+          [attr.data-testid]="'page-' + page.page_number"
+          type="secondary"
+          class="ion-pagination__button--rounded"
+          [class.ion-pagination__button--selected]="page.selected"
+          [size]="size"
+          [disabled]="loading"
+          (ionOnClick)="selectPageOnClick(page.page_number)" />
+      }
+      @if (jumpButtons.right.visible()) {
+        <ion-button
+          [icon]="{ type: jumpButtons.right.hover ? 'right3' : 'more' }"
+          data-testid="more-right"
+          type="secondary"
+          [size]="size"
+          shape="rounded"
+          [disabled]="loading"
+          (mouseenter)="changeIconHover('right', IS_HOVER)"
+          (mouseleave)="changeIconHover('right', !IS_HOVER)"
+          (ionOnClick)="jumpPagesForward()" />
+      }
+      <ion-button
+        [label]="pages()[pages().length - 1].page_number.toString()"
+        [attr.data-testid]="'page-' + pages()[pages().length - 1].page_number"
+        type="secondary"
+        class="ion-pagination__button--rounded"
+        [class.ion-pagination__button--selected]="
+          pages()[pages().length - 1].selected
+        "
+        [size]="size"
+        [disabled]="loading"
+        (ionOnClick)="
+          selectPageOnClick(pages()[pages().length - 1].page_number)
+        " />
+    </div>
+  } @else {
+    @for (page of pages(); track page.page_number) {
+      <ion-button
+        [label]="page.page_number.toString()"
+        [attr.data-testid]="'page-' + page.page_number"
+        type="secondary"
+        class="ion-pagination__button--rounded"
+        [class.ion-pagination__button--selected]="page.selected"
+        [size]="size"
+        [disabled]="loading"
+        (ionOnClick)="selectPageOnClick(page.page_number)" />
+    }
+  }
+
+  <ion-button
+    [icon]="{ type: 'right2' }"
+    data-testid="arrow-right"
+    type="secondary"
+    [size]="size"
+    shape="rounded"
+    (ionOnClick)="next()"
+    [disabled]="loading || !hasNext()" />
+</div>
