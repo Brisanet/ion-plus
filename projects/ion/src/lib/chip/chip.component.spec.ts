@@ -14,6 +14,7 @@ import {
   IonIconComponent,
 } from '../../public-api';
 import { SafeAny } from '../utils/safe-any';
+import { ComponentFixture } from '@angular/core/testing';
 
 const defaultOptions = [
   { label: 'Cat', value: 1, selected: false, key: '1', icon: 'box' },
@@ -234,7 +235,7 @@ describe('ChipComponent', () => {
 
   it('should render the label of the first selected option when displaying the chip with dropdown', async () => {
     await sut({
-      label: 'option',
+      label: 'Custom label',
       options: defaultOptions,
       disabled: false,
       size: 'sm',
@@ -242,13 +243,18 @@ describe('ChipComponent', () => {
       multiple: false,
       iconPosition: 'left',
       required: false,
-      hasDropdown: false,
+      hasDropdown: true,
       infoBadge: { render: false, type: 'negative' },
-      rightBadge: { render: true, label: 'novo', type: 'primary' },
+      rightBadge: { render: false, label: 'novo', type: 'primary' },
       chipSelected: { selected: false, disabled: false },
       dropdownEvents: [],
     });
-    expect(screen.getByText('option')).toBeInTheDocument();
+    fireEvent.click(screen.getByTestId('ion-chip'));
+    fireEvent.click(screen.getByTestId('dropdown-item-1'));
+    fireEvent.click(document.body);
+    expect(screen.getByTestId('ion-chip-label')).toContainHTML(
+      defaultOptions[0].label
+    );
   });
 
   it('should render badge with value', async () => {
@@ -357,7 +363,9 @@ describe('ChipComponent', () => {
 describe('Check update label', () => {
   const dropdownEvent = jest.fn();
   const events = jest.fn();
-
+  afterEach(() => {
+    dropdownEvent.mockClear();
+  });
   it('should change label when select option', async () => {
     await sut({
       label: 'dropdown',
@@ -378,20 +386,19 @@ describe('Check update label', () => {
         emit: dropdownEvent,
       } as SafeAny,
     });
-    const chip = screen.getByText('dropdown');
+    const chip = screen.getByTestId('ion-chip');
     fireEvent.click(chip);
-    const option = screen.getByTestId('dropdown-item-1');
+    const option = screen.getByTestId('dropdown-item-2');
     fireEvent.click(option);
     fireEvent.click(document.body);
     expect(screen.getByTestId('ion-chip-label')).toContainHTML(
-      defaultOptions[0].label
+      defaultOptions[1].label
     );
   });
 
   it('should change label when deselect option', async () => {
-    defaultOptions[0].selected = true;
     await sut({
-      label: 'dropdown',
+      label: 'Custom label',
       options: defaultOptions,
       disabled: false,
       size: 'sm',
@@ -409,19 +416,21 @@ describe('Check update label', () => {
         emit: dropdownEvent,
       } as SafeAny,
     });
-    const chip = screen.getByText('dropdown');
+    const chip = screen.getByTestId('ion-chip');
     fireEvent.click(chip);
     fireEvent.click(screen.getByTestId('dropdown-item-1'));
-    expect(screen.getByText('dropdown')).toBeInTheDocument();
+    fireEvent.click(screen.getByTestId('dropdown-item-1'));
+
+    expect(screen.getByText('Custom label')).toBeInTheDocument();
   });
 });
 
 describe('With Multiple Dropdown', () => {
   const dropdownEvent = jest.fn();
   const events = jest.fn();
-
+  let fixture: ComponentFixture<IonChipComponent>;
   beforeEach(async () => {
-    await sut({
+    const result = await sut({
       label: 'dropdown',
       options: defaultOptions,
       multiple: true,
@@ -440,6 +449,8 @@ describe('With Multiple Dropdown', () => {
         emit: events,
       } as SafeAny,
     });
+
+    fixture = result.fixture;
   });
 
   it('should not show badge when dont have item selected', async () => {
@@ -450,8 +461,6 @@ describe('With Multiple Dropdown', () => {
     fireEvent.click(screen.getByText('dropdown'));
     fireEvent.click(screen.getByTestId('dropdown-item-1'));
     fireEvent.click(screen.getByTestId('dropdown-item-2'));
-    defaultOptions[0].selected = true;
-    defaultOptions[1].selected = true;
     expect(dropdownEvent).toHaveBeenCalled();
     expect(screen.getByText('Limpar')).toBeInTheDocument();
     expect(screen.getByTestId('ion-badge-2')).toContainHTML('2');
@@ -462,6 +471,7 @@ describe('With Multiple Dropdown', () => {
     fireEvent.click(dropdown);
     fireEvent.click(screen.getByTestId('dropdown-item-1'));
     expect(screen.getAllByTestId('ion-dropdown')).toBeTruthy();
+    screen.debug(undefined, Infinity);
     expect(screen.getByText('Limpar')).toBeInTheDocument();
   });
 
@@ -495,7 +505,9 @@ describe('With Multiple Dropdown', () => {
   });
 
   afterEach(() => {
+    fixture.destroy(); // Destruir o fixture após cada teste
     dropdownEvent.mockClear();
+    events.mockClear();
   });
 });
 
@@ -503,7 +515,7 @@ describe('With dropdown with icons', () => {
   const dropdownEvent = jest.fn();
   const events = jest.fn();
 
-  beforeEach(async () => {
+  it('should set the icon to the selected option', async () => {
     await sut({
       label: 'dropdown',
       options: defaultOptions,
@@ -523,14 +535,35 @@ describe('With dropdown with icons', () => {
         emit: dropdownEvent,
       } as SafeAny,
     });
-  });
-
-  it('should set the icon to the selected option', async () => {
     fireEvent.click(screen.getByText('dropdown'));
     fireEvent.click(screen.getByTestId('dropdown-item-1'));
     const chipIcon = document.getElementById(
       `ion-icon-${defaultOptions[0].icon}`
     );
+    expect(chipIcon).toBeVisible();
+  });
+
+  it('should set icon if hasDropdown is false', async () => {
+    await sut({
+      label: 'dropdown',
+      options: [],
+      disabled: false,
+      size: 'sm',
+      icon: 'close',
+      multiple: false,
+      iconPosition: 'left',
+      required: false,
+      hasDropdown: false,
+      infoBadge: { render: false, type: 'negative' },
+      rightBadge: { render: false, label: 'novo', type: 'primary' },
+      chipSelected: {
+        emit: events,
+      } as SafeAny,
+      dropdownEvents: {
+        emit: dropdownEvent,
+      } as SafeAny,
+    });
+    const chipIcon = document.getElementById(`ion-icon-close`);
     expect(chipIcon).toBeVisible();
   });
 });
