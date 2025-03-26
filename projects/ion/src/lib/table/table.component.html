@@ -37,13 +37,16 @@
                     <ng-container>
                       @if (action.show ? !showAction(row, action) : true) {
                         <ion-button
+                          [attr.data-testid]="
+                            'row-' + $index + '-' + action.label
+                          "
                           [label]="action.label"
                           type="ghost"
                           [disabled]="
                             action.disabled ? disableAction(row, action) : false
                           "
                           [icon]="{ type: action.icon }"
-                          [shape]="'circle'"
+                          shape="circle"
                           (ionOnClick)="
                             handleEvent(row, action.call!)
                           "></ion-button>
