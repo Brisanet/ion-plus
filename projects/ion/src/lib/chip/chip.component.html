@@ -21,7 +21,7 @@
     <ion-icon
       [attr.data-testid]="'chip-icon-' + iconPosition()"
       [attr.class]="'icon-color chip-icon-' + iconPosition()"
-      [type]="dropdownWithIcon ? iconPlaceholder : icon()"
+      [type]="dropdownWithIcon() ? iconPlaceholder() : icon()"
       [size]="iconSize"></ion-icon>
   }
 

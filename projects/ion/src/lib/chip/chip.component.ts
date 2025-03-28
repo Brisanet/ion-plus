@@ -1,6 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
   DoCheck,
   input,
   OnChanges,
@@ -57,12 +58,22 @@ export class IonChipComponent implements OnInit, OnChanges, DoCheck {
   selected = signal(false);
   dropdownId!: string;
   chipId!: string;
-  dropdownWithIcon = false;
+  dropdownWithIcon = signal(false);
   placeholder = '';
-  iconPlaceholder: IconType = '';
+  iconPlaceholder = signal<IconType>('');
   firstCheck = true;
   badge!: Badge;
   iconSize = 16;
+
+  shouldShowIcon = computed(() => {
+    return (
+      (!this.hasDropdown() && this.icon()) ||
+      (this.hasDropdown() &&
+        this.dropdownWithIcon() &&
+        this.iconPlaceholder() &&
+        this.iconPosition() === 'left')
+    );
+  });
 
   select(): void {
     this.selected.set(!this.selected());
@@ -86,7 +97,7 @@ export class IonChipComponent implements OnInit, OnChanges, DoCheck {
 
   setPlaceHolder(label: string, icon: IconType): void {
     this.placeholder = label || this.label();
-    this.iconPlaceholder = icon || (this.icon() as string);
+    this.iconPlaceholder.set(icon || (this.icon() as string));
     this.selected.set(false);
   }
 
@@ -98,7 +109,7 @@ export class IonChipComponent implements OnInit, OnChanges, DoCheck {
 
   updateLabel(): void {
     this.placeholder = this.label();
-    this.iconPlaceholder = '';
+    this.iconPlaceholder.set('');
 
     if (this.firstCheck) {
       this.firstUpdateLabel();
@@ -115,7 +126,7 @@ export class IonChipComponent implements OnInit, OnChanges, DoCheck {
     }
 
     this.placeholder = selectedOption.label;
-    this.iconPlaceholder = selectedOption.icon as string;
+    this.iconPlaceholder.set(selectedOption.icon as string);
   }
 
   firstUpdateLabel(): void {
@@ -123,26 +134,13 @@ export class IonChipComponent implements OnInit, OnChanges, DoCheck {
       const optionSelected = this.options().find(option => option.selected);
       if (optionSelected) {
         this.placeholder = optionSelected.label || '';
-        this.iconPlaceholder = optionSelected.icon || '';
+        this.iconPlaceholder.set(optionSelected.icon || '');
       }
     } else {
       this.placeholder = this.label();
-      this.iconPlaceholder = '';
+      this.iconPlaceholder.set('');
     }
     this.firstCheck = false;
-  }
-
-  shouldShowIcon(): boolean {
-    if (
-      (!this.hasDropdown() && this.icon()) ||
-      (this.hasDropdown() &&
-        this.dropdownWithIcon &&
-        this.iconPlaceholder &&
-        this.iconPosition() === 'left')
-    ) {
-      return true;
-    }
-    return false;
   }
 
   private setBadgeValue(): void {
@@ -154,7 +152,7 @@ export class IonChipComponent implements OnInit, OnChanges, DoCheck {
     if ((this.options() && !this.options().length) || !this.options()) {
       return;
     }
-    this.dropdownWithIcon = !!this.options()[0].icon;
+    this.dropdownWithIcon.set(!!this.options()[0].icon);
   }
 
   private setIconSize(): void {
