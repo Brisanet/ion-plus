@@ -62,6 +62,7 @@ export class IonChipComponent implements OnInit, OnChanges, DoCheck {
   iconPlaceholder: IconType = '';
   firstCheck = true;
   badge!: Badge;
+  iconSize = 16;
 
   select(): void {
     this.selected.set(!this.selected());
@@ -131,6 +132,19 @@ export class IonChipComponent implements OnInit, OnChanges, DoCheck {
     this.firstCheck = false;
   }
 
+  shouldShowIcon(): boolean {
+    if (
+      (!this.hasDropdown() && this.icon()) ||
+      (this.hasDropdown() &&
+        this.dropdownWithIcon &&
+        this.iconPlaceholder &&
+        this.iconPosition() === 'left')
+    ) {
+      return true;
+    }
+    return false;
+  }
+
   private setBadgeValue(): void {
     const newValue = this.getSelectedOptions().length;
     this.badge = { ...this.badge, value: newValue };
@@ -141,6 +155,10 @@ export class IonChipComponent implements OnInit, OnChanges, DoCheck {
       return;
     }
     this.dropdownWithIcon = !!this.options()[0].icon;
+  }
+
+  private setIconSize(): void {
+    this.iconSize = this.size() === 'sm' ? 16 : 20;
   }
 
   public ngDoCheck(): void {
@@ -156,6 +174,7 @@ export class IonChipComponent implements OnInit, OnChanges, DoCheck {
     if (selecteds && this.multiple()) {
       this.setBadgeValue();
     }
+    this.setIconSize();
   }
 
   public ngOnChanges(changes: SimpleChanges): void {

@@ -17,18 +17,12 @@
   [dropdownOptions]="options() ? options() : []"
   (dropdownOpened)="select()"
   (dropdownEvent)="selectDropdownItem($event)">
-  @if (
-    (!hasDropdown() && icon()) ||
-    (hasDropdown() &&
-      dropdownWithIcon &&
-      iconPlaceholder &&
-      iconPosition() === 'left')
-  ) {
+  @if (shouldShowIcon()) {
     <ion-icon
       [attr.data-testid]="'chip-icon-' + iconPosition()"
       [attr.class]="'icon-color chip-icon-' + iconPosition()"
       [type]="dropdownWithIcon ? iconPlaceholder : icon()"
-      [size]="size() === 'sm' ? 16 : 20"></ion-icon>
+      [size]="iconSize"></ion-icon>
   }
 
   @if (badge.value > 0 && multiple()) {
@@ -59,7 +53,7 @@
       data-testid="icon-default"
       [attr.class]="'icon-color chip-icon-' + iconPosition()"
       [type]="showDropdown() ? 'semi-up' : 'semi-down'"
-      [size]="size() === 'sm' ? 16 : 20">
+      [size]="iconSize">
     </ion-icon>
   }
 </button>
