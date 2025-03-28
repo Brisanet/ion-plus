@@ -51,6 +51,8 @@ export class IonDropdownComponent<T extends IonDropdownOption> {
         selected: option.disabled ? option.selected : false,
       }))
     );
+
+    this.dropdownOptionsChange.emit(this.dropdownOptions());
   }
 
   public selectOption(selectedOption: T): void {

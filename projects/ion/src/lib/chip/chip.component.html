@@ -1,0 +1,59 @@
+<button
+  data-testid="ion-chip"
+  [id]="chipId"
+  [disabled]="disabled()"
+  [class]="'ion-chip chip-' + size()"
+  [ngClass]="{
+    chip: !selected(),
+    'chip-selected': selected(),
+  }"
+  ionDropdown
+  [dropdownConfig]="{
+    shouldRender: !disabled() && hasDropdown(),
+    required: required(),
+    multiple: multiple(),
+    clearButton: multiple(),
+  }"
+  [dropdownOptions]="options() ? options() : []"
+  (dropdownOpened)="select()"
+  (dropdownEvent)="selectDropdownItem($event)">
+  @if (shouldShowIcon()) {
+    <ion-icon
+      [attr.data-testid]="'chip-icon-' + iconPosition()"
+      [attr.class]="'icon-color chip-icon-' + iconPosition()"
+      [type]="dropdownWithIcon() ? iconPlaceholder() : icon()"
+      [size]="iconSize"></ion-icon>
+  }
+
+  @if (badge.value > 0 && multiple()) {
+    <ion-badge [label]="badge.value" type="primary"></ion-badge>
+  }
+
+  <div data-testid="ion-chip-label" class="container-icon-text">
+    {{ placeholder }}
+  </div>
+
+  @if (rightBadge().render && !infoBadge().render) {
+    <ion-badge
+      class="right-badge"
+      [label]="rightBadge().label"
+      [type]="rightBadge().type"></ion-badge>
+  }
+
+  @if (infoBadge().render) {
+    <ion-badge
+      class="right-badge"
+      [dot]="true"
+      size="md"
+      [status]="infoBadge().type"></ion-badge>
+  }
+
+  @if (hasDropdown()) {
+    <ion-icon
+      data-testid="icon-default"
+      [attr.class]="'icon-color chip-icon-' + iconPosition()"
+      [type]="showDropdown() ? 'semi-up' : 'semi-down'"
+      [size]="iconSize">
+    </ion-icon>
+  }
+</button>
