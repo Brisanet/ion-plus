@@ -1,0 +1,204 @@
+@import '../../styles/index.scss';
+
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: spacing(0.5);
+
+  .input-select-container {
+    display: flex;
+    border-radius: spacing(1);
+
+    .input-container {
+      display: flex;
+      line-height: 0;
+      width: 100%;
+
+      div.input {
+        border: 1px solid $neutral-5;
+
+        input {
+          border: transparent;
+        }
+      }
+
+      div.input {
+        z-index: 2;
+        width: 100%;
+        display: flex;
+        box-shadow: none;
+        position: relative;
+        align-items: center;
+        background: $neutral-1;
+      }
+    }
+
+    .input {
+      border-radius: 0 spacing(1) spacing(1) 0;
+
+      .my-input {
+        padding: spacing(0.75) spacing(1.5);
+
+        width: 100%;
+        border: none;
+        outline: none;
+        font-size: 14px;
+        padding: 8px 12px;
+        color: $neutral-7;
+        border-radius: 8px;
+        background: transparent;
+
+        &::placeholder {
+          font-size: 14px;
+          font-weight: 400;
+          color: $neutral-5;
+        }
+      }
+    }
+  }
+}
+
+.dropdown-container {
+  &__button {
+    cursor: pointer;
+    background-color: $neutral-2;
+
+    display: flex;
+    align-items: center;
+    gap: spacing(1);
+
+    padding: spacing(0.75) spacing(1.5);
+    min-width: max-content;
+    border-radius: spacing(1) 0 0 spacing(1);
+    border: 1px solid $neutral-5;
+    border-right: none;
+
+    color: $neutral-7;
+    line-height: 20px;
+    font-size: 14px;
+    font-weight: 400;
+  }
+}
+
+.multiple-input {
+  background-color: $neutral-1;
+
+  .first-input {
+    border-radius: 0 !important;
+  }
+
+  .second-input {
+    border-radius: 0 spacing(1) spacing(1) 0 !important;
+  }
+
+  .first-input:not(:hover):not(:focus-within):not(:active) {
+    border-right: transparent;
+  }
+
+  .second-input:not(:hover):not(:focus-within):not(:active) {
+    border-left: transparent;
+  }
+
+  .first-input,
+  .second-input {
+    position: relative;
+    z-index: 2;
+  }
+
+  &--disabled {
+    background-color: $neutral-2;
+
+    .dropdown-container__button {
+      cursor: not-allowed;
+      color: $neutral-5;
+      border: 1px solid $neutral-4;
+    }
+
+    & .first-input {
+      border-left: none;
+    }
+
+    & .first-input:hover,
+    & .second-input:hover,
+    & .first-input:active,
+    & .second-input:active {
+      border: 1px solid $neutral-4;
+      border-left: none;
+      outline: none;
+    }
+
+    & .first-input:hover,
+    & .first-input:active {
+      border-right: none;
+    }
+
+    & .separator {
+      border: 1px solid $neutral-4;
+      border-left: none;
+      border-right: none;
+      cursor: not-allowed;
+    }
+
+    ::ng-deep ion-icon svg {
+      fill: $neutral-4;
+    }
+  }
+
+  &--invalid:not(&--disabled) {
+    .dropdown-container__button {
+      border: 1px solid $negative-5;
+      border-right: none;
+    }
+
+    & .first-input,
+    & .second-input {
+      border: 1px solid $negative-5;
+    }
+
+    & .first-input:hover,
+    & .second-input:hover,
+    & .first-input:active,
+    & .second-input:active,
+    & .first-input:focus-within,
+    & .second-input:focus-within {
+      border: 1px solid $negative-6;
+      border-color: $negative-5;
+      outline: 2px solid $negative-2;
+    }
+
+    & .separator {
+      border-color: $negative-5 !important;
+      border: 1px solid;
+      border-left: 0;
+      border-right: 0;
+    }
+  }
+}
+
+.separator {
+  background-color: transparent;
+  color: $neutral-5;
+  line-height: spacing(2.5);
+
+  border-top: 1px solid $neutral-5;
+  border-bottom: 1px solid $neutral-5;
+  padding: spacing(1) spacing(1.5);
+}
+
+ion-icon.color-valid {
+  position: absolute;
+  right: spacing(1.5);
+
+  ::ng-deep svg {
+    fill: $positive-6 !important;
+  }
+}
+
+ion-icon.color-invalid {
+  position: absolute;
+  right: spacing(1.5);
+
+  ::ng-deep svg {
+    fill: $negative-6 !important;
+  }
+}
