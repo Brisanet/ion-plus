@@ -68,7 +68,6 @@ export class IonInputSelectComponent implements OnInit {
   public handleSelect(): void {
     this.clearInputs();
     this.currentOption = this.getCurrentOption();
-    console.log(this.currentOption);
     this.handleChange();
   }
 
