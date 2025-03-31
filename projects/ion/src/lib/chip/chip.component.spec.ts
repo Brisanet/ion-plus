@@ -26,14 +26,13 @@ const defaultOptions = [
 const sut = async (
   customProps: IonChipProps
 ): Promise<RenderResult<IonChipComponent>> => {
-  const { chipSelected, dropdownEvents, ...rest } = customProps;
+  const { chipEvents, ...rest } = customProps;
   return await render(IonChipComponent, {
     componentInputs: {
       ...rest,
     },
     componentOutputs: {
-      chipSelected: chipSelected as SafeAny,
-      dropdownEvents: dropdownEvents as SafeAny,
+      chipEvents: chipEvents as SafeAny,
     },
     imports: [IonBadgeComponent, IonIconComponent, IonDropdownDirective],
   });
@@ -53,8 +52,11 @@ describe('ChipComponent', () => {
       hasDropdown: true,
       infoBadge: { render: false, type: 'primary' },
       rightBadge: { render: false, label: 'label', type: 'primary' },
-      chipSelected: { selected: false, disabled: false },
-      dropdownEvents: [],
+      chipEvents: {
+        chipSelected: false,
+        chipDisabled: false,
+        options: [],
+      },
     });
     const iconDinamic = screen.queryAllByTestId('icon-dinamic');
     const iconDefault = screen.queryAllByTestId('icon-default');
@@ -75,8 +77,11 @@ describe('ChipComponent', () => {
       hasDropdown: true,
       infoBadge: { render: false, type: 'primary' },
       rightBadge: { render: false, label: 'label', type: 'primary' },
-      chipSelected: { selected: false, disabled: false },
-      dropdownEvents: [],
+      chipEvents: {
+        chipSelected: false,
+        chipDisabled: false,
+        options: [],
+      },
     });
     expect(screen.queryAllByTestId('ion-dot-badge')).toHaveLength(0);
   });
@@ -94,8 +99,11 @@ describe('ChipComponent', () => {
       hasDropdown: true,
       infoBadge: { render: false, type: 'primary' },
       rightBadge: { render: false, label: 'label', type: 'primary' },
-      chipSelected: { selected: false, disabled: false },
-      dropdownEvents: [],
+      chipEvents: {
+        chipSelected: false,
+        chipDisabled: false,
+        options: [],
+      },
     });
     expect(screen.getByText('Custom label')).toBeTruthy();
   });
@@ -115,8 +123,11 @@ describe('ChipComponent', () => {
         hasDropdown: true,
         infoBadge: { render: false, type: 'primary' },
         rightBadge: { render: false, label: 'label', type: 'primary' },
-        chipSelected: { selected: false, disabled: false },
-        dropdownEvents: [],
+        chipEvents: {
+          chipSelected: false,
+          chipDisabled: false,
+          options: [],
+        },
       });
       const element = screen.getByTestId('ion-chip');
       expect(element).toHaveClass('chip-' + size);
@@ -136,8 +147,11 @@ describe('ChipComponent', () => {
       hasDropdown: false,
       infoBadge: { render: false, type: 'primary' },
       rightBadge: { render: false, label: 'label', type: 'primary' },
-      chipSelected: { selected: false, disabled: false },
-      dropdownEvents: [],
+      chipEvents: {
+        chipSelected: false,
+        chipDisabled: false,
+        options: [],
+      },
     });
     const chipIcon = screen.getByTestId('chip-icon-left');
     expect(chipIcon).toHaveClass('icon-color chip-icon-left');
@@ -156,8 +170,11 @@ describe('ChipComponent', () => {
       hasDropdown: false,
       infoBadge: { render: false, type: 'primary' },
       rightBadge: { render: false, label: 'label', type: 'primary' },
-      chipSelected: { selected: false, disabled: false },
-      dropdownEvents: [],
+      chipEvents: {
+        chipSelected: false,
+        chipDisabled: false,
+        options: [],
+      },
     });
     const element = screen.getByTestId('ion-chip');
     expect(element).toHaveAttribute('disabled');
@@ -177,17 +194,17 @@ describe('ChipComponent', () => {
       hasDropdown: false,
       infoBadge: { render: false, type: 'primary' },
       rightBadge: { render: false, label: 'label', type: 'primary' },
-      chipSelected: {
+      chipEvents: {
         emit: selectEvent,
       } as SafeAny,
-      dropdownEvents: [],
     });
     const element = screen.getByTestId('ion-chip');
     fireEvent.click(element);
     expect(element).toHaveClass('chip-selected');
     expect(selectEvent).toHaveBeenCalledWith({
-      selected: true,
-      disabled: false,
+      chipSelected: true,
+      chipDisabled: false,
+      options: [],
     });
   });
 
@@ -206,8 +223,11 @@ describe('ChipComponent', () => {
         hasDropdown: false,
         infoBadge: { render: true, type: badgeType as BadgeStatus },
         rightBadge: { render: false, label: 'label', type: 'primary' },
-        chipSelected: { selected: false, disabled: false },
-        dropdownEvents: [],
+        chipEvents: {
+          chipSelected: false,
+          chipDisabled: false,
+          options: [],
+        },
       });
       expect(screen.getByTestId('ion-dot-badge')).toBeInTheDocument();
     }
@@ -227,8 +247,11 @@ describe('ChipComponent', () => {
       hasDropdown: false,
       infoBadge: { render: false, type: 'negative' },
       rightBadge: { render: true, label: 'novo', type: 'primary' },
-      chipSelected: { selected: false, disabled: false },
-      dropdownEvents: [],
+      chipEvents: {
+        chipSelected: false,
+        chipDisabled: false,
+        options: [],
+      },
     });
     expect(screen.getByText(labelBadge)).toBeInTheDocument();
   });
@@ -246,8 +269,11 @@ describe('ChipComponent', () => {
       hasDropdown: true,
       infoBadge: { render: false, type: 'negative' },
       rightBadge: { render: false, label: 'novo', type: 'primary' },
-      chipSelected: { selected: false, disabled: false },
-      dropdownEvents: [],
+      chipEvents: {
+        chipSelected: false,
+        chipDisabled: false,
+        options: [],
+      },
     });
     fireEvent.click(screen.getByTestId('ion-chip'));
     fireEvent.click(screen.getByTestId('dropdown-item-1'));
@@ -273,8 +299,11 @@ describe('ChipComponent', () => {
       hasDropdown: false,
       infoBadge: { render: false, type: 'negative' },
       rightBadge: { render: false, label: 'novo', type: 'primary' },
-      chipSelected: { selected: false, disabled: false },
-      dropdownEvents: [],
+      chipEvents: {
+        chipSelected: false,
+        chipDisabled: false,
+        options: [],
+      },
     });
     expect(screen.getByTestId('ion-badge-1')).toHaveTextContent('1');
   });
@@ -295,8 +324,11 @@ describe('ChipComponent', () => {
       hasDropdown: false,
       infoBadge: { render: false, type: 'negative' },
       rightBadge: { render: false, label: 'novo', type: 'primary' },
-      chipSelected: { selected: false, disabled: false },
-      dropdownEvents: [],
+      chipEvents: {
+        chipSelected: false,
+        chipDisabled: false,
+        options: [],
+      },
     });
     expect(screen.queryAllByTestId('ion-badge-1')).toHaveLength(1);
   });
@@ -316,8 +348,7 @@ describe('ChipComponent', () => {
         hasDropdown: true,
         infoBadge: { render: false, type: 'negative' },
         rightBadge: { render: false, label: 'novo', type: 'primary' },
-        chipSelected: { selected: false, disabled: false },
-        dropdownEvents: {
+        chipEvents: {
           emit: dropdownEvent,
         } as SafeAny,
       });
@@ -341,17 +372,24 @@ describe('ChipComponent', () => {
     it('should emit options selected when select in chip', async () => {
       const chipToOpen = screen.getByTestId('ion-chip');
       fireEvent.click(chipToOpen);
-      screen.debug();
       fireEvent.click(screen.getByTestId('dropdown-item-1'));
-      expect(dropdownEvent).toHaveBeenCalledWith(defaultOptions);
+      expect(dropdownEvent).toHaveBeenCalledWith({
+        chipDisabled: false,
+        chipSelected: true,
+        options: defaultOptions,
+      });
     });
 
     it('should render call event only one time when select a option', async () => {
       const chipToOpen = screen.getByTestId('ion-chip');
       fireEvent.click(chipToOpen);
       fireEvent.click(screen.getByTestId('dropdown-item-1'));
-      expect(dropdownEvent).toHaveBeenCalledWith(defaultOptions);
-      expect(dropdownEvent).toHaveBeenCalledTimes(1);
+      expect(dropdownEvent).toHaveBeenCalledWith({
+        chipDisabled: false,
+        chipSelected: true,
+        options: defaultOptions,
+      });
+      expect(dropdownEvent).toHaveBeenCalledTimes(2);
     });
 
     afterEach(() => {
@@ -379,11 +417,8 @@ describe('Check update label', () => {
       hasDropdown: true,
       infoBadge: { render: false, type: 'negative' },
       rightBadge: { render: false, label: 'novo', type: 'primary' },
-      chipSelected: {
+      chipEvents: {
         emit: events,
-      } as SafeAny,
-      dropdownEvents: {
-        emit: dropdownEvent,
       } as SafeAny,
     });
     const chip = screen.getByTestId('ion-chip');
@@ -409,11 +444,8 @@ describe('Check update label', () => {
       hasDropdown: true,
       infoBadge: { render: false, type: 'negative' },
       rightBadge: { render: false, label: 'novo', type: 'primary' },
-      chipSelected: {
+      chipEvents: {
         emit: events,
-      } as SafeAny,
-      dropdownEvents: {
-        emit: dropdownEvent,
       } as SafeAny,
     });
     const chip = screen.getByTestId('ion-chip');
@@ -442,11 +474,8 @@ describe('With Multiple Dropdown', () => {
       hasDropdown: true,
       infoBadge: { render: false, type: 'negative' },
       rightBadge: { render: false, label: 'novo', type: 'primary' },
-      dropdownEvents: {
+      chipEvents: {
         emit: dropdownEvent,
-      } as SafeAny,
-      chipSelected: {
-        emit: events,
       } as SafeAny,
     });
 
@@ -471,7 +500,6 @@ describe('With Multiple Dropdown', () => {
     fireEvent.click(dropdown);
     fireEvent.click(screen.getByTestId('dropdown-item-1'));
     expect(screen.getAllByTestId('ion-dropdown')).toBeTruthy();
-    screen.debug(undefined, Infinity);
     expect(screen.getByText('Limpar')).toBeInTheDocument();
   });
 
@@ -498,9 +526,10 @@ describe('With Multiple Dropdown', () => {
   it('should emit event when dropdown is closed', async () => {
     fireEvent.click(screen.getByText('dropdown'));
     fireEvent.click(document.body);
-    expect(events).toHaveBeenCalledWith({
-      selected: true,
-      disabled: false,
+    expect(dropdownEvent).toHaveBeenCalledWith({
+      chipSelected: true,
+      chipDisabled: false,
+      options: defaultOptions,
     });
   });
 
@@ -512,7 +541,6 @@ describe('With Multiple Dropdown', () => {
 });
 
 describe('With dropdown with icons', () => {
-  const dropdownEvent = jest.fn();
   const events = jest.fn();
 
   it('should set the icon to the selected option', async () => {
@@ -528,11 +556,8 @@ describe('With dropdown with icons', () => {
       hasDropdown: true,
       infoBadge: { render: false, type: 'negative' },
       rightBadge: { render: false, label: 'novo', type: 'primary' },
-      chipSelected: {
+      chipEvents: {
         emit: events,
-      } as SafeAny,
-      dropdownEvents: {
-        emit: dropdownEvent,
       } as SafeAny,
     });
     fireEvent.click(screen.getByText('dropdown'));
@@ -556,11 +581,8 @@ describe('With dropdown with icons', () => {
       hasDropdown: false,
       infoBadge: { render: false, type: 'negative' },
       rightBadge: { render: false, label: 'novo', type: 'primary' },
-      chipSelected: {
+      chipEvents: {
         emit: events,
-      } as SafeAny,
-      dropdownEvents: {
-        emit: dropdownEvent,
       } as SafeAny,
     });
     const chipIcon = document.getElementById(`ion-icon-close`);
@@ -569,7 +591,6 @@ describe('With dropdown with icons', () => {
 });
 
 describe('IonChipComponent / Option showToggle', () => {
-  const dropdownEvent = jest.fn();
   const events = jest.fn();
   it('should not close dropdown when selected option', async () => {
     await sut({
@@ -584,11 +605,8 @@ describe('IonChipComponent / Option showToggle', () => {
       hasDropdown: true,
       infoBadge: { render: false, type: 'negative' },
       rightBadge: { render: false, label: 'novo', type: 'primary' },
-      chipSelected: {
+      chipEvents: {
         emit: events,
-      } as SafeAny,
-      dropdownEvents: {
-        emit: dropdownEvent,
       } as SafeAny,
     });
     fireEvent.click(screen.getByText('dropdown'));
@@ -598,7 +616,6 @@ describe('IonChipComponent / Option showToggle', () => {
 });
 
 describe('IonChipComponent / Required', () => {
-  const dropdownEvent = jest.fn();
   const events = jest.fn();
   it('should render with correct label', async () => {
     await sut({
@@ -613,14 +630,10 @@ describe('IonChipComponent / Required', () => {
       hasDropdown: true,
       infoBadge: { render: false, type: 'negative' },
       rightBadge: { render: false, label: 'novo', type: 'primary' },
-      chipSelected: {
+      chipEvents: {
         emit: events,
       } as SafeAny,
-      dropdownEvents: {
-        emit: dropdownEvent,
-      } as SafeAny,
     });
-    screen.debug();
     expect(screen.getByTestId('ion-chip-label')).toContainHTML('dropdown');
   });
 
@@ -637,11 +650,8 @@ describe('IonChipComponent / Required', () => {
       hasDropdown: true,
       infoBadge: { render: false, type: 'negative' },
       rightBadge: { render: false, label: 'novo', type: 'primary' },
-      chipSelected: {
+      chipEvents: {
         emit: events,
-      } as SafeAny,
-      dropdownEvents: {
-        emit: dropdownEvent,
       } as SafeAny,
     });
     const chip = screen.getByText('dropdown');

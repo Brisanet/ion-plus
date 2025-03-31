@@ -3,6 +3,12 @@ import { IonDropdownOption } from '../../public-api';
 
 export type ChipSize = 'sm' | 'md';
 
+export type chipEvents = {
+  chipSelected: boolean;
+  chipDisabled: boolean;
+  options: IonDropdownOption[];
+};
+
 export interface ChipEvent {
   /**
    * @param selected - Indicates that the chip is selected.
@@ -86,11 +92,11 @@ export interface IonChipProps {
    */
   size: ChipSize;
   /**
-   * @event chipSelected - Event triggered when chip is clicked.
+   * @event chipEvents - Event triggered when chip is clicked or when a change occurs in the dropdown.
    * @type {ChipEvent}
-   * @description - This event is emitted when the chip is clicked, emitting an event with a selected value and a disabled value. The event will not be fired is `disabled` propertie is set to `true`.
+   * @description - This event is emitted when the chip is clicked, emitting an event with a selected value, disabled value and the dropdown options. The event will not be fired is `disabled` propertie is set to `true`.
    */
-  chipSelected: ChipEvent;
+  chipEvents: chipEvents;
   /**
    * @param options - Defines the options displayed in the chip dropdown.
    * @type {IonDropdownOption[]}
@@ -146,10 +152,4 @@ export interface IonChipProps {
    * @default `false``
    */
   required: boolean;
-  /**
-   * @event dropdownEvents - Event triggered when a change occurs in the dropdown options.
-   * @type {IonDropdownOption[]}
-   * @description - This event is triggered when a option is clicked in the dropdown.
-   */
-  dropdownEvents: IonDropdownOption[];
 }

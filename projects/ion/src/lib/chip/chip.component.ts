@@ -50,8 +50,7 @@ export class IonChipComponent implements OnInit, OnChanges, DoCheck {
     label: 'label',
     type: 'primary',
   });
-  public chipSelected = output<IonChipProps['chipSelected']>();
-  public dropdownEvents = output<IonChipProps['dropdownEvents']>();
+  public chipEvents = output<IonChipProps['chipEvents']>();
 
   visibleOptions: IonChipProps['options'] = [];
   showDropdown = signal(false);
@@ -78,16 +77,20 @@ export class IonChipComponent implements OnInit, OnChanges, DoCheck {
   select(): void {
     this.selected.set(!this.selected());
     this.showDropdown.set(!this.showDropdown());
-    this.chipSelected.emit({
-      selected: this.selected(),
-      disabled: this.disabled(),
+    this.chipEvents.emit({
+      chipSelected: this.selected(),
+      chipDisabled: this.disabled(),
+      options: this.visibleOptions,
     });
   }
 
   selectDropdownItem(selecteds: IonDropdownOption[]): void {
     this.visibleOptions = selecteds;
-    this.dropdownEvents.emit(selecteds);
-
+    this.chipEvents.emit({
+      chipSelected: this.selected(),
+      chipDisabled: this.disabled(),
+      options: selecteds,
+    });
     if (this.multiple()) {
       this.setBadgeValue();
       return;
