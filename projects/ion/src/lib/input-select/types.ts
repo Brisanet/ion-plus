@@ -31,13 +31,13 @@ export interface IonInputSelectProps {
    * @type {SelectOption}
    * @default `defaultSelectOptions`
    */
-  selectOptions: SelectOption;
+  selectOptions: SelectOption[];
   /**
    * @param valid - Defines the state of valid or invalid.
-   * @type {boolean}
-   * @default `true`
+   * @type {boolean | null}
+   * @default `null`
    */
-  valid: boolean;
+  valid: boolean | null;
   /**
    * @event valueChange - Event triggered when a change occurs in the input select.
    * @type {ValueToEmmit}
