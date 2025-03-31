@@ -31,7 +31,7 @@ import { NgClass } from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IonChipComponent implements OnInit, OnChanges, DoCheck {
-  public label = input<IonChipProps['label']>('');
+  public label = input.required<IonChipProps['label']>();
   public options = input<IonChipProps['options']>([]);
   public disabled = input<IonChipProps['disabled']>(false);
   public size = input<IonChipProps['size']>('sm');
