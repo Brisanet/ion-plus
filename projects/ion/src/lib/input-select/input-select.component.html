@@ -1,0 +1,70 @@
+<div class="input-wrapper" data-testid="ion-input-select">
+  <div
+    class="input-select-container"
+    [class.multiple-input--invalid]="valid() === false"
+    [class.multiple-input--valid]="valid()"
+    [class.multiple-input--disabled]="disabled()"
+    [class.multiple-input]="currentOption?.multiple">
+    <div class="dropdown-container">
+      <button
+        class="dropdown-container__button"
+        (click)="handleClick()"
+        [disabled]="disabled()"
+        ionDropdown
+        [dropdownConfig]="{
+          required: true,
+          multiple: false,
+          shouldRender: !disabled(),
+        }"
+        [dropdownOptions]="selectOptions()"
+        (dropdownEvent)="handleSelect()">
+        <span> {{ currentOption?.label }}</span>
+        <ion-icon
+          [type]="isDropdownOpen() ? 'semi-up' : 'semi-down'"></ion-icon>
+      </button>
+    </div>
+
+    <div class="input-container">
+      <div class="input first-input" [class.disabled]="disabled()">
+        <input
+          type="text"
+          class="my-input"
+          [id]="name()"
+          [placeholder]="currentOption?.firstPlaceholder || 'Digite um valor'"
+          [(ngModel)]="value"
+          (input)="handleChange()" />
+        @if (valid() && !currentOption?.multiple) {
+          <ion-icon type="check-solid"></ion-icon>
+        }
+
+        @if (valid() === false && !currentOption?.multiple) {
+          <ion-icon type="close-solid"></ion-icon>
+        }
+      </div>
+    </div>
+
+    @if (currentOption?.multiple) {
+      <div class="separator">-</div>
+
+      <div class="input-container">
+        <div class="input second-input">
+          <input
+            type="text"
+            class="my-input"
+            [id]="name()"
+            [placeholder]="currentOption?.secondPlaceholder || 'Valor final'"
+            [disabled]="disabled()"
+            [(ngModel)]="secondValue"
+            (input)="handleChange()" />
+          @if (valid()) {
+            <ion-icon type="check-solid"></ion-icon>
+          }
+
+          @if (valid() === false) {
+            <ion-icon type="close-solid"></ion-icon>
+          }
+        </div>
+      </div>
+    }
+  </div>
+</div>
