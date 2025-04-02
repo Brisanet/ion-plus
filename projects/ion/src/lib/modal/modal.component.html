@@ -1,0 +1,68 @@
+<section
+  data-testid="ion-modal"
+  class="ion-modal"
+  [id]="modalRef.id"
+  [style.width.px]="configuration().width">
+  <header class="ion-modal__header">
+    @if (
+      configuration().headerButton &&
+      !(
+        configuration().headerButton?.hidden &&
+        configuration().headerButton?.hidden()
+      )
+    ) {
+      <ion-button
+        type="ghost"
+        shape="circle"
+        [label]="configuration().headerButton?.label"
+        [icon]="configuration().headerButton?.icon"
+        [disabled]="
+          !!(
+            configuration().headerButton?.disabled &&
+            configuration().headerButton?.disabled()
+          )
+        "
+        (ionOnClick)="onHeaderAction()" />
+    }
+    <h4 class="ion-modal__title">{{ configuration().title }}</h4>
+    @if (!configuration().hideCloseButton) {
+      <ion-button
+        label="Fechar"
+        [icon]="{ type: 'close' }"
+        type="ghost"
+        shape="circle"
+        data-testid="close-btn"
+        (ionOnClick)="closeModal('onClose')" />
+    }
+  </header>
+  @if (configuration().alert; as alert) {
+    <ion-alert
+      [message]="alert.message"
+      [type]="alert.type"
+      [description]="alert.description"
+      [closable]="false"
+      [hideBackground]="false"
+      [noRadius]="true" />
+  }
+  <main class="ion-modal__body">
+    <ng-template #content></ng-template>
+  </main>
+  @if (!configuration().footer?.hide) {
+    <footer
+      data-testid="ion-modal-footer"
+      class="ion-modal__footer"
+      [class.footer__divider]="configuration().footer?.showDivider">
+      <ion-button
+        type="ghost"
+        [label]="configuration().footer?.secondaryButton?.label || 'Cancelar'"
+        [icon]="configuration().footer?.secondaryButton?.icon"
+        (ionOnClick)="closeModal('onClose')" />
+      <ion-button
+        [label]="configuration().footer?.primaryButton?.label || 'Confirmar'"
+        [icon]="configuration().footer?.primaryButton?.icon"
+        [loading]="!!configuration().footer?.primaryButton?.loading"
+        [disabled]="!!configuration().footer?.primaryButton?.disabled"
+        (ionOnClick)="closeModal('onConfirm')" />
+    </footer>
+  }
+</section>
