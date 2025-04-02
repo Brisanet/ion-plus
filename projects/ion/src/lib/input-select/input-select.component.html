@@ -7,8 +7,9 @@
     [class.multiple-input]="currentOption?.multiple">
     <div class="dropdown-container">
       <button
+        data-testid="ion-select-button"
         class="dropdown-container__button"
-        (click)="handleClick()"
+        (dropdownOpened)="handleClick()"
         [disabled]="disabled()"
         ionDropdown
         [dropdownConfig]="{
@@ -27,9 +28,11 @@
     <div class="input-container">
       <div class="input first-input" [class.disabled]="disabled()">
         <input
+          data-testid="first-input"
           type="text"
           class="my-input"
           [id]="name()"
+          [disabled]="disabled()"
           [placeholder]="currentOption?.firstPlaceholder || 'Digite um valor'"
           [(ngModel)]="value"
           (input)="handleChange()" />
@@ -49,6 +52,7 @@
       <div class="input-container">
         <div class="input second-input">
           <input
+            data-testid="second-input"
             type="text"
             class="my-input"
             [id]="name()"
@@ -57,11 +61,11 @@
             [(ngModel)]="secondValue"
             (input)="handleChange()" />
           @if (valid()) {
-            <ion-icon type="check-solid"></ion-icon>
+            <ion-icon data-testid="valid-icon" type="check-solid"></ion-icon>
           }
 
           @if (valid() === false) {
-            <ion-icon type="close-solid"></ion-icon>
+            <ion-icon data-testid="invalid-icon" type="close-solid"></ion-icon>
           }
         </div>
       </div>

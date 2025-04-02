@@ -1,4 +1,11 @@
-import { Component, input, OnInit, output, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  input,
+  OnInit,
+  output,
+  signal,
+} from '@angular/core';
 import { IonInputSelectProps, SelectOption } from './types';
 import { IonIconComponent } from '../icon';
 import { CommonModule } from '@angular/common';
@@ -47,6 +54,7 @@ export const defaultSelectOptions: SelectOption[] = [
   imports: [IonIconComponent, CommonModule, FormsModule, IonDropdownDirective],
   templateUrl: './input-select.component.html',
   styleUrls: ['./input-select.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IonInputSelectComponent implements OnInit {
   name = input<IonInputSelectProps['name']>('');
