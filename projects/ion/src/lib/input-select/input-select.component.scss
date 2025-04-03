@@ -68,7 +68,7 @@
     min-width: max-content;
     border-radius: spacing(1) 0 0 spacing(1);
     border: 1px solid $neutral-5;
-    border-right: none;
+    border-right: none !important;
 
     color: $neutral-7;
     line-height: 20px;
@@ -111,27 +111,34 @@
       border: 1px solid $neutral-4;
     }
 
-    & .first-input {
-      border-left: none;
-      cursor: not-allowed;
+    & .first-input,
+    & .second-input {
+      border: 1px solid $neutral-4 !important;
+      input {
+        cursor: not-allowed !important;
+      }
     }
 
-    & .first-input:hover,
-    & .second-input:hover,
-    & .first-input:active,
-    & .second-input:active {
-      border: 1px solid $neutral-4;
-      border-left: none;
+    & .second-input {
+      border: 1px solid $neutral-4 !important;
       outline: none;
+      :hover {
+        border-right: none !important;
+      }
+    }
+
+    & .second-input:hover,
+    & .second-input:active {
+      border-left: none !important;
     }
 
     & .first-input:hover,
     & .first-input:active {
-      border-right: none;
+      border-right: none !important;
     }
 
     & .separator {
-      border-color: $neutral-4;
+      border-color: $neutral-4 !important;
       border-left: none;
       border-right: none;
       cursor: not-allowed;
