@@ -15,21 +15,18 @@
       width: 100%;
 
       div.input {
-        border: 1px solid $neutral-5;
-
-        input {
-          border: transparent;
-        }
-      }
-
-      div.input {
         z-index: 2;
         width: 100%;
         display: flex;
         box-shadow: none;
         position: relative;
         align-items: center;
-        background: $neutral-1;
+
+        border: 1px solid $neutral-5;
+
+        input {
+          border: transparent;
+        }
       }
     }
 
@@ -92,11 +89,11 @@
   }
 
   .first-input:not(:hover):not(:focus-within):not(:active) {
-    border-right: transparent;
+    border-right: transparent !important;
   }
 
   .second-input:not(:hover):not(:focus-within):not(:active) {
-    border-left: transparent;
+    border-left: transparent !important;
   }
 
   .first-input,
@@ -116,6 +113,7 @@
 
     & .first-input {
       border-left: none;
+      cursor: not-allowed;
     }
 
     & .first-input:hover,
@@ -133,7 +131,7 @@
     }
 
     & .separator {
-      border: 1px solid $neutral-4;
+      border-color: $neutral-4;
       border-left: none;
       border-right: none;
       cursor: not-allowed;
@@ -168,7 +166,7 @@
 
     & .separator {
       border-color: $negative-5 !important;
-      border: 1px solid;
+      border: 1px solid !important;
       border-left: 0;
       border-right: 0;
     }
@@ -180,8 +178,8 @@
   color: $neutral-5;
   line-height: spacing(2.5);
 
-  border-top: 1px solid $neutral-5;
-  border-bottom: 1px solid $neutral-5;
+  border-top: 1px solid $neutral-5 !important;
+  border-bottom: 1px solid $neutral-5 !important;
   padding: spacing(1) spacing(1.5);
 }
 
