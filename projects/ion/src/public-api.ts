@@ -32,3 +32,5 @@ export * from './lib/tab-group';
 export * from './lib/tag';
 export * from './lib/triple-toggle';
 export * from './lib/utils/commonTypes';
+export * from './lib/popover';
+export * from './lib/position';
