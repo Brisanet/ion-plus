@@ -7,18 +7,18 @@ import {
   EnvironmentInjector,
   HostListener,
   Inject,
-  OnDestroy,
-  ViewContainerRef,
   model,
+  OnDestroy,
   output,
+  ViewContainerRef,
 } from '@angular/core';
 
 import { IonPositionService } from '../position/position.service';
+import { IonPositions } from '../position/types';
+import { getPositionsPopover } from '../utils/popover';
 import { SafeAny } from './../utils/safe-any';
 import { IonPopoverComponent } from './component/popover.component';
 import { PopoverDirectiveProps, PopoverTrigger } from './types';
-import { IonPositions } from '../position/types';
-import { getPositionsPopover } from '../utils/popover';
 
 @Directive({
   selector: '[ionPopover]',
