@@ -69,9 +69,7 @@ export class IonPopoverDirective implements OnDestroy {
   createPopover(): void {
     this.popoverComponentRef = this.viewRef.createComponent(
       IonPopoverComponent,
-      {
-        injector: this.injector,
-      }
+      { injector: this.injector }
     );
 
     const popoverElement = this.popoverComponentRef.location
@@ -130,24 +128,32 @@ export class IonPopoverDirective implements OnDestroy {
 
   setComponentPosition(): void {
     const hostElement = this.elementRef.nativeElement.getBoundingClientRect();
-
     this.positionService.setHostPosition(hostElement);
-
     this.positionService.setChoosedPosition(this.ionPopoverPosition());
-    const position = this.ionPopoverArrowPointAtCenter();
-    this.positionService.setPointAtCenter(position as boolean);
+    this.positionService.setPointAtCenter(
+      this.ionPopoverArrowPointAtCenter() as boolean
+    );
+
+    const popoverElement =
+      this.popoverComponentRef?.instance.popover?.nativeElement;
+    if (popoverElement) {
+      const popoverRect = popoverElement.getBoundingClientRect();
+      this.positionService.setComponentCoordinates(popoverRect);
+    }
 
     const ionPopoverPosition =
       this.positionService.getNewPosition(getPositionsPopover);
 
-    const props = {
-      top: ionPopoverPosition!.top + window.scrollY,
-      left: ionPopoverPosition!.left + window.scrollX,
-      position: 'absolute',
-      ionPopoverTrigger: this.ionPopoverTrigger(),
-    };
+    if (ionPopoverPosition) {
+      const props = {
+        top: ionPopoverPosition.top + window.scrollY,
+        left: ionPopoverPosition.left + window.scrollX,
+        position: 'absolute',
+        ionPopoverTrigger: this.ionPopoverTrigger(),
+      };
 
-    Object.assign(this.popoverComponentRef!.instance, props);
+      Object.assign(this.popoverComponentRef!.instance, props);
+    }
   }
 
   showPopover(): void {

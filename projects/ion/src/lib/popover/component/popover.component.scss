@@ -13,7 +13,6 @@ $arrow-distance-to-border: 16px;
   width: $popover-width;
   justify-content: flex-end;
   border-radius: spacing(1);
-
   position: relative;
   z-index: $zIndexMid;
 
@@ -69,7 +68,7 @@ $arrow-distance-to-border: 16px;
       padding-bottom: $popover-spacing;
       transform: translateY(-100%);
       @include sup-container(
-        $neutral-2,
+        $neutral-1,
         $arrow-spacing-to-popover,
         calc(
           $popover-width - $arrow-distance-to-border - $arrow-visible-diagonal
@@ -83,8 +82,8 @@ $arrow-distance-to-border: 16px;
       padding-bottom: $popover-spacing;
       transform: translateY(-100%);
       @include sup-container(
-        popover-arrow-header-color,
-        $neutral-2,
+        $neutral-1,
+        $arrow-spacing-to-popover,
         calc($popover-width / 2 - $arrow-width / 2),
         -135deg,
         'footer'
@@ -95,7 +94,7 @@ $arrow-distance-to-border: 16px;
       padding-bottom: $popover-spacing;
       transform: translateY(-100%);
       @include sup-container(
-        $neutral-2,
+        $neutral-1,
         $arrow-spacing-to-popover,
         $arrow-distance-to-border,
         -135deg,
@@ -105,9 +104,9 @@ $arrow-distance-to-border: 16px;
 
     &--leftBottom {
       padding-right: $popover-spacing;
-      transform: translateY(-100%);
+      transform: translateY(calc(-100% + #{$arrow-distance-to-border}));
       @include sup-container(
-        $neutral-2,
+        $neutral-1,
         $arrow-distance-to-border,
         calc($popover-width - $arrow-spacing-to-popover - $popover-spacing),
         135deg,
@@ -119,8 +118,8 @@ $arrow-distance-to-border: 16px;
       padding-right: $popover-spacing;
       transform: translateY(-50%);
       @include sup-container(
-        $neutral-2,
-        10px,
+        $neutral-1,
+        calc(50% - $arrow-height / 2),
         calc($popover-width - $arrow-spacing-to-popover - $popover-spacing),
         135deg,
         'footer'
@@ -177,7 +176,7 @@ $arrow-distance-to-border: 16px;
       padding-left: $popover-spacing;
       transform: translateY(-100%);
       @include sup-container(
-        $neutral-2,
+        $neutral-1,
         $arrow-distance-to-border,
         $arrow-spacing-to-popover,
         -45deg,
@@ -189,7 +188,7 @@ $arrow-distance-to-border: 16px;
       padding-left: $popover-spacing;
       transform: translateY(-50%);
       @include sup-container(
-        $neutral-2,
+        $neutral-1,
         calc(50% - $arrow-height / 2),
         $arrow-spacing-to-popover,
         -45deg,
@@ -197,7 +196,7 @@ $arrow-distance-to-border: 16px;
       );
     }
 
-    &--topRight {
+    &--rightTop {
       padding-left: $popover-spacing;
       @include sup-container(
         $neutral-2,
