@@ -30,9 +30,9 @@ function calculateTopPositions({
       left: arrowAtCenter
         ? hostHorizontalCenter -
           popover.width +
-          ARROW_DIAGONAL / 2 +
-          ARROW_TO_EDGE_DISTANCE +
-          POPOVER_SPACING
+          ARROW_DIAGONAL +
+          ARROW_TO_EDGE_DISTANCE -
+          POPOVER_SPACING / 2
         : host.right - popover.width,
       top,
     },
@@ -41,7 +41,9 @@ function calculateTopPositions({
       top,
     },
     topLeft: {
-      left: arrowAtCenter ? host.left + ARROW_TO_EDGE_DISTANCE / 2 : host.left,
+      left: arrowAtCenter
+        ? host.left + ARROW_TO_EDGE_DISTANCE / 2 + ARROW_DIAGONAL / 2
+        : host.left,
       top,
     },
   };
@@ -59,8 +61,8 @@ function calculateBottomPositions({
       left: arrowAtCenter
         ? hostHorizontalCenter -
           popover.width +
-          ARROW_DIAGONAL / 2 +
-          ARROW_TO_EDGE_DISTANCE
+          ARROW_TO_EDGE_DISTANCE +
+          ARROW_DIAGONAL / 2
         : host.right - popover.width,
       top,
     },
@@ -71,11 +73,9 @@ function calculateBottomPositions({
     bottomLeft: {
       left: arrowAtCenter
         ? hostHorizontalCenter -
-          host.left +
-          popover.width +
+          ARROW_TO_EDGE_DISTANCE -
           ARROW_DIAGONAL / 2 +
-          ARROW_TO_EDGE_DISTANCE +
-          POPOVER_SPACING
+          arrowMargin
         : host.left,
       top,
     },

@@ -31,7 +31,7 @@ export const popoverStyleForStorybook = `
   template: `
     <style>
       div {
-        height: 400px;
+        height: 600px;
         display: flex;
         justify-content: center;
         align-items: center;
