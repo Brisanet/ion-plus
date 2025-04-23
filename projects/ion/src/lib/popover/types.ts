@@ -35,7 +35,7 @@ export interface IonPopoverProps {
    */
   ionPopoverTitle: string;
   /**
-   * @param ionPopoverBody -
+   * @param ionPopoverBody - Defines the content of the popover body.
    * @type {TemplareRef<void>}
    */
   ionPopoverBody: TemplateRef<void> | null;
@@ -67,24 +67,53 @@ export interface IonPopoverProps {
    */
   ionPopoverPosition: IonPositions;
   /**
-   * @param ionPopoverKeep
+   * @param ionPopoverKeep - Defines if the popover close or not.
+   * @description - Controlls if the popover should close when the click event its outside the popover.
    * @type {boolean}
    */
   ionPopoverKeep: boolean;
   /**
-   * @param ionPopoverCustomClass
+   * @param ionPopoverCustomClass - Add a custom class to the popover.
    * @type {string}
    */
   ionPopoverCustomClass?: string;
-
+  /**
+   * @param ionOnFirstAction - Defines the action of the first button on the popover.
+   * @type {void}
+   */
   ionOnFirstAction?: void;
+  /**
+   * @param ionOnSecondAction - Defines the action of the second button on the popover.
+   * @type {void}
+   */
   ionOnSecondAction?: void;
+  /**
+   * @param ionOnClose -Defines when the popover should close.
+   * @type {void}
+   */
   ionOnClose?: void;
 }
 
 export interface PopoverDirectiveProps extends IonPopoverProps {
+  /**
+   * @param ionPopoverStopCloseOnScroll - Defines if the popover close or not.
+   * @description - Controlls if the popover close when a scroll event occurs.
+   * @type {boolean}
+   */
   ionPopoverStopCloseOnScroll?: boolean;
+  /**
+   * @param ionPopoverClose - Controlls if the popover should close.
+   * @type {Subject<void>}
+   */
   ionPopoverClose?: Subject<void>;
+  /**
+   * @param ionPopoverArrowPointAtCenter - Defines if the popover arrown points at center.
+   * @type {boolean}
+   */
   ionPopoverArrowPointAtCenter?: boolean;
+  /**
+   * @param ionPopoverStopCloseOnScroll - Defines the trigger the opens the popover.
+   * @type {'default' | 'hover'}
+   */
   ionPopoverTrigger?: PopoverTrigger;
 }

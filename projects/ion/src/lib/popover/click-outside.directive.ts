@@ -1,17 +1,11 @@
-import {
-  Directive,
-  ElementRef,
-  EventEmitter,
-  HostListener,
-  Output,
-} from '@angular/core';
+import { Directive, ElementRef, HostListener, output } from '@angular/core';
 
 @Directive({
-  selector: '[ionClickOutside]',
   standalone: true,
+  selector: '[ionClickOutside]',
 })
 export class ClickOutsideDirective {
-  @Output() ionClickOutside: EventEmitter<null> = new EventEmitter();
+  ionClickOutside = output<null>();
   private firstOpen = true;
 
   constructor(private elementRef: ElementRef) {}

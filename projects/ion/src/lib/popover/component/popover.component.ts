@@ -89,7 +89,7 @@ export class IonPopoverComponent implements AfterViewChecked {
     this.ionOnSecondAction.next();
   }
 
-  private repositionPopover(): void {
+  repositionPopover(): void {
     const coordinates = this.popover.nativeElement.getBoundingClientRect();
 
     this.positionService.setComponentCoordinates(coordinates);
