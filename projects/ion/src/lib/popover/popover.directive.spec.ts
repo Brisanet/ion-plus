@@ -190,7 +190,7 @@ describe('PopoverDirective', () => {
     it('should remove popover when mouseLeave on element when trigger is hover', async () => {
       await userEvent.hover(screen.getByTestId('ion-button-'));
       expect(screen.getByTestId('ion-popover')).toBeInTheDocument();
-      await userEvent.unhover(screen.getByTestId('ion-popover'));
+      await userEvent.unhover(screen.getByTestId('ion-button-'));
       expect(screen.queryByTestId('ion-popover')).not.toBeInTheDocument();
     });
   });

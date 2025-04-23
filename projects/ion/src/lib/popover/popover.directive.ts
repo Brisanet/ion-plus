@@ -192,7 +192,10 @@ export class IonPopoverDirective implements OnDestroy {
   @HostListener('mouseleave', ['$event']) onMouseLeave(
     event: MouseEvent
   ): void {
-    if (this.isPopoverTrigger(PopoverTrigger.HOVER)) {
+    if (
+      this.isPopoverTrigger(PopoverTrigger.HOVER) &&
+      this.popoverComponentRef
+    ) {
       this.handleHoverOutside(event);
     }
   }
