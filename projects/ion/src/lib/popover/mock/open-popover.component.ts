@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 import {
   IonButtonComponent,
@@ -21,6 +21,7 @@ export const popoverStyleForStorybook = `
 `;
 
 @Component({
+  standalone: true,
   selector: 'ion-open-popover',
   imports: [
     IonIconComponent,
@@ -40,36 +41,37 @@ export const popoverStyleForStorybook = `
     <div>
       <ion-button
         ionPopover
-        [ionPopoverIcon]="ionPopoverIcon"
-        [ionPopoverIconColor]="ionPopoverIconColor"
-        [ionPopoverTitle]="ionPopoverTitle"
+        [ionPopoverIcon]="ionPopoverIcon()"
+        [ionPopoverIconColor]="ionPopoverIconColor()"
+        [ionPopoverTitle]="ionPopoverTitle()"
         [ionPopoverBody]="BodyTemplate"
-        [ionPopoverIconClose]="ionPopoverIconClose"
-        [ionPopoverPosition]="ionPopoverPosition"
-        [ionPopoverActions]="ionPopoverActions"
-        [ionPopoverTrigger]="ionPopoverTrigger"
-        [ionPopoverCustomClass]="ionPopoverCustomClass"
-        [label]="label">
+        [ionPopoverIconClose]="ionPopoverIconClose()"
+        [ionPopoverPosition]="ionPopoverPosition()"
+        [ionPopoverActions]="ionPopoverActions()"
+        [ionPopoverTrigger]="ionPopoverTrigger()"
+        [ionPopoverKeep]="ionPopoverKeep()"
+        [ionPopoverCustomClass]="ionPopoverCustomClass()"
+        [label]="label()">
       </ion-button>
-      <ng-template #BodyTemplate> {{ ionPopoverBody }} </ng-template>
+      <ng-template #BodyTemplate> {{ ionPopoverBody() }} </ng-template>
     </div>
   `,
   styles: [popoverStyleForStorybook],
 })
 export class OpenPopoverComponent {
-  label = '';
-  ionPopoverTitle = '';
-  ionPopoverIconClose = false;
-  ionPopoverIcon = '';
-  ionPopoverPosition = PopoverPosition.BOTTOM_CENTER;
-  ionPopoverTrigger = PopoverTrigger.DEFAULT;
-  ionPopoverArrowPointAtCenter = false;
-  ionPopoverIconColor = '';
-  ionPopoverBody = '';
-  ionPopoverCustomClass = '';
-  ionPopoverActions = [
+  label = input('');
+  ionPopoverTitle = input('');
+  ionPopoverIconClose = input(false);
+  ionPopoverIcon = input('');
+  ionPopoverPosition = input(PopoverPosition.BOTTOM_CENTER);
+  ionPopoverTrigger = input(PopoverTrigger.DEFAULT);
+  ionPopoverArrowPointAtCenter = input(false);
+  ionPopoverIconColor = input('');
+  ionPopoverBody = input('');
+  ionPopoverCustomClass = input('');
+  ionPopoverActions = input([
     { label: 'voltar', shape: 'normal', keepOpenAfterAction: false },
     { label: 'concluir', shape: 'normal', keepOpenAfterAction: false },
-  ];
-  ionPopoverKeep = false;
+  ]);
+  ionPopoverKeep = input(false);
 }

@@ -10,7 +10,7 @@
   [style.top]="top + 'px'"
   [style.left]="left + 'px'"
   [style.position]="position"
-  (clickOutside)="onClickOutside()"
+  (ionClickOutside)="onClickOutside()"
   #popover>
   <div class="ion-popover__container">
     @if (ionPopoverTitle()) {
@@ -30,6 +30,7 @@
 
         @if (ionPopoverIconClose()) {
           <ion-button
+            label="close"
             id="popover-close-button"
             [icon]="{ type: 'close' }"
             class="ion-popover__icon-close"

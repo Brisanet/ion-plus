@@ -59,7 +59,7 @@ export interface IonPopoverProps {
    * @type {boolena}
    * @default `false`
    */
-  ionPopoverIconClose: false;
+  ionPopoverIconClose: boolean;
   /**
    * @param ionPopoverPosition - Controlls the position of the popover.
    * @type {PopoverPosition}
@@ -77,8 +77,8 @@ export interface IonPopoverProps {
    */
   ionPopoverCustomClass?: string;
 
-  ionOnFirstAction: void;
-  ionOnSecondAction: void;
+  ionOnFirstAction?: void;
+  ionOnSecondAction?: void;
   ionOnClose?: void;
 }
 

@@ -5,7 +5,7 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
-  signal,
+  model,
   ViewChild,
 } from '@angular/core';
 import { Subject } from 'rxjs';
@@ -18,6 +18,7 @@ import {
 import { IonPositionService } from '../../position/position.service';
 import { IonPositions } from '../../position/types';
 import { IonPopoverProps, PopoverTrigger } from '../types';
+import { ClickOutsideDirective } from '../click-outside.directive';
 
 const PRIMARY_6 = '#0858ce';
 
@@ -32,24 +33,25 @@ const PRIMARY_6 = '#0858ce';
     IonIconComponent,
     IonButtonComponent,
     IonDividerComponent,
+    ClickOutsideDirective,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IonPopoverComponent implements AfterViewChecked {
   @ViewChild('popover', { static: true }) popover!: ElementRef;
 
-  ionPopoverTitle = signal<IonPopoverProps['ionPopoverTitle']>('');
-  ionPopoverKeep = signal<IonPopoverProps['ionPopoverKeep']>(false);
-  ionPopoverBody = signal<IonPopoverProps['ionPopoverBody']>(null);
-  ionPopoverActions = signal<IonPopoverProps['ionPopoverActions']>(undefined);
-  ionPopoverIcon = signal<IonPopoverProps['ionPopoverIcon']>('');
-  ionPopoverPosition = signal<IonPopoverProps['ionPopoverPosition']>(
+  ionPopoverTitle = model<IonPopoverProps['ionPopoverTitle']>('');
+  ionPopoverKeep = model<IonPopoverProps['ionPopoverKeep']>(false);
+  ionPopoverBody = model<IonPopoverProps['ionPopoverBody']>(null);
+  ionPopoverActions = model<IonPopoverProps['ionPopoverActions']>(undefined);
+  ionPopoverIcon = model<IonPopoverProps['ionPopoverIcon']>('');
+  ionPopoverPosition = model<IonPopoverProps['ionPopoverPosition']>(
     IonPositions.BOTTOM_LEFT
   );
   ionPopoverIconColor =
-    signal<IonPopoverProps['ionPopoverIconColor']>(PRIMARY_6);
-  ionPopoverIconClose = signal<IonPopoverProps['ionPopoverIconClose']>(false);
-  ionPopoverCustomClass = signal<IonPopoverProps['ionPopoverCustomClass']>('');
+    model<IonPopoverProps['ionPopoverIconColor']>(PRIMARY_6);
+  ionPopoverIconClose = model<IonPopoverProps['ionPopoverIconClose']>(false);
+  ionPopoverCustomClass = model<IonPopoverProps['ionPopoverCustomClass']>('');
 
   ionPopoverVisible: boolean = false;
   ionPopoverTrigger = PopoverTrigger.DEFAULT;
@@ -76,7 +78,6 @@ export class IonPopoverComponent implements AfterViewChecked {
     ) {
       return;
     }
-
     this.close();
   }
 

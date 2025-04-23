@@ -7,7 +7,7 @@ import {
   EnvironmentInjector,
   HostListener,
   Inject,
-  model,
+  input,
   OnDestroy,
   output,
   ViewContainerRef,
@@ -25,33 +25,32 @@ import { PopoverDirectiveProps, PopoverTrigger } from './types';
   standalone: true,
 })
 export class IonPopoverDirective implements OnDestroy {
-  ionPopoverTitle = model<PopoverDirectiveProps['ionPopoverTitle']>('');
-  ionPopoverKeep = model<PopoverDirectiveProps['ionPopoverKeep']>(false);
-  ionPopoverBody = model<PopoverDirectiveProps['ionPopoverBody']>(null);
-  ionPopoverActions = model<PopoverDirectiveProps['ionPopoverActions']>();
-  ionPopoverIcon = model<PopoverDirectiveProps['ionPopoverIcon']>('');
-  ionPopoverIconColor = model<PopoverDirectiveProps['ionPopoverIconColor']>('');
+  ionPopoverTitle = input<PopoverDirectiveProps['ionPopoverTitle']>('');
+  ionPopoverKeep = input<PopoverDirectiveProps['ionPopoverKeep']>(false);
+  ionPopoverBody = input<PopoverDirectiveProps['ionPopoverBody']>(null);
+  ionPopoverActions = input<PopoverDirectiveProps['ionPopoverActions']>();
+  ionPopoverIcon = input<PopoverDirectiveProps['ionPopoverIcon']>('');
+  ionPopoverIconColor = input<PopoverDirectiveProps['ionPopoverIconColor']>('');
   ionPopoverIconClose =
-    model<PopoverDirectiveProps['ionPopoverIconClose']>(false);
-  ionPopoverPosition = model<PopoverDirectiveProps['ionPopoverPosition']>(
+    input<PopoverDirectiveProps['ionPopoverIconClose']>(false);
+  ionPopoverPosition = input<PopoverDirectiveProps['ionPopoverPosition']>(
     IonPositions.BOTTOM_LEFT
   );
   ionPopoverArrowPointAtCenter =
-    model<PopoverDirectiveProps['ionPopoverArrowPointAtCenter']>(true);
+    input<PopoverDirectiveProps['ionPopoverArrowPointAtCenter']>(true);
   ionPopoverCustomClass =
-    model<PopoverDirectiveProps['ionPopoverCustomClass']>();
-  ionPopoverTrigger = model<PopoverDirectiveProps['ionPopoverTrigger']>(
+    input<PopoverDirectiveProps['ionPopoverCustomClass']>();
+  ionPopoverTrigger = input<PopoverDirectiveProps['ionPopoverTrigger']>(
     PopoverTrigger.DEFAULT
   );
-  ionPopoverClose = model<PopoverDirectiveProps['ionPopoverClose']>();
+  ionPopoverClose = input<PopoverDirectiveProps['ionPopoverClose']>();
   ionPopoverStopCloseOnScroll =
-    model<PopoverDirectiveProps['ionPopoverStopCloseOnScroll']>(false);
+    input<PopoverDirectiveProps['ionPopoverStopCloseOnScroll']>(false);
   ionOnFirstAction = output<PopoverDirectiveProps['ionOnFirstAction']>();
   ionOnSecondAction = output<PopoverDirectiveProps['ionOnSecondAction']>();
   ionOnClose = output<PopoverDirectiveProps['ionOnClose']>();
 
   private popoverComponentRef: ComponentRef<IonPopoverComponent> | null = null;
-
   constructor(
     @Inject(DOCUMENT) private document: SafeAny,
     private appRef: ApplicationRef,
@@ -198,14 +197,16 @@ export class IonPopoverDirective implements OnDestroy {
     }
   }
 
-  @HostListener('window:scroll', ['$event'])
+  @HostListener('window:wheel', ['$event'])
   onScroll(event: Event): void {
-    const target = event.target as HTMLElement;
+    const targetElement = event.target;
     if (
       !this.ionPopoverStopCloseOnScroll() &&
-      !target?.closest('ion-popover')
+      targetElement instanceof HTMLElement &&
+      !targetElement.closest('ion-popover')
     ) {
       this.destroyComponent();
+      this.ionOnClose.emit();
     }
   }
 
