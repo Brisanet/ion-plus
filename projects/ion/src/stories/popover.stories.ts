@@ -1,13 +1,14 @@
 import { Meta, StoryObj } from '@storybook/angular';
 
-import { OpenPopoverComponent } from '../lib/popover/mock/open-popover.component';
-import { IonPopoverDirective } from '../lib/popover/popover.directive';
-import { PopoverPosition, PopoverTrigger } from '../lib/popover/types';
+import { OpenPopoverComponent } from '../lib/directives/popover/mock/open-popover.component';
+import { IonPopoverDirective } from '../lib/directives/popover/popover.directive';
+import { PopoverTrigger } from '../lib/directives/popover/types';
 import {
   iconsPaths,
   IonButtonComponent,
   IonDividerComponent,
   IonIconComponent,
+  IonPositions,
 } from '../public-api';
 
 const meta: Meta<OpenPopoverComponent> = {
@@ -50,7 +51,7 @@ export const Directive: Story = {
       'Ao concluir essa ação as ordens de serviço alocadas para o recurso ficarão órfãs. Haha',
 
     ionPopoverTrigger: PopoverTrigger.DEFAULT,
-    ionPopoverPosition: PopoverPosition.BOTTOM_LEFT,
+    ionPopoverPosition: IonPositions.BOTTOM_LEFT,
   },
 };
 
@@ -67,7 +68,7 @@ export const DirectiveWithTriggerHover: Story = {
     ionPopoverBody:
       'Gato é um animal solitário, mas quando seu lar é destruído por uma grande inundação, ele encontra refúgio em um barco habitado por diversas espécies, tendo que se juntar a elas apesar das diferenças Classificação indicativa Livre. Contém sem restrições.',
     ionPopoverTrigger: PopoverTrigger.DEFAULT,
-    ionPopoverPosition: PopoverPosition.TOP_RIGHT,
+    ionPopoverPosition: IonPositions.TOP_RIGHT,
   },
 };
 
@@ -80,7 +81,7 @@ export const DirectiveWithoutHeader: Story = {
     ionPopoverBody:
       '"In the End" é uma música icônica do Linkin Park, lançada em 2001. Combinando rock alternativo e nu-metal, a canção aborda a luta e a inevitabilidade da mudança. A letra reflexiva destaca a importância de esforços, mesmo que os resultados nem sempre sejam como desejado. A fusão de vocais intensos e arranjos emotivos faz de "In the End" uma experiência atemporal, ressoando com milhões de fãs ao redor do mundo.',
     ionPopoverTrigger: PopoverTrigger.DEFAULT,
-    ionPopoverPosition: PopoverPosition.BOTTOM_CENTER,
+    ionPopoverPosition: IonPositions.BOTTOM_CENTER,
   },
 };
 
@@ -96,7 +97,7 @@ export const KeepOpen: Story = {
     ionPopoverBody:
       '"In the End" é uma música icônica do Linkin Park, lançada em 2001. Combinando rock alternativo e nu-metal, a canção aborda a luta e a inevitabilidade da mudança. A letra reflexiva destaca a importância de esforços, mesmo que os resultados nem sempre sejam como desejado. A fusão de vocais intensos e arranjos emotivos faz de "In the End" uma experiência atemporal, ressoando com milhões de fãs ao redor do mundo.',
     ionPopoverTrigger: PopoverTrigger.DEFAULT,
-    ionPopoverPosition: PopoverPosition.BOTTOM_CENTER,
+    ionPopoverPosition: IonPositions.BOTTOM_CENTER,
   },
 };
 
@@ -115,7 +116,7 @@ export const DirectiveWithActions: Story = {
     ionPopoverBody:
       'Ao concluir essa ação as ordens de serviço alocadas para o recurso ficarão órfãs. Haha',
     ionPopoverTrigger: PopoverTrigger.DEFAULT,
-    ionPopoverPosition: PopoverPosition.TOP_RIGHT,
+    ionPopoverPosition: IonPositions.TOP_RIGHT,
   },
 };
 export const DirectiveWithActionsKeepAction: Story = {
@@ -132,7 +133,7 @@ export const DirectiveWithActionsKeepAction: Story = {
     ionPopoverBody:
       'Você pode escolher avançar corajosamente para a próxima etapa da jornada ou optar por explorar o caminho anterior.',
     ionPopoverTrigger: PopoverTrigger.DEFAULT,
-    ionPopoverPosition: PopoverPosition.TOP_RIGHT,
+    ionPopoverPosition: IonPositions.TOP_RIGHT,
   },
 };
 
@@ -150,7 +151,7 @@ export const Placements: Story = {
     ionPopoverBody:
       'Você pode escolher avançar corajosamente para a próxima etapa da jornada ou optar por explorar o caminho anterior.',
     ionPopoverTrigger: PopoverTrigger.DEFAULT,
-    ionPopoverPosition: PopoverPosition.TOP_RIGHT,
+    ionPopoverPosition: IonPositions.TOP_RIGHT,
   },
   argTypes: {
     ionPopoverIcon: {
@@ -165,7 +166,7 @@ export const Placements: Story = {
     ionPopoverPosition: {
       name: 'ionPopoverPosition',
       control: 'select',
-      options: [...Object.values(PopoverPosition)],
+      options: [...Object.values(IonPositions)],
     },
     ionPopoverTrigger: {
       name: 'ionPopoverTrigger',

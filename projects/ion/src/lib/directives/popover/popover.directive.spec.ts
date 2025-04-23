@@ -5,7 +5,7 @@ import {
   IonPositions,
   PopoverDirectiveProps,
   PopoverTrigger,
-} from '../../public-api';
+} from '../../../public-api';
 import { OpenPopoverComponent } from './mock/open-popover.component';
 
 const sut = async (props: PopoverDirectiveProps) => {

@@ -14,11 +14,11 @@ import {
   IonButtonComponent,
   IonDividerComponent,
   IonIconComponent,
-} from '../../../public-api';
-import { IonPositionService } from '../../position/position.service';
-import { IonPositions } from '../../position/types';
+} from '../../../../public-api';
+import { IonPositionService } from '../../../position/position.service';
+import { IonPositions } from '../../../position/types';
 import { IonPopoverProps, PopoverTrigger } from '../types';
-import { ClickOutsideDirective } from '../click-outside.directive';
+import { ClickOutsideDirective } from '../../click-outside.directive';
 
 const PRIMARY_6 = '#0858ce';
 

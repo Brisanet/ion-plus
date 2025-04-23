@@ -4,9 +4,10 @@ import {
   IonButtonComponent,
   IonDividerComponent,
   IonIconComponent,
-} from '../../../public-api';
+  IonPositions,
+} from '../../../../public-api';
 import { IonPopoverDirective } from '../popover.directive';
-import { PopoverPosition, PopoverTrigger } from '../types';
+import { PopoverTrigger } from '../types';
 
 export const popoverStyleForStorybook = `
   ::ng-deep .ion-popover__sup-container--leftBottom,
@@ -63,7 +64,7 @@ export class OpenPopoverComponent {
   ionPopoverTitle = input('');
   ionPopoverIconClose = input(false);
   ionPopoverIcon = input('');
-  ionPopoverPosition = input(PopoverPosition.BOTTOM_CENTER);
+  ionPopoverPosition = input(IonPositions.BOTTOM_CENTER);
   ionPopoverTrigger = input(PopoverTrigger.DEFAULT);
   ionPopoverArrowPointAtCenter = input(false);
   ionPopoverIconColor = input('');

@@ -1,8 +1,7 @@
-import { PopoverPosition } from '../popover/types';
-import { GetPositionsCallbackProps } from '../position/types';
+import { GetPositionsCallbackProps, IonPositions } from '../position/types';
 
 export type PopoverPositions = {
-  [key in PopoverPosition]: Pick<DOMRect, 'left' | 'top'>;
+  [key in IonPositions]: Pick<DOMRect, 'left' | 'top'>;
 };
 
 const ARROW_TO_EDGE_DISTANCE = 16;
