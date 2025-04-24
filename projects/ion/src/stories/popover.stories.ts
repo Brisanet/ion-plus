@@ -67,8 +67,15 @@ export const DirectiveWithTriggerHover: Story = {
     ionPopoverIconClose: true,
     ionPopoverBody:
       'Gato é um animal solitário, mas quando seu lar é destruído por uma grande inundação, ele encontra refúgio em um barco habitado por diversas espécies, tendo que se juntar a elas apesar das diferenças Classificação indicativa Livre. Contém sem restrições.',
-    ionPopoverTrigger: PopoverTrigger.DEFAULT,
+    ionPopoverTrigger: PopoverTrigger.HOVER,
     ionPopoverPosition: IonPositions.TOP_RIGHT,
+  },
+  argTypes: {
+    ionPopoverTrigger: {
+      name: 'ionPopoverTrigger',
+      control: 'radio',
+      options: [...Object.values(PopoverTrigger)],
+    },
   },
 };
 
@@ -170,7 +177,7 @@ export const Placements: Story = {
     },
     ionPopoverTrigger: {
       name: 'ionPopoverTrigger',
-      control: 'select',
+      control: 'radio',
       options: [...Object.values(PopoverTrigger)],
     },
   },
