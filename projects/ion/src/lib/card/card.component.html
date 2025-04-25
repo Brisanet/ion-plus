@@ -1,0 +1,91 @@
+@if (configuration()) {
+  <div class="ion-card">
+    <header>
+      <div class="ion-card-header-title">
+        @if (configuration().header.icon) {
+          <ion-icon
+            data-testid="icon-title"
+            [type]="configuration().header.icon"
+            class="icon-title"></ion-icon>
+        }
+        <h4>
+          {{ configuration().header.title }}
+        </h4>
+      </div>
+
+      @if (configuration().header.buttons) {
+        <div class="ion-card-header-container-buttons">
+          @for (button of configuration().header.buttons; track button.label) {
+            <ion-button
+              [label]="button.label"
+              [icon]="{
+                type: button.icon,
+                rightPosition: false,
+              }"
+              [shape]="button.shape"
+              [type]="button.type"
+              (ionOnClick)="cardEvent({ buttonAction: button.nameAction })"
+              size="sm"></ion-button>
+          }
+        </div>
+      }
+    </header>
+
+    @if (configuration().body) {
+      <ion-divider
+        [label]="'Divider'"
+        [direction]="'horizontal'"
+        [type]="'solid'"></ion-divider>
+      <body #body></body>
+    }
+
+    @if (configuration().footer) {
+      <ion-divider
+        [label]="'Divider'"
+        [direction]="'horizontal'"
+        [type]="'solid'"></ion-divider>
+      <footer>
+        @if (configuration().footer.buttons) {
+          <div class="ion-card-footer-container-buttons">
+            @if (configuration().footer.buttons.secondary) {
+              <ion-button
+                [label]="configuration().footer.buttons.secondary.label"
+                [icon]="configuration().footer.buttons.secondary.icon"
+                [shape]="configuration().footer.buttons.secondary.shape"
+                type="secondary"
+                (ionOnClick)="
+                  cardEvent({ buttonAction: 'secondary' })
+                "></ion-button>
+            }
+            <div class="ion-card-footer-buttons">
+              @if (configuration().footer.buttons.ghost) {
+                <ion-button
+                  [label]="configuration().footer.buttons.ghost.label"
+                  [icon]="configuration().footer.buttons.ghost.icon"
+                  [shape]="configuration().footer.buttons.ghost.shape"
+                  type="ghost"
+                  (ionOnClick)="
+                    cardEvent({ buttonAction: 'ghost' })
+                  "></ion-button>
+              }
+              @if (configuration().footer.buttons.primary) {
+                <ion-button
+                  [label]="configuration().footer.buttons.primary.label"
+                  [icon]="configuration().footer.buttons.primary.icon"
+                  [shape]="configuration().footer.buttons.primary.shape"
+                  type="primary"
+                  (ionOnClick)="
+                    cardEvent({ buttonAction: 'primary' })
+                  "></ion-button>
+              }
+            </div>
+          </div>
+        }
+
+        @if (configuration().footer.body) {
+          <div #footer></div>
+        }
+      </footer>
+    }
+  </div>
+}
