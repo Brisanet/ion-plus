@@ -1,7 +1,8 @@
 import { Meta, StoryObj } from '@storybook/angular';
-import { IonCardComponent } from '../public-api';
+
 import { BodyMockComponent } from '../lib/card/mock/body-mock.component';
 import { SafeAny } from '../lib/utils/safe-any';
+import { IonCardComponent } from '../public-api';
 
 const meta: Meta<IonCardComponent> = {
   title: 'Ion/Data Display/Card',
@@ -29,7 +30,11 @@ export const Default: Story = {
         icon: '',
       },
       body: undefined,
-      footer: undefined,
+      footer: {
+        shouldRender: false,
+        body: undefined,
+        buttons: {},
+      },
     },
   },
 };
@@ -43,7 +48,11 @@ export const WithBody: Story = {
         icon: '',
       },
       body: BodyMockComponent,
-      footer: undefined,
+      footer: {
+        shouldRender: false,
+        body: undefined,
+        buttons: {},
+      },
     },
   },
 };
@@ -59,20 +68,24 @@ export const WithButtons: Story = {
             label: '',
             shape: 'circle',
             icon: 'refresh',
-            nameAction: 'refresh',
+            nameAction: '',
           },
           {
             type: 'ghost',
             label: '',
             shape: 'circle',
             icon: 'trash',
-            nameAction: 'trash',
+            nameAction: 'refresh',
           },
         ],
         icon: '',
       },
       body: BodyMockComponent,
-      footer: undefined,
+      footer: {
+        shouldRender: false,
+        body: undefined,
+        buttons: {},
+      },
     },
   },
 };
@@ -101,7 +114,11 @@ export const WithIconTitle: Story = {
         ],
       },
       body: BodyMockComponent,
-      footer: undefined,
+      footer: {
+        shouldRender: false,
+        body: undefined,
+        buttons: {},
+      },
     },
   },
 };
@@ -117,6 +134,7 @@ export const WithFooter: Story = {
       body: BodyMockComponent,
       footer: {
         body: undefined as SafeAny,
+        shouldRender: true,
         buttons: {
           primary: {
             label: 'Primary',

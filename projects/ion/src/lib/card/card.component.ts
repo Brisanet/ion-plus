@@ -35,7 +35,11 @@ export class IonCardComponent implements AfterViewInit, OnDestroy {
       icon: '',
     },
     body: undefined,
-    footer: undefined,
+    footer: {
+      shouldRender: false,
+      body: undefined,
+      buttons: {},
+    },
   });
   cardEvents = output<IonCardProps['cardEvents']>();
   constructor(private cdr: ChangeDetectorRef) {}

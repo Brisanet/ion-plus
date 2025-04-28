@@ -41,7 +41,7 @@
       <body #body></body>
     }
 
-    @if (configuration().footer) {
+    @if (configuration().footer.shouldRender) {
       <ion-divider
         [label]="'Divider'"
         [direction]="'horizontal'"
