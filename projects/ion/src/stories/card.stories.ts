@@ -26,8 +26,10 @@ export const Default: Story = {
       header: {
         title: 'Com risco de atraso',
         buttons: [],
+        icon: '',
       },
-      body: undefined as SafeAny,
+      body: undefined,
+      footer: undefined,
     },
   },
 };
@@ -38,8 +40,10 @@ export const WithBody: Story = {
       header: {
         title: 'Com risco de atraso',
         buttons: [],
+        icon: '',
       },
       body: BodyMockComponent,
+      footer: undefined,
     },
   },
 };
@@ -65,8 +69,10 @@ export const WithButtons: Story = {
             nameAction: 'trash',
           },
         ],
+        icon: '',
       },
       body: BodyMockComponent,
+      footer: undefined,
     },
   },
 };
@@ -95,6 +101,7 @@ export const WithIconTitle: Story = {
         ],
       },
       body: BodyMockComponent,
+      footer: undefined,
     },
   },
 };
@@ -114,14 +121,17 @@ export const WithFooter: Story = {
           primary: {
             label: 'Primary',
             shape: 'normal',
+            icon: '',
           },
           secondary: {
             label: 'Secondary',
             shape: 'normal',
+            icon: '',
           },
           ghost: {
             label: 'Ghost',
             shape: 'normal',
+            icon: '',
           },
         },
       },

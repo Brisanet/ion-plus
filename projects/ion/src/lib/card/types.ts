@@ -1,5 +1,5 @@
 import { ComponentType } from '@angular/cdk/overlay';
-import { Icon, IconType, Shape, Type } from '../../public-api';
+import { IconType, Shape, Type } from '../../public-api';
 import { SafeAny } from '../utils/safe-any';
 
 export type FooterButton = {
@@ -7,10 +7,10 @@ export type FooterButton = {
 };
 
 interface ButtonBase {
-  type: Type;
-  nameAction: Type;
+  type: string;
+  nameAction: IconType;
   label: string;
-  icon: Icon['type'];
+  icon: IconType;
   shape: Shape;
 }
 
@@ -26,12 +26,12 @@ interface Footer {
 }
 
 export interface CardEvent {
-  buttonAction: Type;
+  buttonAction: IconType;
 }
 
 export interface IonCardProps {
   header: Header;
   body: ComponentType<SafeAny> | undefined;
-  footer: Footer;
+  footer: Footer | undefined;
   cardEvents?: CardEvent;
 }
