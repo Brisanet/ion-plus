@@ -8,13 +8,13 @@ import {
   ViewChild,
   ViewContainerRef,
 } from '@angular/core';
-import { IonCardProps } from './types';
-import { SafeAny } from '../utils/safe-any';
+
 import {
   IonButtonComponent,
   IonDividerComponent,
   IonIconComponent,
 } from '../../public-api';
+import { IonCardProps } from './types';
 
 @Component({
   standalone: true,
@@ -46,7 +46,7 @@ export class IonCardComponent implements AfterViewInit, OnDestroy {
     }
 
     if (config && config.footer) {
-      this.footer.createComponent(config.footer as SafeAny);
+      this.footer.createComponent(config.footer.body);
     }
   }
 

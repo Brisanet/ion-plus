@@ -2,7 +2,7 @@ import { Component, input } from '@angular/core';
 
 @Component({
   standalone: true,
-  template: ` <p>{{ text() }}</p> `,
+  template: ` <p data-testid="ion-card-body">{{ text() }}</p> `,
   styles: [
     `
       p {

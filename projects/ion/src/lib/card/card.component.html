@@ -1,5 +1,5 @@
 @if (configuration()) {
-  <div class="ion-card">
+  <div class="ion-card" data-testid="ion-card">
     <header>
       <div class="ion-card-header-title">
         @if (configuration().header.icon) {
@@ -8,13 +8,15 @@
             [type]="configuration().header.icon"
             class="icon-title"></ion-icon>
         }
-        <h4>
+        <h4 data-testid="ion-card-header-title">
           {{ configuration().header.title }}
         </h4>
       </div>
 
       @if (configuration().header.buttons) {
-        <div class="ion-card-header-container-buttons">
+        <div
+          class="ion-card-header-container-buttons"
+          data-testid="ion-card-header-buttons">
           @for (button of configuration().header.buttons; track button.label) {
             <ion-button
               [label]="button.label"
@@ -44,7 +46,7 @@
         [label]="'Divider'"
         [direction]="'horizontal'"
         [type]="'solid'"></ion-divider>
-      <footer>
+      <footer data-testid="ion-card-footer">
         @if (configuration().footer.buttons) {
           <div class="ion-card-footer-container-buttons">
             @if (configuration().footer.buttons.secondary) {
