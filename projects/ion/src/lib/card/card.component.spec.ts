@@ -35,9 +35,16 @@ describe('CardComponent', () => {
   beforeEach(async () => {
     await sut({
       header: {
+        icon: '',
         title: 'Card Title',
         buttons: [
-          { type: 'secondary', label: 'Secondary', nameAction: 'secondary' },
+          {
+            type: 'secondary',
+            label: 'Secondary',
+            nameAction: 'secondary',
+            shape: 'circle',
+            icon: '',
+          },
         ],
       },
       body: BodyMockComponent,
@@ -45,9 +52,10 @@ describe('CardComponent', () => {
         emit: cardEvents,
       } as SafeAny,
       footer: {
+        shouldRender: true,
         body: FooterTestComponent,
         buttons: {
-          primary: { label: 'primary' },
+          primary: { label: 'primary', shape: 'normal', icon: '' },
         },
       },
     });
