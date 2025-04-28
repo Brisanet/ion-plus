@@ -51,9 +51,12 @@
           <div class="ion-card-footer-container-buttons">
             @if (configuration().footer.buttons.secondary) {
               <ion-button
-                [label]="configuration().footer.buttons.secondary.label"
-                [icon]="configuration().footer.buttons.secondary.icon"
-                [shape]="configuration().footer.buttons.secondary.shape"
+                [label]="configuration().footer.buttons.secondary!.label"
+                [icon]="{
+                  type: configuration().footer.buttons.secondary!.icon,
+                  rightPosition: false,
+                }"
+                [shape]="configuration().footer.buttons.secondary!.shape"
                 type="secondary"
                 (ionOnClick)="
                   cardEvent({ buttonAction: 'secondary' })
@@ -62,9 +65,12 @@
             <div class="ion-card-footer-buttons">
               @if (configuration().footer.buttons.ghost) {
                 <ion-button
-                  [label]="configuration().footer.buttons.ghost.label"
-                  [icon]="configuration().footer.buttons.ghost.icon"
-                  [shape]="configuration().footer.buttons.ghost.shape"
+                  [label]="configuration().footer.buttons.ghost!.label"
+                  [icon]="{
+                    type: configuration().footer.buttons.ghost!.icon,
+                    rightPosition: false,
+                  }"
+                  [shape]="configuration().footer.buttons.ghost!.shape"
                   type="ghost"
                   (ionOnClick)="
                     cardEvent({ buttonAction: 'ghost' })
@@ -72,9 +78,12 @@
               }
               @if (configuration().footer.buttons.primary) {
                 <ion-button
-                  [label]="configuration().footer.buttons.primary.label"
-                  [icon]="configuration().footer.buttons.primary.icon"
-                  [shape]="configuration().footer.buttons.primary.shape"
+                  [label]="configuration().footer.buttons.primary!.label"
+                  [icon]="{
+                    type: configuration().footer.buttons.primary!.icon,
+                    rightPosition: false,
+                  }"
+                  [shape]="configuration().footer.buttons.primary!.shape"
                   type="primary"
                   (ionOnClick)="
                     cardEvent({ buttonAction: 'primary' })

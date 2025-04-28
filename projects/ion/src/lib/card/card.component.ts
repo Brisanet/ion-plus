@@ -28,7 +28,18 @@ export class IonCardComponent implements AfterViewInit, OnDestroy {
   body!: ViewContainerRef;
   @ViewChild('footer', { read: ViewContainerRef, static: false })
   footer!: ViewContainerRef;
-  configuration = input<IonCardProps>();
+  configuration = input<IonCardProps>({
+    header: {
+      title: '',
+      buttons: [],
+      icon: '',
+    },
+    body: undefined,
+    footer: {
+      body: undefined,
+      buttons: {},
+    },
+  });
   cardEvents = output<IonCardProps['cardEvents']>();
   constructor(private cdr: ChangeDetectorRef) {}
 
@@ -45,7 +56,7 @@ export class IonCardComponent implements AfterViewInit, OnDestroy {
       this.body.createComponent(config.body);
     }
 
-    if (config && config.footer) {
+    if (config && config.footer && config.footer.body) {
       this.footer.createComponent(config.footer.body);
     }
   }
