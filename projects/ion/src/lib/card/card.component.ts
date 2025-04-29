@@ -1,0 +1,74 @@
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  input,
+  OnDestroy,
+  output,
+  ViewChild,
+  ViewContainerRef,
+} from '@angular/core';
+
+import {
+  IonButtonComponent,
+  IonDividerComponent,
+  IonIconComponent,
+} from '../../public-api';
+import { IonCardProps } from './types';
+
+@Component({
+  standalone: true,
+  imports: [IonIconComponent, IonButtonComponent, IonDividerComponent],
+  selector: 'ion-card',
+  templateUrl: './card.component.html',
+  styleUrls: ['./card.component.scss'],
+})
+export class IonCardComponent implements AfterViewInit, OnDestroy {
+  @ViewChild('body', { read: ViewContainerRef, static: false })
+  body!: ViewContainerRef;
+  @ViewChild('footer', { read: ViewContainerRef, static: false })
+  footer!: ViewContainerRef;
+  configuration = input<IonCardProps>({
+    header: {
+      title: '',
+      buttons: [],
+      icon: '',
+    },
+    body: undefined,
+    footer: {
+      shouldRender: false,
+      body: undefined,
+      buttons: {},
+    },
+  });
+  cardEvents = output<IonCardProps['cardEvents']>();
+  constructor(private cdr: ChangeDetectorRef) {}
+
+  cardEvent(event: IonCardProps['cardEvents']): void {
+    this.cardEvents.emit(event);
+  }
+
+  ngAfterViewInit(): void {
+    this.cdr.detectChanges();
+    this.ngOnDestroy();
+    const config = this.configuration();
+
+    if (config && config.body) {
+      this.body.createComponent(config.body);
+    }
+
+    if (config && config.footer && config.footer.body) {
+      this.footer.createComponent(config.footer.body);
+    }
+  }
+
+  ngOnDestroy(): void {
+    if (this.body) {
+      this.body.detach();
+    }
+
+    if (this.footer) {
+      this.footer.detach();
+    }
+  }
+}
