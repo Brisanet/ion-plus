@@ -1,5 +1,5 @@
 import { DialogRef } from '@angular/cdk/dialog';
-import { CommonModule } from '@angular/common';
+
 import {
   ChangeDetectionStrategy,
   Component,
@@ -15,7 +15,7 @@ import { Action } from './types';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, IonButtonComponent, IonAlertComponent],
+  imports: [IonButtonComponent, IonAlertComponent],
   templateUrl: './modal.component.html',
   styleUrl: './modal.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

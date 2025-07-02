@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import {
   ChangeDetectionStrategy,
   Component,
@@ -10,7 +10,7 @@ import { IonTagProps } from './types';
 
 @Component({
   selector: 'ion-tag',
-  imports: [CommonModule, IonIconComponent],
+  imports: [IonIconComponent],
   templateUrl: './tag.component.html',
   styleUrls: ['./tag.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

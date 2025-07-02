@@ -1,4 +1,4 @@
-import { CommonModule, NgClass } from '@angular/common';
+import { NgClass } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -11,7 +11,7 @@ import { IonTabProps } from './types';
 
 @Component({
   selector: 'ion-tab',
-  imports: [CommonModule, IonIconComponent, IonBadgeComponent, NgClass],
+  imports: [IonIconComponent, IonBadgeComponent, NgClass],
   templateUrl: './tab.component.html',
   styleUrls: ['./tab.component.scss'],
   host: {

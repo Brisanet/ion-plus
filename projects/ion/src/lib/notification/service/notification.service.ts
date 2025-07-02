@@ -1,4 +1,4 @@
-import { DOCUMENT } from '@angular/common';
+
 import {
   ApplicationRef,
   ComponentRef,
@@ -6,6 +6,7 @@ import {
   Inject,
   Injectable,
   createComponent,
+  DOCUMENT
 } from '@angular/core';
 import { Subject } from 'rxjs';
 import { IonNotificationConfigOptions } from '..';

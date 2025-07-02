@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import {
   ChangeDetectionStrategy,
   Component,
@@ -15,7 +15,7 @@ import { IonTabGroupProps, TabInGroup } from './types';
 
 @Component({
   selector: 'ion-tab-group',
-  imports: [CommonModule, IonTabComponent],
+  imports: [IonTabComponent],
   templateUrl: './tab-group.component.html',
   styleUrls: ['./tab-group.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -1,4 +1,4 @@
-import { CommonModule, NgClass } from '@angular/common';
+import { NgClass } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -11,7 +11,7 @@ import { IonRadioProps, Option } from './types';
 @Component({
   standalone: true,
   selector: 'ion-radio',
-  imports: [CommonModule, NgClass],
+  imports: [NgClass],
   templateUrl: './radio.component.html',
   styleUrls: ['./radio.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

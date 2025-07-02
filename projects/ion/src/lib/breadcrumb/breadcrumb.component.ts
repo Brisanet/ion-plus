@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import {
   ChangeDetectionStrategy,
   Component,
@@ -10,7 +10,7 @@ import { BreadcrumbItem, BreadcrumbProps } from './types';
 
 @Component({
   selector: 'ion-breadcrumb',
-  imports: [CommonModule, IonIconComponent],
+  imports: [IonIconComponent],
   templateUrl: './breadcrumb.component.html',
   styleUrl: './breadcrumb.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

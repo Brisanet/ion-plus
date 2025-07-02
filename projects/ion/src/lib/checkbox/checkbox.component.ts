@@ -1,4 +1,4 @@
-import { CommonModule, NgClass } from '@angular/common';
+import { NgClass } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -11,7 +11,7 @@ import { IonCheckboxProps } from './types';
 @Component({
   standalone: true,
   selector: 'ion-checkbox',
-  imports: [CommonModule, NgClass],
+  imports: [NgClass],
   templateUrl: './checkbox.component.html',
   styleUrls: ['./checkbox.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

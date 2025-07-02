@@ -1,4 +1,4 @@
-import { CommonModule, NgClass } from '@angular/common';
+import { NgClass } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -19,7 +19,7 @@ import { IonNotificationProps } from '../types';
 @Component({
   standalone: true,
   selector: 'ion-notification',
-  imports: [CommonModule, IonIconComponent, NgClass],
+  imports: [IonIconComponent, NgClass],
   templateUrl: './notification.component.html',
   styleUrls: ['./notification.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { CommonModule, NgClass } from '@angular/common';
+import { NgClass } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -12,7 +12,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { IonSwitchProps } from './types';
 
 @Component({
-  imports: [CommonModule, NgClass],
+  imports: [NgClass],
   selector: 'ion-switch',
   templateUrl: './switch.component.html',
   styleUrls: ['./switch.component.scss'],

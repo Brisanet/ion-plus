@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import {
   ChangeDetectionStrategy,
   Component,
@@ -13,7 +13,7 @@ import { IonStepsProps, Status, StatusType } from './types';
 
 @Component({
   selector: 'ion-steps',
-  imports: [CommonModule, IonIconComponent],
+  imports: [IonIconComponent],
   templateUrl: './steps.component.html',
   styleUrls: ['./steps.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
