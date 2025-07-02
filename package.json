@@ -57,7 +57,7 @@
     "@storybook/angular": "^8.6.12",
     "@storybook/blocks": "^8.6.12",
     "@storybook/test": "^8.6.12",
-    "@testing-library/angular": "^17.3.7",
+    "@testing-library/angular": "^17.4.0",
     "@types/jest": "^29.5.14",
     "@typescript-eslint/eslint-plugin": "^8.29.0",
     "@typescript-eslint/parser": "^8.29.0",
