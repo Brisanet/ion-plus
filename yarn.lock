@@ -294,10 +294,10 @@
   optionalDependencies:
     lmdb "3.2.6"
 
-"@angular/cdk@^19.2.8":
-  version "19.2.8"
-  resolved "https://registry.npmjs.org/@angular/cdk/-/cdk-19.2.8.tgz"
-  integrity sha512-ZZqWVYFF80TdjWkk2sc9Pn2luhiYeC78VH3Yjeln4wXMsTGDsvKPBcuOxSxxpJ31saaVBehDjBUuXMqGRj8KuA==
+"@angular/cdk@^20.0.5":
+  version "20.0.5"
+  resolved "https://registry.npmjs.org/@angular/cdk/-/cdk-20.0.5.tgz"
+  integrity sha512-WhJ1I/ib/Za0qjWkSzMYV0gM8NOWrtOcZ2TYZ4aYFsjd8E13rGhxOez0DWt2sN3vfjAc1iWMmGGbNZrkp98adg==
   dependencies:
     parse5 "^7.1.2"
     tslib "^2.3.0"
@@ -324,7 +324,7 @@
     semver "7.7.2"
     yargs "17.7.2"
 
-"@angular/common@^19.0.0 || ^20.0.0", "@angular/common@^20.0.6", "@angular/common@>= 17.0.0", "@angular/common@>=15.0.0 < 20.0.0", "@angular/common@20.0.6":
+"@angular/common@^20.0.0 || ^21.0.0", "@angular/common@^20.0.6", "@angular/common@>= 17.0.0", "@angular/common@>=15.0.0 < 20.0.0", "@angular/common@20.0.6":
   version "20.0.6"
   resolved "https://registry.npmjs.org/@angular/common/-/common-20.0.6.tgz"
   integrity sha512-NRsq2gI4CH8nEy8yEZFySEmZ4U+1Y1yGzdIFubrKmtE2NXxR4KFGvQCkBLCLh6hNQXQx+Soe126bqByA6oIaFw==
@@ -359,7 +359,7 @@
   dependencies:
     tslib "^2.3.0"
 
-"@angular/core@^19.0.0 || ^20.0.0", "@angular/core@^20.0.0", "@angular/core@^20.0.6", "@angular/core@>= 17.0.0", "@angular/core@>=15.0.0 < 20.0.0", "@angular/core@>=15.0.0 <20.0.0", "@angular/core@20.0.6":
+"@angular/core@^20.0.0", "@angular/core@^20.0.0 || ^21.0.0", "@angular/core@^20.0.6", "@angular/core@>= 17.0.0", "@angular/core@>=15.0.0 < 20.0.0", "@angular/core@>=15.0.0 <20.0.0", "@angular/core@20.0.6":
   version "20.0.6"
   resolved "https://registry.npmjs.org/@angular/core/-/core-20.0.6.tgz"
   integrity sha512-PLSRl8vM8I+HOlAJFiTcRMNbRj2Clb7lpQqUfkeBSk8bBWOy9fLlscoY3JOk0tXoUTnW6lbRB1LmAFuYAQZzAA==
@@ -2408,7 +2408,12 @@
   resolved "https://registry.npmjs.org/@rollup/rollup-linux-x64-gnu/-/rollup-linux-x64-gnu-4.40.2.tgz"
   integrity sha512-lG7Xa+BmBNwpjmVUbmyKxdQJ3Q6whHjMjzQplOs5Z+Gj7mxPtWakGHqzMqNER68G67kmCX9qX57aRsW5V0VOng==
 
-"@rollup/rollup-linux-x64-musl@4.34.8", "@rollup/rollup-linux-x64-musl@4.40.2":
+"@rollup/rollup-linux-x64-musl@4.34.8":
+  version "4.34.8"
+  resolved "https://registry.npmjs.org/@rollup/rollup-linux-x64-musl/-/rollup-linux-x64-musl-4.34.8.tgz"
+  integrity sha512-SCXcP0ZpGFIe7Ge+McxY5zKxiEI5ra+GT3QRxL0pMMtxPfpyLAKleZODi1zdRHkz5/BhueUrYtYVgubqe9JBNQ==
+
+"@rollup/rollup-linux-x64-musl@4.40.2":
   version "4.40.2"
   resolved "https://registry.npmjs.org/@rollup/rollup-linux-x64-musl/-/rollup-linux-x64-musl-4.40.2.tgz"
   integrity sha512-tD46wKHd+KJvsmije4bUskNuvWKFcTOIM9tZ/RrmIvcXnbi0YK/cKS9FzFtAm7Oxi2EhV5N2OpfFB348vSQRXA==
