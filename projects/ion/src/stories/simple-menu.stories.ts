@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import type { Meta, StoryObj } from '@storybook/angular';
 
 import { IonSimpleMenuComponent } from '../lib/simple-menu';

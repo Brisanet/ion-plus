@@ -1,3 +1,6 @@
+// For more info, see https://github.com/storybookjs/eslint-plugin-storybook#configuration-flat-config-format
+import storybook from "eslint-plugin-storybook";
+
 import { FlatCompat } from '@eslint/eslintrc';
 import js from '@eslint/js';
 import eslintConfigPrettier from 'eslint-config-prettier';
@@ -12,74 +15,67 @@ const compat = new FlatCompat({
   allConfig: js.configs.all,
 });
 
-export default [
-  {
-    ignores: [
-      '**/*.js',
-      '**/*.mdx',
-      'dist/*',
-      '**/coverage/',
-      'projects/ion-test/',
+export default [{
+  ignores: [
+    '**/*.js',
+    '**/*.mdx',
+    'dist/*',
+    '**/coverage/',
+    'projects/ion-test/',
+  ],
+}, ...compat
+  .extends(
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:@angular-eslint/recommended',
+    'plugin:@angular-eslint/template/process-inline-templates',
+    'plugin:prettier/recommended'
+  )
+  .map(config => ({
+    ...config,
+    files: ['**/*.ts'],
+  })), {
+  files: ['**/*.ts'],
+
+  rules: {
+    '@angular-eslint/directive-selector': [
+      'error',
+      {
+        type: 'attribute',
+        prefix: 'ion',
+        style: 'camelCase',
+      },
+    ],
+
+    '@angular-eslint/component-selector': [
+      'error',
+      {
+        type: 'element',
+        prefix: 'ion',
+        style: 'kebab-case',
+      },
     ],
   },
-  ...compat
-    .extends(
-      'eslint:recommended',
-      'plugin:@typescript-eslint/recommended',
-      'plugin:@angular-eslint/recommended',
-      'plugin:@angular-eslint/template/process-inline-templates',
-      'plugin:prettier/recommended'
-    )
-    .map(config => ({
-      ...config,
-      files: ['**/*.ts'],
-    })),
-  {
-    files: ['**/*.ts'],
-
-    rules: {
-      '@angular-eslint/directive-selector': [
-        'error',
-        {
-          type: 'attribute',
-          prefix: 'ion',
-          style: 'camelCase',
-        },
-      ],
-
-      '@angular-eslint/component-selector': [
-        'error',
-        {
-          type: 'element',
-          prefix: 'ion',
-          style: 'kebab-case',
-        },
-      ],
-    },
-  },
-  ...compat
-    .extends(
-      'plugin:@angular-eslint/template/recommended',
-      'plugin:@angular-eslint/template/accessibility',
-      'plugin:prettier/recommended'
-    )
-    .map(config => ({
-      ...config,
-      files: ['**/*.html'],
-      ignores: ['**/*inline-template-*.component.html'],
-    })),
-  {
+}, ...compat
+  .extends(
+    'plugin:@angular-eslint/template/recommended',
+    'plugin:@angular-eslint/template/accessibility',
+    'plugin:prettier/recommended'
+  )
+  .map(config => ({
+    ...config,
     files: ['**/*.html'],
     ignores: ['**/*inline-template-*.component.html'],
+  })), {
+  files: ['**/*.html'],
+  ignores: ['**/*inline-template-*.component.html'],
 
-    rules: {
-      'prettier/prettier': [
-        'warn',
-        {
-          parser: 'angular',
-        },
-      ],
-    },
+  rules: {
+    'prettier/prettier': [
+      'warn',
+      {
+        parser: 'angular',
+      },
+    ],
   },
-  eslintConfigPrettier,
-];
+}, eslintConfigPrettier, ...storybook.configs["flat/recommended"]];

@@ -1,4 +1,4 @@
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { IonSwitchComponent } from '../lib/switch';
 
 import type { Meta, StoryObj } from '@storybook/angular';
