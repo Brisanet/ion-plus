@@ -34,3 +34,5 @@ export * from './lib/table';
 export * from './lib/popover';
 export * from './lib/triple-toggle';
 export * from './lib/utils/commonTypes';
+export * from './lib/directives/popover';
+export * from './lib/position';

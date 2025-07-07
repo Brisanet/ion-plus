@@ -1,0 +1,78 @@
+<div
+  [ngClass]="
+    ionPopoverCustomClass() +
+    ' ion-popover__sup-container--' +
+    ionPopoverPosition()
+  "
+  [class.ion-popover--visible]="ionPopoverVisible"
+  [class.without-header]="!ionPopoverTitle()"
+  data-testid="ion-popover"
+  [style.top]="top + 'px'"
+  [style.left]="left + 'px'"
+  [style.position]="position"
+  (ionClickOutside)="onClickOutside()"
+  #popover>
+  <div class="ion-popover__container">
+    @if (ionPopoverTitle()) {
+      <div
+        data-testid="popover-header"
+        class="ion-popover__header"
+        data-testid="popover-header">
+        <div>
+          @if (ionPopoverIcon()) {
+            <ion-icon
+              [type]="ionPopoverIcon()"
+              [color]="ionPopoverIconColor()"></ion-icon>
+          }
+
+          <span class="ion-popover__title">{{ ionPopoverTitle() }}</span>
+        </div>
+
+        @if (ionPopoverIconClose()) {
+          <ion-button
+            label="close"
+            id="popover-close-button"
+            [icon]="{ type: 'close' }"
+            class="ion-popover__icon-close"
+            type="ghost"
+            shape="circle"
+            (ionOnClick)="close()"></ion-button>
+        }
+      </div>
+    }
+
+    @if (ionPopoverBody()) {
+      <div class="ion-popover__content-body">
+        <ng-container [ngTemplateOutlet]="ionPopoverBody()"></ng-container>
+      </div>
+    }
+
+    @if (ionPopoverActions()) {
+      <ion-divider></ion-divider>
+
+      <div class="ion-popover__footer">
+        @for (
+          action of ionPopoverActions();
+          track action.label;
+          let idx = $index
+        ) {
+          @if (action && idx < 2) {
+            <ion-button
+              [attr.data-testid]="'popover-action-' + (idx + 1)"
+              [label]="action.label"
+              [type]="idx === 0 ? 'ghost' : 'primary'"
+              size="sm"
+              [danger]="action.danger"
+              [disabled]="action.disabled"
+              [loading]="action.loading"
+              [icon]="action.icon"
+              [shape]="action.shape"
+              (ionOnClick)="
+                idx === 1 ? firstAction() : secondAction()
+              "></ion-button>
+          }
+        }
+      </div>
+    }
+  </div>
+</div>
