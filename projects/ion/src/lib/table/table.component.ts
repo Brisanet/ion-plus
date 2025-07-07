@@ -1,12 +1,12 @@
 import { IonThemeService } from './../theme/theme.service';
 import {
-  ChangeDetectorRef,
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
-  Input,
   OnChanges,
   OnInit,
-  Output,
+  input,
+  output,
   SimpleChanges,
 } from '@angular/core';
 
@@ -22,19 +22,19 @@ import { Column, ConfigTable } from './utilsTable';
   selector: 'ion-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IonTableComponent<RowType>
   extends BaseTable<RowType, ConfigTable<RowType>, TableEvent>
-  implements OnInit, OnChanges
+  implements OnInit
 {
-  @Input() config: ConfigTable<RowType>;
-  @Output() events = new EventEmitter<TableEvent>();
+  config = input.required<ConfigTable<RowType>>();
+  events = output<TableEvent>();
 
   public mainCheckBoxState: CheckBoxStates = 'enabled';
   public smartData = [];
 
   constructor(
-    private cdr: ChangeDetectorRef,
     protected ionThemeService: IonThemeService
   ) {
     super();
