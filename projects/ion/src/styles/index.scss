@@ -1,8 +1,8 @@
-@import 'colors/colors.scss';
-@import 'themes/index.scss';
-@import 'fonts/index.scss';
-@import 'shadows/index.scss';
-@import 'z-indexes/index.scss';
-@import 'presets-styles/index.scss';
-@import 'scrollbar/index.scss';
-@import '@angular/cdk/overlay-prebuilt.css';
+@use 'colors/colors';
+@use 'themes/index';
+@use 'fonts/index';
+@use 'shadows/index';
+@use 'z-indexes/index';
+@use 'presets-styles/index';
+@use 'scrollbar/index';
+@use '@angular/cdk/overlay-prebuilt';

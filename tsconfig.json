@@ -8,9 +8,7 @@
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "paths": {
-      "ion": [
-        "./dist/ion"
-      ]
+      "ion": ["./dist/ion"]
     },
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
@@ -24,10 +22,7 @@
     "target": "ES2022",
     "module": "ES2022",
     "useDefineForClassFields": false,
-    "lib": [
-      "ES2022",
-      "dom"
-    ]
+    "lib": ["ES2022", "dom"]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

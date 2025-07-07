@@ -68,7 +68,7 @@ export interface IonPaginationProps {
    * @example
    * <ion-pagination size = `md`/>
    */
-  size?: Size;
+  size: Size;
 
   /**
    * Pagination loading
@@ -78,7 +78,7 @@ export interface IonPaginationProps {
    * @example
    * <ion-pagination loading = false />
    */
-  loading?: boolean;
+  loading: boolean;
 
   /**
    * Pagination page.

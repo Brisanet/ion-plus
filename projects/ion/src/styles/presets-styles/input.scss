@@ -1,4 +1,4 @@
-@import '../colors/colors.scss';
+@use '../colors/colors';
 
 @mixin add-colors($border, $outlineConfig, $color) {
   border-color: $border;

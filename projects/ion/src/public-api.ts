@@ -42,7 +42,6 @@ export * from './lib/switch';
 export * from './lib/tab';
 export * from './lib/tab-group';
 export * from './lib/tag';
-export * from './lib/table';
 export * from './lib/triple-toggle';
 export * from './lib/notification';
 export * from './lib/triple-toggle';

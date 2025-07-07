@@ -1,4 +1,3 @@
-
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { IonButtonComponent } from '../button';
 import { IonSidebarGroupComponent } from './sidebar-group/sidebar-group.component';
@@ -10,8 +9,8 @@ import { callItemAction, selectItemByIndex, unselectAllItems } from './utils';
   imports: [
     IonButtonComponent,
     IonSidebarItemComponent,
-    IonSidebarGroupComponent
-],
+    IonSidebarGroupComponent,
+  ],
   selector: 'ion-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],

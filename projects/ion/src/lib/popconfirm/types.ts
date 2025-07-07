@@ -18,7 +18,7 @@ export interface IonPopConfirmProps {
    * @example
    * <ion-popconfirm ionPopConfirmType = `warning`/>
    */
-  ionPopConfirmType?: PopConfirmStatusType;
+  ionPopConfirmType: PopConfirmStatusType;
 
   /**
    * Popconfirm description.

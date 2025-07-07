@@ -11,8 +11,8 @@ import { IonDropdownComponent } from '../../../ion/src/lib/directives/dropdown/d
     RouterOutlet,
     IonIconComponent,
     IonSelectComponent,
-    IonDropdownComponent
-],
+    IonDropdownComponent,
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
