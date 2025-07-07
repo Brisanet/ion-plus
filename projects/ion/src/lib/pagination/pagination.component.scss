@@ -1,0 +1,41 @@
+@import '../../styles/index.scss';
+
+.ion-pagination {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+
+  &__advanced-list {
+    display: flex;
+    gap: 8px;
+  }
+
+  &__button {
+    &--rounded {
+      ::ng-deep button {
+        &.ion-btn--sm {
+          padding: spacing(0.5);
+        }
+        &.ion-btn--md {
+          padding: spacing(0.75);
+        }
+        &.ion-btn--lg {
+          padding: spacing(1);
+        }
+        &.ion-btn--xl {
+          padding: spacing(1.5);
+        }
+      }
+    }
+
+    &--selected {
+      ::ng-deep button {
+        &.ion-btn--secondary {
+          border: 1px solid $primary-color;
+          background-color: $primary-1;
+          color: $primary-color;
+        }
+      }
+    }
+  }
+}
