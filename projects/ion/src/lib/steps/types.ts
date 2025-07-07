@@ -1,6 +1,6 @@
 import { OutputEmitterRef } from '@angular/core';
 
-export type StatusType = 'default' | 'selected' | 'checked' | 'error';
+export type StepStatusType = 'default' | 'selected' | 'checked' | 'error';
 export type LineType = 'initial' | 'final';
 
 export enum Status {
@@ -45,7 +45,7 @@ export interface Step {
    * @example
    * <ion-steps steps = [{label: `label text`, status: `selected`}] />
    */
-  status?: StatusType;
+  status?: StepStatusType;
 }
 
 export type IonStepsProps = {

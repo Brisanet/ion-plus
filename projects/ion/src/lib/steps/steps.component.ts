@@ -9,7 +9,7 @@ import {
   output,
 } from '@angular/core';
 import { IonIconComponent } from '../icon';
-import { IonStepsProps, Status, StatusType } from './types';
+import { IonStepsProps, Status, StepStatusType } from './types';
 
 @Component({
   selector: 'ion-steps',
@@ -63,7 +63,7 @@ export class IonStepsComponent {
     this.currentChange.emit(index);
   }
 
-  private stepStatus(stepIndex: number, currentIndex: number): StatusType {
+  private stepStatus(stepIndex: number, currentIndex: number): StepStatusType {
     if (stepIndex && stepIndex < currentIndex) return Status.checked;
     if (stepIndex === currentIndex) return Status.selected;
     return Status.default;
