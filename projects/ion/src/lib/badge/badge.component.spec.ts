@@ -75,8 +75,9 @@ describe('IonBadgeComponent', () => {
 
     it('should render a dot badge with custom color', async () => {
       await sut({ dot: true, customColor: 'red' });
+      const redRGB = 'rgb(255, 0, 0)';
       expect(screen.getByTestId('ion-dot-badge')).toHaveStyle({
-        backgroundColor: 'red',
+        'background-color': redRGB,
       });
     });
     it('should render a label when has icon but size is xs', async () => {
