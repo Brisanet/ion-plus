@@ -11,6 +11,7 @@ export * from './lib/breadcrumb';
 export * from './lib/button';
 export * from './lib/checkbox';
 export * from './lib/directives/dropdown';
+export * from './lib/directives/tooltip';
 export * from './lib/divider';
 export * from './lib/icon';
 export * from './lib/input';

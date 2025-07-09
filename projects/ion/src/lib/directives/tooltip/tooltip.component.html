@@ -1,0 +1,19 @@
+@if (ionTooltipVisible()) {
+  <section
+    class="ion-tooltip"
+    data-testid="ion-tooltip-component"
+    [ngClass]="[
+      'ion-tooltip-position--' + ionTooltipPosition(),
+      ionTooltipCustomClass(),
+    ]">
+    @if (title()) {
+      <p data-testid="ion-tooltip-component-title">{{ title() }}</p>
+    }
+
+    @if (contentTemplate() !== null) {
+      <ng-container
+        data-testid="ion-tooltip-component-contentTemplate"
+        [ngTemplateOutlet]="contentTemplate()"></ng-container>
+    }
+  </section>
+}

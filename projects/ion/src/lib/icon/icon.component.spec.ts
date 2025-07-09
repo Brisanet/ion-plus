@@ -60,7 +60,7 @@ describe('IonIconComponent', () => {
 
       expect(containerWidth).toHaveAttribute(
         'style',
-        `background-color: rgba(255, 0, 22, 0.102); width: ${
+        `background-color: rgba(255, 0, 22, 0.1); width: ${
           iconSizes.sm * 2
         }px; height: ${iconSizes.sm * 2}px;`
       );
@@ -80,7 +80,7 @@ describe('IonIconComponent', () => {
 
       expect(containerWidth).toHaveAttribute(
         'style',
-        `background-color: rgba(255, 0, 22, 0.102); width: ${
+        `background-color: rgba(255, 0, 22, 0.1); width: ${
           iconSizes.sm * 2.5
         }px; height: ${iconSizes.sm * 2.5}px;`
       );
@@ -98,7 +98,7 @@ describe('IonIconComponent', () => {
 
       expect(containerWidth).toHaveAttribute(
         'style',
-        `background-color: rgba(255, 0, 22, 0.102); width: ${
+        `background-color: rgba(255, 0, 22, 0.1); width: ${
           iconSizes.md * 2.25
         }px; height: ${iconSizes.md * 2.25}px;`
       );
@@ -116,7 +116,7 @@ describe('IonIconComponent', () => {
 
       expect(containerWidth).toHaveAttribute(
         'style',
-        `background-color: rgba(255, 0, 22, 0.251); width: ${
+        `background-color: rgba(255, 0, 22, 0.25); width: ${
           iconSizes.sm * 1.75
         }px; height: ${iconSizes.sm * 1.75}px;`
       );
@@ -134,7 +134,7 @@ describe('IonIconComponent', () => {
 
       expect(containerWidth).toHaveAttribute(
         'style',
-        `background-color: rgba(255, 0, 22, 0.251); width: ${
+        `background-color: rgba(255, 0, 22, 0.25); width: ${
           iconSizes.md * 1.5
         }px; height: ${iconSizes.md * 1.5}px;`
       );
