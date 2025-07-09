@@ -20,6 +20,7 @@ export * from './lib/message';
 export * from './lib/modal';
 export * from './lib/no-data';
 export * from './lib/notification';
+export * from './lib/popconfirm';
 export * from './lib/radio';
 export * from './lib/select';
 export * from './lib/sidebar';
