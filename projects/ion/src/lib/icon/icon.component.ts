@@ -1,120 +1,107 @@
+import { CommonModule } from '@angular/common';
 import {
+  ChangeDetectionStrategy,
   Component,
   ElementRef,
-  Input,
-  OnChanges,
   Renderer2,
-  ViewChild,
+  computed,
+  effect,
+  input,
+  viewChild,
 } from '@angular/core';
 import { iconsPaths } from './svgs/icons';
-import { ContainerStyle, Highlight, IonIconProps } from './types';
-import { CommonModule } from '@angular/common';
+import { ContainerStyle, IonIconProps } from './types';
+
+const DEFAULT_STYLE = {
+  color: 'transparent',
+  size: 'unset',
+};
 
 @Component({
-  standalone: true,
   selector: 'ion-icon',
   imports: [CommonModule],
   templateUrl: './icon.component.html',
   styleUrls: ['./icon.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class IonIconComponent implements OnChanges {
-  @Input({ required: true }) type!: IonIconProps['type'];
-  @Input() size: IonIconProps['size'] = 24;
-  @Input() color: IonIconProps['color'] = '#282b33';
-  @Input() highlight: IonIconProps['highlight'] = Highlight.NONE;
+export class IonIconComponent {
+  type = input.required<IonIconProps['type']>();
+  size = input<IonIconProps['size']>(24);
+  color = input<IonIconProps['color']>('#282b33');
+  highlight = input<IonIconProps['highlight']>('none');
 
-  @ViewChild('svgElement', { static: true }) svgElement!: ElementRef;
+  svgElement = viewChild<ElementRef>('svgElement');
 
-  outerContainerStyle: ContainerStyle = {
-    color: 'transparent',
-    size: 'unset',
-  };
-
-  innerContainerStyle: ContainerStyle = {
-    color: 'transparent',
-    size: 'unset',
-  };
-
-  constructor(private renderer: Renderer2) {}
-
-  setOuterContainerStyle(): void {
-    const defaultStyle = {
-      color: 'transparent',
-      size: 'unset',
-    };
+  outerContainerStyle = computed<ContainerStyle>(() => {
+    if (!this.isHex()) {
+      return DEFAULT_STYLE;
+    }
 
     const stylesControl = {
       double: {
-        color: `${this.color}1A`,
-        size: `${this.size! * this.getCircleProportion().outsideCircle}px`,
+        color: `${this.color()}1A`,
+        size: `${this.size() * this.getCircleProportion().outsideCircle}px`,
       },
       simple: {
-        color: `${this.color}1A`,
-        size: `${this.size! * 2}px`,
+        color: `${this.color()}1A`,
+        size: `${this.size() * 2}px`,
       },
-      none: defaultStyle,
+      none: DEFAULT_STYLE,
     };
 
-    this.outerContainerStyle = {
-      color: stylesControl[this.highlight!].color,
-      size: stylesControl[this.highlight!].size,
+    return {
+      color: stylesControl[this.highlight()].color,
+      size: stylesControl[this.highlight()].size,
     };
-  }
+  });
 
-  setInnerContainerStyle(): void {
-    const defaultStyle = {
-      color: 'transparent',
-      size: 'unset',
-    };
+  innerContainerStyle = computed<ContainerStyle>(() => {
+    if (!this.isHex()) {
+      return DEFAULT_STYLE;
+    }
 
     const stylesControl = {
       double: {
-        color: `${this.color}40`,
-        size: `${this.size! * this.getCircleProportion().innerCircle}px`,
+        color: `${this.color()}40`,
+        size: `${this.size() * this.getCircleProportion().innerCircle}px`,
       },
-      simple: defaultStyle,
-      none: defaultStyle,
+      simple: DEFAULT_STYLE,
+      none: DEFAULT_STYLE,
     };
 
-    this.innerContainerStyle = {
-      color: stylesControl[this.highlight!].color,
-      size: stylesControl[this.highlight!].size,
+    return {
+      color: stylesControl[this.highlight()].color,
+      size: stylesControl[this.highlight()].size,
     };
+  });
+
+  constructor(private renderer: Renderer2) {
+    effect(() => {
+      if (iconsPaths[this.type()]) {
+        const paths = iconsPaths[this.type()].split('/>');
+        const resultPaths = paths
+          .map((path, index) => {
+            return path.includes('path')
+              ? `${path} id="ion-icon-path-${this.type}-${index}" />`
+              : '';
+          })
+          .join('');
+
+        this.renderer.setProperty(
+          this.svgElement()?.nativeElement,
+          'innerHTML',
+          resultPaths
+        );
+      }
+    });
   }
 
-  ngOnChanges(): void {
-    if (iconsPaths[this.type]) {
-      const paths = iconsPaths[this.type].split('/>');
-      const resultPaths = paths
-        .map((path, index) => {
-          return path.includes('path')
-            ? `${path} id="ion-icon-path-${this.type}-${index}" />`
-            : '';
-        })
-        .join('');
-
-      this.renderer.setProperty(
-        this.svgElement.nativeElement,
-        'innerHTML',
-        resultPaths
-      );
-    }
-
-    if (this.isHex()) {
-      this.setInnerContainerStyle();
-      this.setOuterContainerStyle();
-    }
-  }
-
-  private isHex(): boolean {
+  private isHex = computed(() => {
     const regex = /^#?([0-9A-Fa-f]{6})$/;
-    return !!this.color && regex.test(this.color);
-  }
+    return !!this.color() && regex.test(this.color()!);
+  });
 
-  private getCircleProportion(): {
-    innerCircle: number;
-    outsideCircle: number;
-  } {
+  private getCircleProportion = computed(() => {
     const mdIcon = 24;
     const proportions = {
       largeIcon: {
@@ -128,11 +115,11 @@ export class IonIconComponent implements OnChanges {
     };
 
     const iconSize =
-      this.size && this.size >= mdIcon ? 'largeIcon' : 'smallIcon';
+      this.size() && this.size() >= mdIcon ? 'largeIcon' : 'smallIcon';
 
     return {
       innerCircle: proportions[iconSize].inner,
       outsideCircle: proportions[iconSize].outer,
     };
-  }
+  });
 }

@@ -1,0 +1,84 @@
+@import '../colors/colors.scss';
+
+@mixin add-colors($border, $outlineConfig, $color) {
+  border-color: $border;
+  outline: $outlineConfig;
+  outline-color: $color;
+}
+
+@mixin outline-none($border, $outline) {
+  border-color: $border;
+  outline: $outline;
+}
+
+.ion-input {
+  border: 1px solid $neutral-5;
+  border-radius: spacing(1);
+  width: calc(100% - 2 * spacing(1.5));
+  position: relative;
+  line-height: 0;
+  color: $neutral-7;
+  font-size: 14px;
+  padding: spacing(1) spacing(1.5);
+
+  &::placeholder {
+    color: $neutral-5;
+    font-weight: 400;
+    font-size: 14px;
+  }
+
+  &:hover {
+    border-color: $primary-4;
+  }
+
+  &:focus {
+    @include add-colors($primary-5, 2px solid, $primary-2);
+  }
+
+  &:active {
+    @include add-colors($primary-5, 2px solid, $primary-2);
+  }
+
+  &:disabled {
+    background: $neutral-2;
+    border: 1px solid $neutral-4;
+    cursor: not-allowed;
+    outline: none;
+
+    input::placeholder {
+      color: $neutral-4;
+    }
+
+    &:hover {
+      border-color: $neutral-4;
+    }
+
+    &:active {
+      outline: none;
+    }
+  }
+
+  &--invalid {
+    border: 1px solid $negative-6;
+
+    &:hover {
+      border-color: $negative-6;
+    }
+
+    &:focus-within {
+      @include outline-none($negative-6, none);
+    }
+
+    &:active {
+      @include add-colors($negative-6, 2px solid, $negative-1);
+    }
+
+    &.disabled {
+      border-color: $neutral-4;
+
+      &:active {
+        @include outline-none($neutral-4, none);
+      }
+    }
+  }
+}

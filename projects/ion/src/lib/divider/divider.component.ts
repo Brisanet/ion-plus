@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 import { IonDividerProps } from './types';
 
@@ -7,11 +7,13 @@ import { IonDividerProps } from './types';
   selector: 'ion-divider',
   templateUrl: './divider.component.html',
   styleUrls: ['./divider.component.scss'],
+  host: {
+    '[attr.data-type]': 'type()',
+  },
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IonDividerComponent {
-  @Input() label: IonDividerProps['label'] = '';
-  @Input() direction?: IonDividerProps['direction'] = 'horizontal';
-  @HostBinding('[attr.data-type]')
-  @Input()
-  type?: IonDividerProps['type'] = 'solid';
+  label = input<IonDividerProps['label']>();
+  direction = input<IonDividerProps['direction']>('horizontal');
+  type = input<IonDividerProps['type']>('solid');
 }

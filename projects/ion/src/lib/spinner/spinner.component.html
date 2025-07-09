@@ -1,16 +1,16 @@
-<span [class.spinner-container]="text && text.length">
+<span [class.spinner-container]="text() && text().length">
   <span
     class="ion-spinner"
     data-testid="ion-spinner"
-    [ngClass]="color"
-    [style.width.px]="size"
-    [style.height.px]="size"
-    [style.border-left-color]="customColor"></span>
-  @if (text && text.length) {
+    [ngClass]="color()"
+    [style.width.px]="size()"
+    [style.height.px]="size()"
+    [style.border-left-color]="customColor()"></span>
+  @if (text() && text().length) {
     <span
       data-testid="ion-spinner-text"
-      [attr.class]="'ion-spinner__text ion-spinner__text--' + textSize"
-      >{{ text }}</span
+      [attr.class]="'ion-spinner__text ion-spinner__text--' + textSize()"
+      >{{ text() }}</span
     >
   }
 </span>

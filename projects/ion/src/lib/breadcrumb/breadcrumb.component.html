@@ -1,11 +1,11 @@
 <nav class="ion-breadcrumbs">
   <ol class="ion-breadcrumbs__list">
-    @for (breadcrumb of breadcrumbs; track breadcrumb.label) {
+    @for (breadcrumb of breadcrumbs(); track breadcrumb.label) {
       <li>
         <button (click)="onSelected(breadcrumb)" class="ion-breadcrumbs__item">
           {{ breadcrumb.label }}
         </button>
-        <ion-icon [type]="icon!" [size]="16"></ion-icon>
+        <ion-icon [type]="icon.type" [size]="icon.size" />
       </li>
     }
   </ol>

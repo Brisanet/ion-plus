@@ -10,19 +10,19 @@ export interface IonDividerProps {
    * Divider label.
    * @type {string}
    * */
-  label?: string;
+  label: string;
 
   /**
    * Divider direction. Can be 'horizontal' or 'vertical'.
    * @type {DirectionType}
    * @default 'horizontal'
    * */
-  direction?: DirectionType;
+  direction: DirectionType;
 
   /**
    * Divider type. Can be 'solid', 'dashed' or 'text'.
    * @type {DividerType}
    * @default 'solid'
    * */
-  type?: DividerType;
+  type: DividerType;
 }

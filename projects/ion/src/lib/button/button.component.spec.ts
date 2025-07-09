@@ -19,8 +19,18 @@ const shapes: Array<IonButtonProps['shape']> = ['normal', 'circle', 'rounded'];
 const sut = async (
   customProps: Partial<IonButtonProps>
 ): Promise<HTMLElement> => {
+  const { ionOnClick, ...rest } = customProps;
   await render(IonButtonComponent, {
-    componentProperties: customProps,
+    componentInputs: {
+      ...rest,
+    },
+    componentOutputs: {
+      ionOnClick:
+        ionOnClick ||
+        ({
+          emit: jest.fn(),
+        } as SafeAny),
+    },
   });
 
   return screen.getByTestId(`ion-button-${customProps.label}`);
@@ -130,5 +140,29 @@ describe('IonButtonComponent', () => {
     });
     fireEvent.click(button);
     expect(clickEvent).not.toHaveBeenCalled();
+  });
+
+  it('should render a pressed animation when the button is clicked.', async () => {
+    const button = await sut({ label: defaultName });
+    fireEvent.pointerDown(button);
+    expect(button).toHaveClass('ion-btn--press');
+  });
+
+  it('should render an unpressed animation when the button is released.', async () => {
+    const button = await sut({ label: defaultName });
+    fireEvent.pointerDown(button);
+    fireEvent.pointerUp(button);
+    expect(button).toHaveClass('ion-btn--unpress');
+  });
+
+  it('should remove the unpressed animation after a while.', async () => {
+    jest.useFakeTimers();
+    const button = await sut({ label: defaultName });
+    fireEvent.pointerDown(button);
+    fireEvent.pointerUp(button);
+    expect(button).toHaveClass('ion-btn--unpress');
+    jest.runAllTimers();
+    expect(button).not.toHaveClass('ion-btn--unpress');
+    jest.useRealTimers();
   });
 });

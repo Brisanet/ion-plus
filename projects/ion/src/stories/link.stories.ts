@@ -7,7 +7,7 @@ const meta: Meta<IonLinkComponent> = {
   title: 'Ion/Navigation/Link',
   component: IonLinkComponent,
   tags: ['autodocs'],
-  render: (args: IonLinkComponent) => ({
+  render: args => ({
     props: {
       ...args,
     },

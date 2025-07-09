@@ -6,7 +6,7 @@ const meta: Meta<IonDividerComponent> = {
   title: 'Ion/Design Tokens/Dividers',
   component: IonDividerComponent,
   tags: ['autodocs'],
-  render: (args: IonDividerComponent) => ({
+  render: args => ({
     props: {
       ...args,
     },
@@ -44,7 +44,7 @@ export const Default: Story = {
     label: 'Divider',
     direction: 'horizontal',
     type: 'solid',
-  } as IonDividerComponent,
+  },
 };
 
 export const Vertical: Story = {
@@ -52,7 +52,7 @@ export const Vertical: Story = {
     label: 'Divider',
     direction: 'vertical',
     type: 'solid',
-  } as IonDividerComponent,
+  },
 };
 
 export const Dashed: Story = {
@@ -60,7 +60,7 @@ export const Dashed: Story = {
     label: 'Divider',
     direction: 'horizontal',
     type: 'dashed',
-  } as IonDividerComponent,
+  },
 };
 
 export const Text: Story = {
@@ -68,5 +68,5 @@ export const Text: Story = {
     label: 'Divider',
     direction: 'horizontal',
     type: 'text',
-  } as IonDividerComponent,
+  },
 };

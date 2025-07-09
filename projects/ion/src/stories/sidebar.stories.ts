@@ -1,5 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/angular';
+/* eslint-disable */
 import { action } from '@storybook/addon-actions';
+import type { Meta, StoryObj } from '@storybook/angular';
 
 import { IonSidebarComponent } from './../lib/sidebar/sidebar.component';
 
@@ -7,17 +8,14 @@ const meta: Meta<IonSidebarComponent> = {
   title: 'Ion/Navigation/Sidebar',
   component: IonSidebarComponent,
   tags: ['autodocs'],
-  render: (args: IonSidebarComponent) => ({
+  render: args => ({
     props: {
       ...args,
     },
   }),
   argTypes: {
-    logo: {
+    logoConfig: {
       description: 'Caminho para arquivo da logo a ser renderizada.',
-    },
-    logoAction: {
-      description: 'Ação a ser executada ao clicar na logo.',
     },
     items: {
       description:
@@ -35,7 +33,10 @@ export default meta;
 type Story = StoryObj<IonSidebarComponent>;
 export const Default: Story = {
   args: {
-    logo: require('./assets/sidebar-logo.svg'),
+    logoConfig: {
+      src: require('./assets/sidebar-logo.svg'),
+      action: action('logoClick'),
+    },
     closeOnSelect: false,
     items: [
       {

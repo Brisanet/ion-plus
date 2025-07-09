@@ -1,10 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { fireEvent, render, screen } from '@testing-library/angular';
-import { SafeAny } from '../utils/safe-any';
+import { fireEvent, screen } from '@testing-library/angular';
 import { IonAccordionComponent } from './accordion.component';
-import { IonAccordionProps } from './types';
 
 interface Websites {
   name: string;
@@ -79,48 +77,5 @@ describe('IonAccordion', () => {
         webSites[index].url
       );
     });
-  });
-});
-
-describe('IonAccordion - throw an error', () => {
-  const sut = async (
-    customProps: IonAccordionProps = {} as SafeAny
-  ): Promise<void> => {
-    await render(IonAccordionComponent, {
-      componentProperties: { ...customProps },
-    });
-  };
-
-  it('should throw an error when accordions propertie do not exist', async () => {
-    try {
-      await sut();
-    } catch (error: SafeAny) {
-      expect(error.message).toBe(
-        'The accordions property is not configured correctly'
-      );
-    }
-  });
-
-  it('should throw an error when TemplateHeader propertie do not exist', async () => {
-    try {
-      await sut({ accordions: webSites } as SafeAny);
-    } catch (error: SafeAny) {
-      expect(error.message).toBe(
-        'The TemplateHeader propertie have not been set'
-      );
-    }
-  });
-
-  it('should throw an error when templateBody propertie do not exist', async () => {
-    try {
-      await sut({
-        accordions: webSites,
-        templateHeader: `<p>Test</p>`,
-      } as SafeAny);
-    } catch (error: SafeAny) {
-      expect(error.message).toBe(
-        'The TempleteBody propertie have not been set'
-      );
-    }
   });
 });

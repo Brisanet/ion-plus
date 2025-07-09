@@ -13,10 +13,10 @@ const directions: Array<IonTabProps['direction']> = [
 const sizes: Array<IonTabProps['tabSize']> = ['sm', 'md', 'lg'];
 
 const sut = async (
-  customProps?: IonTabProps
+  customProps?: Partial<IonTabProps>
 ): Promise<ComponentFixture<IonTabComponent>> => {
   const { fixture } = await render(IonTabComponent, {
-    componentProperties: customProps || {
+    componentInputs: customProps || {
       label: defaultName,
     },
   });

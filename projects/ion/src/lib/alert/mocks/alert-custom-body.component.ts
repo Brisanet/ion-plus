@@ -3,7 +3,6 @@ import { IonAlertComponent } from '../alert.component';
 import { NgStyle } from '@angular/common';
 
 @Component({
-  standalone: true,
   imports: [NgStyle, IonAlertComponent],
   template: `
     <div>

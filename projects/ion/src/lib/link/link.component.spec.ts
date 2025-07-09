@@ -12,9 +12,11 @@ const getLinkComponentRef = (): HTMLElement => {
 
 const defaultProps = { ionOnClick: { emit: jest.fn() } as SafeAny };
 
-const sut = async (customProps?: Partial<IonLinkProps>): Promise<void> => {
+const sut = async (customProps: Partial<IonLinkProps> = {}): Promise<void> => {
+  const { ionOnClick, ...rest } = customProps;
   await render(IonLinkComponent, {
-    componentProperties: { ...defaultProps, ...customProps },
+    componentInputs: { ...rest },
+    componentOutputs: { ionOnClick: ionOnClick || defaultProps.ionOnClick },
   });
 };
 

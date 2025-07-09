@@ -7,7 +7,7 @@ export type IonTagStatus =
   | 'negative'
   | 'neutral';
 
-export interface IonTagInterface {
+export interface IonTagProps {
   /**
    * @description The `label` parameter is mandatory and represents the text that will be displayed in the tag.
    * @type {string}
@@ -18,21 +18,21 @@ export interface IonTagInterface {
    * @type {boolean}
    * @default true
    */
-  outline?: boolean;
+  outline: boolean;
   /**
    * @description The `status` parameter represents the default color scheme.
    * @type {IonTagStatus}
    * @default 'neutral'
    */
-  status?: IonTagStatus;
+  status: IonTagStatus;
   /**
    * @description The `icon` parameter represents the type of icon that will be displayed.
    * @type {IconType}
    */
-  icon?: IconType;
+  icon: IconType;
   /**
    * @description The `color` parameter can pass a custom color to the `tag`
    * @type {string}
    */
-  color?: string;
+  color: string;
 }

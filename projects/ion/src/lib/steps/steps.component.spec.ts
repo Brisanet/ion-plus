@@ -20,19 +20,21 @@ const defaultSteps: Step[] = [
 
 const indexChangeMock = jest.fn();
 
-const defaultProps: IonStepsProps = {
+const defaultProps: Partial<IonStepsProps> = {
   current: 1,
   steps: defaultSteps,
-  indexChange: {
+  currentChange: {
     emit: indexChangeMock,
   } as SafeAny,
 };
 
 const sut = async (
-  customProps: IonStepsProps = defaultProps
+  customProps: Partial<IonStepsProps> = defaultProps
 ): Promise<HTMLElement> => {
+  const { currentChange, ...rest } = customProps;
   await render(IonStepsComponent, {
-    componentProperties: customProps,
+    componentInputs: { ...rest },
+    componentOutputs: { currentChange },
   });
   return screen.findByTestId('ion-steps');
 };
@@ -135,7 +137,7 @@ describe('Static IonStepsComponent', () => {
 
 @Component({
   standalone: true,
-  template: `<ion-steps [steps]="steps" [current]="current"></ion-steps>`,
+  template: `<ion-steps [steps]="steps" [(current)]="current"></ion-steps>`,
   imports: [IonStepsComponent, IonIconComponent],
 })
 class TestHostComponent {
@@ -172,7 +174,7 @@ describe('Passing through the IonStepsComponent', () => {
     expect(screen.getByTestId('step-1-selected')).toBeTruthy();
     expect(screen.getByTestId('step-2-default')).toBeTruthy();
   });
-  it('should to keep last step selected when try to pass forward', async () => {
+  it('should to keep last step checked when try to pass forward', async () => {
     fixture.detectChanges();
     testHost.current = 2;
     fixture.detectChanges();
@@ -181,5 +183,15 @@ describe('Passing through the IonStepsComponent', () => {
     testHost.current = 4;
     fixture.detectChanges();
     expect(screen.getByTestId('step-3-selected')).toBeTruthy();
+  });
+  it('should to keep first step default when try to pass back', async () => {
+    fixture.detectChanges();
+    testHost.current = 2;
+    fixture.detectChanges();
+    testHost.current = 1;
+    fixture.detectChanges();
+    testHost.current = 0;
+    fixture.detectChanges();
+    expect(screen.getByTestId('step-1-selected')).toBeTruthy();
   });
 });

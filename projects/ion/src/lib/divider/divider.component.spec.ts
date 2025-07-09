@@ -11,16 +11,16 @@ const ClassType = {
   horizontal: 'ion-divider--horizontal',
 };
 
-const defaultDivider: IonDividerProps = {
+const defaultDivider: Partial<IonDividerProps> = {
   type: 'solid',
   direction: 'horizontal',
 };
 
 const sut = async (
-  customProps?: IonDividerProps
+  customProps?: Partial<IonDividerProps>
 ): Promise<ComponentFixture<IonDividerComponent>> => {
   const { fixture } = await render(IonDividerComponent, {
-    componentProperties: customProps || { ...defaultDivider },
+    componentInputs: customProps || { ...defaultDivider },
   });
 
   return fixture;
@@ -34,7 +34,7 @@ describe('IonDividerComponent', () => {
   });
 
   it.each(['vertical', 'horizontal'] as DirectionType[])(
-    'should render $s divider',
+    'should render %s divider',
     async direction => {
       await sut({
         direction,
@@ -44,7 +44,7 @@ describe('IonDividerComponent', () => {
   );
 
   it.each(['vertical', 'horizontal'] as DirectionType[])(
-    'should render $s divider dashed',
+    'should render %s divider dashed',
     async direction => {
       const divider = await sut({
         direction,

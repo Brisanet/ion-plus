@@ -1,31 +1,30 @@
 <button
-  [attr.data-testid]="'ion-button-' + label"
-  [disabled]="disabled"
+  [attr.data-testid]="'ion-button-' + label()"
+  [disabled]="disabled()"
   [ngClass]="
     'ion-btn ion-btn--' +
-    type +
+    type() +
     ' ' +
     'ion-btn--' +
-    size +
+    size() +
     ' ' +
     'ion-btn--' +
-    shape
+    shape()
   "
-  [class.ion-btn--danger]="!disabled && danger"
-  [class.ion-btn--inverter]="icon && icon.type && icon.rightPosition"
-  [class.ion-btn--loading]="!disabled && loading"
+  [class.ion-btn--danger]="!disabled() && danger()"
+  [class.ion-btn--inverter]="icon() && icon()?.type && icon()?.rightPosition"
+  [class.ion-btn--loading]="!disabled() && loading()"
   (click)="handleButtonClick()"
   (pointerdown)="pressAnimation()"
   (pointerup)="unpressAnimation()"
   (pointerleave)="unpressAnimation()"
   #ionButton>
-  @if (!disabled && loading) {
+  @if (!disabled() && loading()) {
     <span class="ion-btn__loading-spinner"></span>
-  } @else if (icon && icon.type) {
-    <ion-icon [type]="icon.type"></ion-icon>
+  } @else if (icon() && icon()?.type) {
+    <ion-icon [type]="icon()?.type!"></ion-icon>
   }
-
-  @if (shape === 'normal') {
-    <span>{{ label }}</span>
+  @if (shape() === 'normal' && label()) {
+    <span>{{ label() }}</span>
   }
 </button>

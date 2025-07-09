@@ -15,10 +15,9 @@ const mockTabs: TabInGroup[] = [
     selected: false,
   },
 ];
-const defaultProps: IonTabGroupProps = {
+const defaultProps: Partial<IonTabGroupProps> = {
   tabs: mockTabs,
-  direction: 'horizontal',
-  selected: {
+  tabSelected: {
     emit: selectEvent,
   } as SafeAny,
 };
@@ -28,10 +27,14 @@ const getTab = (indexTab: number = 0): HTMLElement => {
 };
 
 const sut = async (
-  customProps: IonTabGroupProps = defaultProps
+  customProps: Partial<IonTabGroupProps> = defaultProps
 ): Promise<{ element: HTMLElement; event: jest.Mock }> => {
+  const { tabSelected, ...rest } = customProps;
   await render(IonTabGroupComponent, {
-    componentProperties: customProps,
+    componentInputs: rest,
+    componentOutputs: {
+      tabSelected,
+    },
   });
   return { element: screen.getByTestId('ion-tab-group'), event: selectEvent };
 };
@@ -52,7 +55,7 @@ describe('IonTabGroupComponent', () => {
     const { element } = await sut({
       direction: 'vertical',
       tabs: mockTabs,
-      selected: {
+      tabSelected: {
         emit: selectEvent,
       } as SafeAny,
     });
@@ -72,7 +75,7 @@ describe('IonTabGroupComponent', () => {
     await sut({
       direction: 'vertical',
       tabs: mockTabs,
-      selected: {
+      tabSelected: {
         emit: selectEvent,
       } as SafeAny,
     });
@@ -84,7 +87,7 @@ describe('IonTabGroupComponent', () => {
       direction: 'vertical',
       border: 'left',
       tabs: mockTabs,
-      selected: {
+      tabSelected: {
         emit: selectEvent,
       } as SafeAny,
     });
@@ -98,7 +101,7 @@ describe('IonTabGroupComponent', () => {
         direction: 'vertical',
         tabs: mockTabs,
         size: size as TabSize,
-        selected: {
+        tabSelected: {
           emit: selectEvent,
         } as SafeAny,
       });
@@ -116,14 +119,6 @@ describe('IonTabGroupComponent', () => {
     });
   });
 
-  it('should validate if the event was issued twice', async () => {
-    selectEvent.mockClear();
-    const tabs = await sut();
-    fireEvent.click(screen.getByText(mockTabs[1].label));
-    fireEvent.click(screen.getByText(mockTabs[1].label));
-    expect(tabs.event).toHaveBeenCalledTimes(2);
-  });
-
   it('should show a tab with badge', async () => {
     const badgeValue = 10;
     await sut({
@@ -136,7 +131,7 @@ describe('IonTabGroupComponent', () => {
           badge: badgeValue,
         },
       ],
-      selected: {
+      tabSelected: {
         emit: selectEvent,
       } as SafeAny,
     });
@@ -156,7 +151,7 @@ describe('IonTabGroupComponent', () => {
           disabled: true,
         },
       ],
-      selected: {
+      tabSelected: {
         emit: selectEvent,
       } as SafeAny,
     });

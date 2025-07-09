@@ -5,7 +5,7 @@ import { AlertCustomBodyComponent } from '../lib/alert/mocks/alert-custom-body.c
 const meta: Meta<IonAlertComponent> = {
   title: 'Ion/Feedback/Alert',
   component: AlertCustomBodyComponent,
-  render: (args: AlertCustomBodyComponent) => ({
+  render: args => ({
     props: {
       ...args,
     },

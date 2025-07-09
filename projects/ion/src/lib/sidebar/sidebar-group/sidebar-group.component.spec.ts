@@ -1,6 +1,9 @@
 import { render, screen } from '@testing-library/angular';
 import userEvent from '@testing-library/user-event';
 import { IonSidebarGroupComponent } from './sidebar-group.component';
+import { SidebarGroup } from '../types';
+import { OutputEmitterRef } from '@angular/core';
+import { SafeAny } from '../../utils/safe-any';
 
 const components = {
   group: 'sidebar-group',
@@ -18,8 +21,9 @@ const getByTestId = (key: keyof typeof components): HTMLElement => {
 };
 
 const actionMock = jest.fn();
+const emit = jest.fn();
 
-const mockGroup: Partial<IonSidebarGroupComponent> = {
+const mockGroup = {
   title: 'Title',
   icon: 'box',
   items: [
@@ -27,26 +31,40 @@ const mockGroup: Partial<IonSidebarGroupComponent> = {
       title: 'Item 1',
       icon: 'pencil',
       action: actionMock,
+      selected: false,
     },
     {
       title: 'Item 2',
       icon: 'working',
       action: actionMock,
+      selected: false,
     },
   ],
+  selected: false,
+  haveGroupAction: false,
+  onItemSelected: { emit } as SafeAny,
+  groupSelectedChanged: { emit } as SafeAny,
 };
 
 const sut = async (
-  props: Partial<IonSidebarGroupComponent> = {}
-): Promise<void> => {
-  await render(IonSidebarGroupComponent, {
-    componentProperties: { ...props },
+  props: Partial<SidebarGroup> & {
+    selectedChange?: OutputEmitterRef<boolean>;
+    groupSelectedChanged?: OutputEmitterRef<void>;
+  }
+) => {
+  const { selectedChange, groupSelectedChanged, ...rest } = props;
+  return await render(IonSidebarGroupComponent, {
+    componentInputs: { ...rest },
+    componentOutputs: { selectedChange, groupSelectedChanged },
   });
 };
 
+let detectChangesFn: () => void;
+
 describe('SidebarGroup', () => {
   beforeEach(async () => {
-    await sut(mockGroup);
+    const { detectChanges } = await sut(mockGroup);
+    detectChangesFn = detectChanges;
   });
   afterEach(() => {
     actionMock.mockClear();
@@ -76,6 +94,7 @@ describe('SidebarGroup', () => {
   });
   it('should show items when header is clicked', async () => {
     await userEvent.click(getByTestId('toggleIcon'));
+    detectChangesFn();
     expect(getByTestId('items')).toBeVisible();
   });
 
@@ -103,6 +122,7 @@ describe('SidebarGroup', () => {
 
   it('should render group selected when an item is clicked', async () => {
     await userEvent.click(getByTestId('firstItem').firstElementChild!);
+    detectChangesFn();
     expect(getByTestId('group')).toHaveClass('sidebar-group--selected');
   });
   it('should render only one item selected at a time', async () => {
@@ -111,10 +131,13 @@ describe('SidebarGroup', () => {
     const selectedItemClass = 'ion-sidebar-item--selected';
 
     await userEvent.click(itemOne!);
+    detectChangesFn();
+
     expect(itemOne).toHaveClass(selectedItemClass);
     expect(itemTwo).not.toHaveClass(selectedItemClass);
 
     await userEvent.click(itemTwo!);
+    detectChangesFn();
     expect(itemOne).not.toHaveClass(selectedItemClass);
     expect(itemTwo).toHaveClass(selectedItemClass);
   });
@@ -122,6 +145,7 @@ describe('SidebarGroup', () => {
     await userEvent.click(getByTestId('header'));
     await userEvent.click(getByTestId('firstItem').firstElementChild!);
     await userEvent.click(getByTestId('header'));
+    detectChangesFn();
     expect(getByTestId('firstItem')).toBeVisible();
     expect(getByTestId('secondItem')).not.toBeVisible();
   });

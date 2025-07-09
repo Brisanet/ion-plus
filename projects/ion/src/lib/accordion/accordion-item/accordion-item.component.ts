@@ -1,34 +1,30 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  input,
+  model,
+} from '@angular/core';
 import { IonIconComponent } from '../../icon';
 import { SafeAny } from '../../utils/safe-any';
 import { IonAccordionItemProps } from '../types';
 
 @Component({
-  standalone: true,
   imports: [CommonModule, IonIconComponent],
   selector: 'ion-accordion-item',
   templateUrl: './accordion-item.component.html',
   styleUrls: ['./accordion-item.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class IonAccordionItemComponent implements OnInit {
-  @Input() templateHeader!: IonAccordionItemProps['templateHeader'];
-  @Input() show?: IonAccordionItemProps['show'] = false;
-  @Input() data?: IonAccordionItemProps['data'];
-  @Output() activeChange: IonAccordionItemProps['activeChange'] =
-    new EventEmitter<void>();
+export class IonAccordionItemComponent {
+  templateHeader = input.required<IonAccordionItemProps['templateHeader']>();
+  data = input<IonAccordionItemProps['data']>();
+  show = model<IonAccordionItemProps['show']>(false);
 
   public iconSize = 24;
 
-  public ngOnInit(): void {
-    if (!this.templateHeader) {
-      throw new Error('The templateHeader propertie were not set correctly');
-    }
-  }
-
   public toggle(): void {
-    this.show = !this.show;
-    this.activeChange.emit();
+    this.show.set(!this.show());
   }
 
   public generateContext(element: SafeAny): SafeAny {

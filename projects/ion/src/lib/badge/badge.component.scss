@@ -34,4 +34,44 @@
   &[data-type='negative'] {
     @include theme-badge($negative-color, $positive-1);
   }
+
+  &.ion-dot-badge {
+    display: flex;
+    align-items: center;
+    gap: spacing(1);
+
+    .dot {
+      border-radius: 50%;
+
+      &.has-icon {
+        display: flex;
+        align-items: center;
+      }
+
+      &[dot-status='primary'] {
+        background-color: $primary-6;
+      }
+      &[dot-status='negative'] {
+        background-color: $negative-6;
+      }
+      &[dot-status='positive'] {
+        background-color: $positive-6;
+      }
+      &[dot-status='warning'] {
+        background-color: $warning-6;
+      }
+      &[dot-status='info'] {
+        background-color: $info-6;
+      }
+    }
+
+    span {
+      background: transparent;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 20px;
+      padding: 0;
+      color: $neutral-7;
+    }
+  }
 }

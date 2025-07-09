@@ -1,0 +1,31 @@
+import { Canvas, Meta } from '@storybook/blocks';
+
+import * as InputStories from './input.stories.ts';
+
+<Meta of={InputStories} />
+
+# Input
+
+O componente input é um campo de entrada de texto que permite ao usuário inserir e editar texto.
+
+<Canvas of={InputStories.basic} />
+
+## invalid
+
+<Canvas of={InputStories.invalid} />
+
+## disabled
+
+<Canvas of={InputStories.disabled} />
+
+# Use em seu Projeto
+
+Para usar IonInput em seu projeto, você também precisará importar os estilos predefinidos em sua aplicação Angular.
+
+**Importe o estilo em seu arquivo SCSS:**
+
+```scss
+@import '../node_modules/@brisanet/ion/styles/index.scss';
+```
+
+Certifique-se de que o caminho para os estilos da biblioteca Ion esteja correto com base na estrutura do seu projeto. Sinta-se à vontade para ajustar os caminhos de importação.

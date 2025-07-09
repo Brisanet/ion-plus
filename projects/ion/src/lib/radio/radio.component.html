@@ -1,0 +1,20 @@
+<fieldset class="ion-radio-group">
+  @for (option of options(); let i = $index; track option.value) {
+    <div class="ion-radio-group__container">
+      <input
+        type="radio"
+        [id]="name() + '-' + i"
+        [name]="name()"
+        [value]="option.value"
+        [checked]="option.value === value()"
+        [disabled]="!!option.disabled"
+        (change)="onChange(option.value)" />
+      <label
+        class="ion-radio-group__label"
+        [class.ion-radio-group__label--disabled]="!!option.disabled"
+        [for]="name() + '-' + i"
+        >{{ option.label }}</label
+      >
+    </div>
+  }
+</fieldset>

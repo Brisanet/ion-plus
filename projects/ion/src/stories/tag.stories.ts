@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/angular';
+import { IonIconComponent, iconsPaths } from '../lib/icon';
 import type { IonTagStatus } from '../lib/tag';
 import { IonTagComponent } from '../lib/tag';
-import { iconsPaths, IonIconComponent } from '../lib/icon';
 
 const statusOptions: IonTagStatus[] = [
   'info',
@@ -15,7 +15,7 @@ const meta: Meta<IonTagComponent> = {
   title: 'Ion/Data Display/Tag',
   component: IonTagComponent,
   tags: ['autodocs'],
-  render: (args: IonTagComponent) => ({
+  render: args => ({
     props: {
       ...args,
     },
@@ -44,7 +44,6 @@ const meta: Meta<IonTagComponent> = {
     outline: {
       defaultValue: { summary: 'true' },
       control: { type: 'boolean' },
-      options: true,
       description:
         'Um boolean que define se irá ter borda(por padrão vem verdadeiro, trazendo a `tag` com borda)',
     },

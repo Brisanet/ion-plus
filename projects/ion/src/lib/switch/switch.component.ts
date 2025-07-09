@@ -1,18 +1,17 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { CommonModule, NgClass } from '@angular/common';
 import {
+  ChangeDetectionStrategy,
   Component,
-  EventEmitter,
-  HostBinding,
-  Input,
-  Output,
+  input,
+  model,
+  output,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { IonSwitchProps } from './types';
 
 @Component({
-  standalone: true,
   imports: [CommonModule, NgClass],
   selector: 'ion-switch',
   templateUrl: './switch.component.html',
@@ -24,23 +23,24 @@ import { IonSwitchProps } from './types';
       multi: true,
     },
   ],
+  host: {
+    '[attr.data-size]': 'size()',
+  },
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IonSwitchComponent implements ControlValueAccessor {
-  @Input() key!: IonSwitchProps['key'];
-  @Input() value: IonSwitchProps['value'] = false;
-  @HostBinding('attr.data-size')
-  @Input()
-  size: IonSwitchProps['size'] = 'sm';
-  @Input() disabled: IonSwitchProps['disabled'] = false;
-  @Output() atValueChange: IonSwitchProps['atValueChange'] =
-    new EventEmitter<boolean>();
+  key = input<IonSwitchProps['key']>();
+  value = model<IonSwitchProps['value']>(false);
+  size = input<IonSwitchProps['size']>('sm');
+  disabled = model<IonSwitchProps['disabled']>(false);
+  valueChange = output<IonSwitchProps['value']>();
 
   onTouched = (): void => {};
 
   onChange = (value: boolean): void => {};
 
   writeValue(value: boolean): void {
-    this.value = value;
+    this.value.set(value);
   }
 
   registerOnChange(fn: (value: boolean) => void): void {
@@ -52,13 +52,13 @@ export class IonSwitchComponent implements ControlValueAccessor {
   }
 
   setDisabledState(disabled: boolean): void {
-    this.disabled = disabled;
+    this.disabled.set(disabled);
   }
 
-  handleClick(value: boolean): void {
-    this.value = !value;
-    this.atValueChange.emit(this.value);
-    this.onChange(this.value);
+  handleClick(): void {
+    this.value.set(!this.value());
+    this.valueChange.emit(this.value());
+    this.onChange(this.value());
     this.onTouched();
   }
 }

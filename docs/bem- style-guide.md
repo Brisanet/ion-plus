@@ -10,7 +10,7 @@ The core concept is name our classes based on the building blocks of the structu
 
 You can see the regular structure of a class in the examples below:
 
-### Block + Element 
+### Block + Element
 
 `block__element`
 
@@ -36,7 +36,7 @@ Modifiers are variations of a block or element, they are represented in the clas
 
 ## Examples
 
-- In a situation where we have a button with 2 color variations and sizes, the classes would look like this: 
+- In a situation where we have a button with 2 color variations and sizes, the classes would look like this:
 
 ```css
 .button--red {
@@ -55,18 +55,20 @@ Modifiers are variations of a block or element, they are represented in the clas
   ...
 }
 ```
-- If we have a header with a logo, a search bar and a list with actions, the classes would look like this: 
+
+- If we have a header with a logo, a search bar and a list with actions, the classes would look like this:
 
 ```html
 <header class="header">
-  <img class="header__logo"/>
+  <img class="header__logo" />
   <div class="header__search"></div>
   <ul class="header__list">
     <li class="header__item"></li>
     <li class="header__item"></li>
- </ul>
+  </ul>
 </header>
 ```
+
 With SCSS we would have an css syntax like this:
 
 ```scss
@@ -96,7 +98,9 @@ With SCSS we would have an css syntax like this:
   </li>
 </ul>
 ```
+
 or
+
 ```html
 <ul class="list">
   <li class="list__item publication">
@@ -117,6 +121,6 @@ or
 
 To a deep dive, with more explanation on the pattern, check:
 
-  - [Official Docs](https://en.bem.info/methodology/)
-  - [Article: Understanding CSS BEM](https://codeburst.io/understanding-css-bem-naming-convention-a8cca116d252)
-  - [Article: BEM em 5min](https://medium.com/trainingcenter/bem-em-5min-f5c80fd23439)
+- [Official Docs](https://en.bem.info/methodology/)
+- [Article: Understanding CSS BEM](https://codeburst.io/understanding-css-bem-naming-convention-a8cca116d252)
+- [Article: BEM em 5min](https://medium.com/trainingcenter/bem-em-5min-f5c80fd23439)

@@ -1,51 +1,44 @@
 import { CommonModule, NgClass } from '@angular/common';
 import {
+  ChangeDetectionStrategy,
   Component,
-  EventEmitter,
-  Input,
-  OnChanges,
-  Output,
-  SimpleChanges,
+  computed,
+  input,
+  output,
 } from '@angular/core';
 
 import { IonIconComponent } from '../icon';
 import { IonLinkProps } from './types';
 
+const SIZES = {
+  sm: 16,
+  md: 24,
+};
+
 @Component({
-  standalone: true,
   imports: [CommonModule, IonIconComponent, NgClass],
   selector: 'ion-link',
   templateUrl: './link.component.html',
   styleUrls: ['./link.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class IonLinkComponent implements OnChanges {
-  @Input() label: IonLinkProps['label'] = '';
-  @Input() icon?: IonLinkProps['icon'];
-  @Input() iconSide: IonLinkProps['iconSide'] = 'right';
-  @Input() size: IonLinkProps['size'] = 'sm';
-  @Input() bold: IonLinkProps['bold'] = false;
-  @Input() disabled: IonLinkProps['disabled'] = false;
-  @Input() target: IonLinkProps['target'] = '_self';
-  @Input() link?: IonLinkProps['link'];
-  @Output() ionOnClick: IonLinkProps['ionOnClick'] = new EventEmitter<void>();
+export class IonLinkComponent {
+  label = input<IonLinkProps['label']>();
+  icon = input<IonLinkProps['icon']>();
+  iconSide = input<IonLinkProps['iconSide']>('right');
+  size = input<IonLinkProps['size']>('sm');
+  bold = input<IonLinkProps['bold']>(false);
+  disabled = input<IonLinkProps['disabled']>(false);
+  target = input<IonLinkProps['target']>('_self');
+  link = input<IonLinkProps['link']>();
 
-  public iconSize = 16;
+  ionOnClick = output();
+
+  iconSize = computed(() => SIZES[this.size()]);
 
   public onClick(): void {
-    if (this.disabled) {
-      return;
-    }
-    this.ionOnClick.emit();
-  }
-
-  public ngOnChanges(changes: SimpleChanges): void {
-    const sizeControls = {
-      sm: 16,
-      md: 24,
-    };
-
-    if (changes['size'] && this.size) {
-      this.iconSize = sizeControls[this.size];
+    if (!this.disabled()) {
+      this.ionOnClick.emit();
     }
   }
 }

@@ -6,7 +6,7 @@ const meta: Meta<IonSpinnerComponent> = {
   title: 'Ion/Feedback/Spinner',
   component: IonSpinnerComponent,
   tags: ['autodocs'],
-  render: (args: IonSpinnerComponent) => ({
+  render: args => ({
     props: {
       ...args,
     },
@@ -58,7 +58,7 @@ export const Default: Story = {
     size: 24,
     color: 'primary',
     textSize: 'sm',
-  } as IonSpinnerComponent,
+  },
 };
 
 export const Secondary: Story = {
@@ -68,7 +68,7 @@ export const Secondary: Story = {
     customColor: '',
     text: '',
     textSize: 'sm',
-  } as IonSpinnerComponent,
+  },
 };
 
 export const Danger: Story = {
@@ -78,7 +78,7 @@ export const Danger: Story = {
     customColor: '',
     text: '',
     textSize: 'sm',
-  } as IonSpinnerComponent,
+  },
 };
 
 export const CustomColor: Story = {
@@ -87,7 +87,7 @@ export const CustomColor: Story = {
     customColor: 'purple',
     text: '',
     textSize: 'sm',
-  } as IonSpinnerComponent,
+  },
 };
 
 export const Text: Story = {
@@ -97,5 +97,5 @@ export const Text: Story = {
     customColor: '',
     text: 'Carregando...',
     textSize: 'sm',
-  } as IonSpinnerComponent,
+  },
 };

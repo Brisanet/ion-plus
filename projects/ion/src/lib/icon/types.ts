@@ -1,10 +1,6 @@
 import { iconsPaths } from './svgs/icons';
 
-export enum Highlight {
-  SIMPLE = 'simple',
-  DOUBLE = 'double',
-  NONE = 'none',
-}
+export type Highlight = 'simple' | 'double' | 'none';
 
 export type ContainerStyle = {
   size: string;
@@ -17,7 +13,7 @@ export type IconDirection = 'right' | 'left';
 
 export interface IonIconProps {
   type: IconType;
-  size?: number;
-  color?: string;
-  highlight?: Highlight;
+  size: number;
+  color: string;
+  highlight: Highlight;
 }

@@ -1,0 +1,60 @@
+<ion-button
+  (mouseenter)="openMenu()"
+  (mouseleave)="dismissMenu()"
+  data-testid="ion-button-sandwich"
+  [icon]="{ type: 'sandwich', rightPosition: true }"
+  size="lg"
+  type="ghost"
+  shape="rounded">
+  >
+</ion-button>
+
+<div
+  class="ion-menu-container"
+  [class.ion-menu-container--opened]="open()"
+  (mouseenter)="openMenu()"
+  (mouseleave)="dismissMenu()"
+  data-testid="ion-simple-menu">
+  @if (logo(); as logo) {
+    <header class="ion-menu-container__header">
+      <img [src]="logo.src" [alt]="logo.alt" data-testid="logo-photo" />
+    </header>
+  }
+
+  <ion-tab-group
+    size="md"
+    direction="vertical"
+    border="left"
+    [tabs]="options()"
+    (tabSelected)="changeTab($event)">
+  </ion-tab-group>
+
+  <div class="ion-menu-container__footer">
+    <div>
+      @if (profile().imageUrl) {
+        <ion-avatar
+          data-testid="avatar-photo"
+          [type]="avatarType()"
+          [image]="profile().imageUrl"
+          size="md">
+        </ion-avatar>
+      } @else {
+        <ion-avatar
+          data-testid="avatar-initials"
+          [type]="avatarType()"
+          [value]="profile().name"
+          size="md">
+        </ion-avatar>
+      }
+
+      <span>{{ profile().name }}</span>
+    </div>
+    <ion-button
+      label="Sair"
+      type="ghost"
+      size="md"
+      [icon]="{ type: 'out', rightPosition: true }"
+      (ionOnClick)="logout()">
+    </ion-button>
+  </div>
+</div>

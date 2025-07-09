@@ -1,15 +1,18 @@
 import { render, screen } from '@testing-library/angular';
 import { IonSpinnerComponent } from './spinner.component';
-import { IonSpinnerColor } from './types';
+import { IonSpinnerColor, IonSpinnerProps } from './types';
 
 const colors: IonSpinnerColor[] = ['primary', 'secondary', 'danger'];
-const defaultProps: IonSpinnerComponent = { color: 'primary', size: 24 };
+const defaultProps: Partial<IonSpinnerProps> = {
+  color: 'primary',
+  size: 24,
+};
 
 const sut = async (
-  customProps: IonSpinnerComponent = defaultProps
+  customProps: Partial<IonSpinnerProps> = defaultProps
 ): Promise<void> => {
   await render(IonSpinnerComponent, {
-    componentProperties: customProps,
+    componentInputs: { ...customProps },
   });
 };
 describe('SpinnerComponent', () => {
@@ -28,7 +31,7 @@ describe('SpinnerComponent', () => {
     }
   );
 
-  it('should render SpinnerComponent with custom color', async () => {
+  it('should render SpinnerComponent with a custom color', async () => {
     const customColor = '#c05bff';
     await sut({ ...defaultProps, customColor });
     expect(screen.getByTestId('ion-spinner')).toHaveStyle({

@@ -1,21 +1,21 @@
 <div
   id="ion-tag"
   data-testid="ion-tag"
-  [class]="getTagType()"
+  [class]="tagType()"
   [style.background]="getTagColorAndBackground() + '1A'"
   [style.border-color]="getTagColorAndBackground()">
-  @if (icon) {
+  @if (icon(); as iconType) {
     <ion-icon
       data-testid="ion-tag-icon"
       [size]="12"
-      [type]="icon"
+      [type]="iconType"
       [class.tag-icon]="!getTagColorAndBackground()"
       [color]="getTagColorAndBackground()"></ion-icon>
   }
   <label
     for="ion-tag"
     data-testid="ion-tag-label"
-    [textContent]="label"
+    [textContent]="label()"
     [style.color]="getTagColorAndBackground()">
   </label>
 </div>

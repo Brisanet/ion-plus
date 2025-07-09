@@ -1,11 +1,11 @@
 <section data-testid="ion-accordion">
-  @for (accordion of accordions; track accordion.data; let i = $index) {
+  @for (accordion of accordions(); track $index; let i = $index) {
     <ion-accordion-item
       [show]="accordion.show"
+      (showChange)="toggle(i)"
       [data]="accordion"
-      [templateHeader]="templateHeader"
-      (activeChange)="toggle(i)">
-      @if (templateBody) {
+      [templateHeader]="templateHeader()">
+      @if (templateBody(); as templateBody) {
         <ng-container
           [ngTemplateOutlet]="templateBody"
           [ngTemplateOutletContext]="generateContext(accordion)" />

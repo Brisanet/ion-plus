@@ -7,7 +7,7 @@ const meta: Meta<IonTabComponent> = {
   title: 'Ion/Navigation/Tab',
   component: IonTabComponent,
   tags: ['autodocs'],
-  render: (args: IonTabComponent) => ({
+  render: args => ({
     props: {
       ...args,
     },
@@ -69,5 +69,5 @@ type Story = StoryObj<IonTabComponent>;
 export const Default: Story = {
   args: {
     label: 'Custom label',
-  } as IonTabComponent,
+  },
 };

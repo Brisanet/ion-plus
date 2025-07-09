@@ -1,43 +1,51 @@
 import {
+  ChangeDetectionStrategy,
   Component,
-  ElementRef,
-  HostBinding,
-  Input,
-  OnInit,
-  Renderer2,
-  inject,
+  computed,
+  input,
 } from '@angular/core';
+import { IonIconComponent } from '../icon';
 import { IonBadgeProps } from './types';
+
+const ICON_SIZE = {
+  xs: 0,
+  sm: 12,
+  md: 16,
+};
 
 @Component({
   selector: 'ion-badge',
-  standalone: true,
+  imports: [IonIconComponent],
   templateUrl: './badge.component.html',
   styleUrls: ['./badge.component.scss'],
+  host: {
+    '[attr.data-type]': 'type()',
+    '[class.ion-dot-badge]': 'dot()',
+    '[attr.data-testid]': `'ion-badge-' + label()`,
+  },
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class IonBadgeComponent implements OnInit {
-  @HostBinding('[attr.data-type]')
-  @Input()
-  type: IonBadgeProps['type'] = 'primary';
-  @Input({ transform: handleLabel, required: true })
-  label!: IonBadgeProps['label'];
+export class IonBadgeComponent {
+  dot = input(false, {
+    transform: (value: boolean | string) =>
+      typeof value === 'string' ? value === '' : value,
+  });
+  type = input<IonBadgeProps['type']>('primary');
+  label = input<IonBadgeProps['label']>('');
+  icon = input<IonBadgeProps['icon']>();
+  size = input<IonBadgeProps['size']>('xs');
+  status = input<IonBadgeProps['status']>('primary');
+  customColor = input<IonBadgeProps['customColor']>();
 
-  private renderer = inject(Renderer2);
-  private element = inject(ElementRef);
+  showLabel = computed(
+    () => this.label() && (!this.icon() || this.size() === 'xs')
+  );
+  showIcon = computed(() => !!this.icon() && this.size() !== 'xs');
+  iconSize = computed(() => ICON_SIZE[this.size()]);
+  displayLabel = computed(() => {
+    return Number(this.label()) > 99 ? '99+' : this.label();
+  });
 
-  ngOnInit(): void {
-    if (!String(this.label).trim()) {
-      throw new Error(`Label can't be empty!`);
-    }
-
-    this.renderer.setAttribute(
-      this.element.nativeElement,
-      'data-testid',
-      `ion-badge-${this.label}`
-    );
-  }
-}
-
-function handleLabel(value: string | number) {
-  return Number(value) > 99 ? '99+' : value;
+  defaultDotSize = 8;
+  defaultIconColor = '#FCFCFD';
 }

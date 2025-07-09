@@ -26,7 +26,7 @@ export interface IonLinkProps {
    * @example
    * <ion-link label="Link" />
    * */
-  label?: string;
+  label: string;
 
   /**
    * Link icon.
@@ -34,7 +34,7 @@ export interface IonLinkProps {
    * @example
    * <ion-link icon="box" />
    * */
-  icon?: IconType;
+  icon: IconType;
 
   /**
    * Link icon side. Can be 'left' or 'right'.
@@ -43,7 +43,7 @@ export interface IonLinkProps {
    * @example
    * <ion-link iconSide="left" />
    * */
-  iconSide?: IconSide;
+  iconSide: IconSide;
 
   /**
    * Link size. Can be 'sm' or 'md'.
@@ -52,7 +52,7 @@ export interface IonLinkProps {
    * @example
    * <ion-link size="md" />
    * */
-  size?: FontSize;
+  size: FontSize;
 
   /**
    * Link bold font.
@@ -61,7 +61,7 @@ export interface IonLinkProps {
    * @example
    * <ion-link bold=true />
    * */
-  bold?: boolean;
+  bold: boolean;
 
   /**
    * Link disabled.
@@ -70,7 +70,7 @@ export interface IonLinkProps {
    * @example
    * <ion-link disabled=true />
    * */
-  disabled?: boolean;
+  disabled: boolean;
 
   /**
    * Link target. Can be '_blank', '_self', '_parent' or '_top'.
@@ -79,7 +79,7 @@ export interface IonLinkProps {
    * @example
    * <ion-link target="_blank" />
    * */
-  target?: LinkTarget;
+  target: LinkTarget;
 
   /**
    * Link href.
@@ -87,7 +87,7 @@ export interface IonLinkProps {
    * @example
    * <ion-link link="https://www.google.com" />
    * */
-  link?: string;
+  link: string;
 
   /**
    * Link ionOnClick.

@@ -1,3 +1,5 @@
 import '@testing-library/jest-dom';
-import 'jest-preset-angular/setup-jest.js';
+import { setupZoneTestEnv } from 'jest-preset-angular/setup-env/zone';
+
+setupZoneTestEnv();
 window.open = jest.fn();

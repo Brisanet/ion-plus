@@ -1,28 +1,28 @@
 <section
   data-testid="ion-accordion-item"
   class="ion-accordion-item"
-  [class.ion-accordion-item--open]="show"
-  [class.ion-accordion-item--close]="!show"
+  [class.ion-accordion-item--open]="show()"
+  [class.ion-accordion-item--close]="!show()"
   tabindex="0">
   <button
     class="ion-accordion-item__header"
     data-testid="ion-accordion-item__header"
     (click)="toggle()">
     <div>
-      @if (templateHeader) {
+      @if (templateHeader(); as templateHeader) {
         <ng-container
           [ngTemplateOutlet]="templateHeader"
-          [ngTemplateOutletContext]="generateContext(data)" />
+          [ngTemplateOutletContext]="generateContext(data())" />
       }
     </div>
     <ion-icon
       class="ion-accordion-item__icon"
-      [class.ion-accordion-item__icon--rotate]="show"
+      [class.ion-accordion-item__icon--rotate]="show()"
       [type]="'semi-down'"
       [size]="iconSize" />
   </button>
 
-  @if (show) {
+  @if (show()) {
     <main
       class="ion-accordion-item__main"
       data-testid="ion-accordion-item__main">

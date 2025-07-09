@@ -1,24 +1,31 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { BreadcrumbItem, BreadcrumbProps } from './types';
-import { IconType, IonIconComponent } from '../icon';
 import { CommonModule } from '@angular/common';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  input,
+  output,
+} from '@angular/core';
+import { IonIconComponent, IonIconProps } from '../icon';
+import { BreadcrumbItem, BreadcrumbProps } from './types';
 
 @Component({
   selector: 'ion-breadcrumb',
-  standalone: true,
   imports: [CommonModule, IonIconComponent],
   templateUrl: './breadcrumb.component.html',
   styleUrl: './breadcrumb.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IonBreadcrumbComponent {
-  @Input() breadcrumbs!: BreadcrumbProps['breadcrumbItems'];
-  @Output() selected = new EventEmitter<BreadcrumbItem>();
+  breadcrumbs = input.required<BreadcrumbProps['breadcrumbItems']>();
+  selected = output<BreadcrumbItem>();
 
-  icon: IconType = 'right2';
+  icon: Pick<IonIconProps, 'type' | 'size'> = { type: 'right2', size: 16 };
 
-  onSelected(item: BreadcrumbItem): void {
-    if (item !== this.breadcrumbs[this.breadcrumbs.length - 1]) {
-      this.selected.emit(item);
+  onSelected(selectedBreadcrumb: BreadcrumbItem): void {
+    if (
+      selectedBreadcrumb !== this.breadcrumbs()[this.breadcrumbs().length - 1]
+    ) {
+      this.selected.emit(selectedBreadcrumb);
     }
   }
 }

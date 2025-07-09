@@ -1,12 +1,12 @@
 import { render, screen } from '@testing-library/angular';
 import { IonIconComponent } from './icon.component';
-import { Highlight, IonIconProps } from './types';
+import { IonIconProps } from './types';
 
 const sut = async (
-  customProps: IonIconProps = { type: 'trash' }
+  customProps: Partial<IonIconProps> = { type: 'trash' }
 ): Promise<HTMLElement> => {
   await render(IonIconComponent, {
-    componentProperties: customProps,
+    componentInputs: { ...customProps },
   });
   return document.getElementById('ion-icon-' + customProps.type)!;
 };
@@ -53,14 +53,14 @@ describe('IonIconComponent', () => {
         type: 'box',
         color: '#FF0016',
         size: iconSizes.sm,
-        highlight: Highlight.SIMPLE,
+        highlight: 'simple',
       });
 
       const containerWidth = screen.getByTestId('outside-container');
 
       expect(containerWidth).toHaveAttribute(
         'style',
-        `background-color: rgba(255, 0, 22, 0.102); width: ${
+        `background-color: rgba(255, 0, 22, 0.1); width: ${
           iconSizes.sm * 2
         }px; height: ${iconSizes.sm * 2}px;`
       );
@@ -73,14 +73,14 @@ describe('IonIconComponent', () => {
         type: 'left',
         color: '#FF0016',
         size: iconSizes.sm,
-        highlight: Highlight.DOUBLE,
+        highlight: 'double',
       });
 
       const containerWidth = screen.getByTestId('outside-container');
 
       expect(containerWidth).toHaveAttribute(
         'style',
-        `background-color: rgba(255, 0, 22, 0.102); width: ${
+        `background-color: rgba(255, 0, 22, 0.1); width: ${
           iconSizes.sm * 2.5
         }px; height: ${iconSizes.sm * 2.5}px;`
       );
@@ -91,14 +91,14 @@ describe('IonIconComponent', () => {
         type: 'box',
         color: '#FF0016',
         size: iconSizes.md,
-        highlight: Highlight.DOUBLE,
+        highlight: 'double',
       });
 
       const containerWidth = screen.getByTestId('outside-container');
 
       expect(containerWidth).toHaveAttribute(
         'style',
-        `background-color: rgba(255, 0, 22, 0.102); width: ${
+        `background-color: rgba(255, 0, 22, 0.1); width: ${
           iconSizes.md * 2.25
         }px; height: ${iconSizes.md * 2.25}px;`
       );
@@ -109,14 +109,14 @@ describe('IonIconComponent', () => {
         type: 'left',
         color: '#FF0016',
         size: iconSizes.sm,
-        highlight: Highlight.DOUBLE,
+        highlight: 'double',
       });
 
       const containerWidth = screen.getByTestId('inner-container');
 
       expect(containerWidth).toHaveAttribute(
         'style',
-        `background-color: rgba(255, 0, 22, 0.251); width: ${
+        `background-color: rgba(255, 0, 22, 0.25); width: ${
           iconSizes.sm * 1.75
         }px; height: ${iconSizes.sm * 1.75}px;`
       );
@@ -127,14 +127,14 @@ describe('IonIconComponent', () => {
         type: 'box',
         color: '#FF0016',
         size: iconSizes.md,
-        highlight: Highlight.DOUBLE,
+        highlight: 'double',
       });
 
       const containerWidth = screen.getByTestId('inner-container');
 
       expect(containerWidth).toHaveAttribute(
         'style',
-        `background-color: rgba(255, 0, 22, 0.251); width: ${
+        `background-color: rgba(255, 0, 22, 0.25); width: ${
           iconSizes.md * 1.5
         }px; height: ${iconSizes.md * 1.5}px;`
       );

@@ -2,10 +2,10 @@ import type { Meta, StoryObj } from '@storybook/angular';
 import { IonBadgeComponent } from '../lib/badge';
 
 const meta: Meta<IonBadgeComponent> = {
-  title: 'Ion/Data Display/Badge',
+  title: 'Ion/Data Display/Badge/Value',
   component: IonBadgeComponent,
   tags: ['autodocs'],
-  render: (args: IonBadgeComponent) => ({
+  render: args => ({
     props: {
       ...args,
     },
@@ -24,10 +24,13 @@ const meta: Meta<IonBadgeComponent> = {
       },
       description: 'Define o estilo do badge.',
     },
+    dot: {
+      description: 'Se verdadeiro, a badge será exibida como um ponto.',
+    },
   },
 };
-
 export default meta;
+
 type Story = StoryObj<IonBadgeComponent>;
 export const Default: Story = {
   args: {

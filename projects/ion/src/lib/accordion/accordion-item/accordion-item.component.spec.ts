@@ -1,9 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { fireEvent, render, screen } from '@testing-library/angular';
-import { SafeAny } from '../../utils/safe-any';
-import { IonAccordionItemProps } from '../types';
+import { fireEvent, screen } from '@testing-library/angular';
 import { IonAccordionItemComponent } from './accordion-item.component';
 
 @Component({
@@ -63,25 +61,5 @@ describe('IonAccordionItem', () => {
     fireEvent.click(header);
     fixture.detectChanges();
     expect(screen.queryByTestId('ion-accordion-item__main')).not.toBeTruthy();
-  });
-});
-
-describe('IonAccordionItem - throw an error', () => {
-  const sut = async (
-    customProps: IonAccordionItemProps = {} as SafeAny
-  ): Promise<void> => {
-    await render(IonAccordionItemComponent, {
-      componentProperties: { ...customProps },
-    });
-  };
-
-  it('should throw an error when templateHeader propertie do not exist', async () => {
-    try {
-      await sut();
-    } catch (error: SafeAny) {
-      expect(error.message).toBe(
-        'The templateHeader propertie were not set correctly'
-      );
-    }
   });
 });

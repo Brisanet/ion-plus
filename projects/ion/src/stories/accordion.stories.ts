@@ -1,3 +1,4 @@
+import { action } from '@storybook/addon-actions';
 import type { Meta, StoryObj } from '@storybook/angular';
 
 import type { AccordionItem } from '../lib/accordion';
@@ -20,20 +21,26 @@ const accordions: AccordionItem[] = [
   },
 ];
 
+export const actionsData = {
+  activeChange: action('activeChange'),
+};
+
 const meta: Meta<IonAccordionComponent> = {
   title: 'Ion/Data Display/Accordion',
   component: IonAccordionComponent,
   tags: ['autodocs'],
-  render: (args: IonAccordionComponent) => ({
+  render: args => ({
     props: {
       ...args,
+      activeChange: actionsData.activeChange,
     },
     template: `
       <ion-accordion
       [accordions]="accordions"
-      [modeAccordion]="modeAccordion || true"
+      [modeAccordion]="modeAccordion"
       [templateHeader]="customHeader"
       [templateBody]="customBody"
+      (activeChange)="activeChange($event)"
     >
     </ion-accordion>
 
@@ -87,12 +94,12 @@ type Story = StoryObj<IonAccordionComponent>;
 export const Default: Story = {
   args: {
     accordions,
-  } as IonAccordionComponent,
+  },
 };
 
 export const AccordionWithModeAccordionFalse: Story = {
   args: {
     accordions,
     modeAccordion: false,
-  } as IonAccordionComponent,
+  },
 };

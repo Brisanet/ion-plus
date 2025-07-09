@@ -1,13 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 import { IonTabGroupComponent } from '../lib/tab-group';
-import type { IonTabGroupProps } from '../lib/tab-group';
 import { iconsPaths } from '../public-api';
 
-const tabs: IonTabGroupProps['tabs'] = [];
+const tabs = [];
 for (let index = 1; index <= 8; index++) {
   tabs.push({
     label: 'Tab ' + index,
-
     selected: false,
   });
 }
@@ -16,7 +14,7 @@ const meta: Meta<IonTabGroupComponent> = {
   title: 'Ion/Navigation/TabGroup',
   component: IonTabGroupComponent,
   tags: ['autodocs'],
-  render: (args: IonTabGroupComponent) => ({
+  render: args => ({
     props: {
       ...args,
     },
@@ -53,7 +51,7 @@ const meta: Meta<IonTabGroupComponent> = {
       defaultValue: { summary: `sm` },
       description: 'Tamanho da tab. Pode ser `sm`, `md` ou `lg`.',
     },
-    selected: {
+    tabSelected: {
       action: { handles: 'click' },
       description:
         'Emite um evento quando alguma tab é clicada. Caso a tab esteja desabilitada, nenhum evento será disparado.',
@@ -67,20 +65,20 @@ type Story = StoryObj<IonTabGroupComponent>;
 export const Horizontal: Story = {
   args: {
     tabs,
-  } as IonTabGroupComponent,
+  },
 };
 
 export const HorizontalDisabled: Story = {
   args: {
-    tabs: [...tabs, { label: 'disabled tab', disabled: true }],
-  } as IonTabGroupComponent,
+    tabs: [...tabs, { label: 'disabled tab', disabled: true, selected: false }],
+  },
 };
 
 export const Vertical: Story = {
   args: {
     tabs,
     direction: 'vertical',
-  } as IonTabGroupComponent,
+  },
 };
 
 export const VerticalWithBorderLeft: Story = {
@@ -88,7 +86,7 @@ export const VerticalWithBorderLeft: Story = {
     tabs,
     border: 'left',
     direction: 'vertical',
-  } as IonTabGroupComponent,
+  },
 };
 
 export const SelectedByDefault: Story = {
@@ -103,7 +101,7 @@ export const SelectedByDefault: Story = {
         selected: false,
       },
     ],
-  } as IonTabGroupComponent,
+  },
 };
 
 export const mediumSize: Story = {
@@ -111,7 +109,7 @@ export const mediumSize: Story = {
     tabs,
     direction: 'vertical',
     size: 'md',
-  } as IonTabGroupComponent,
+  },
 };
 
 export const largeSize: Story = {

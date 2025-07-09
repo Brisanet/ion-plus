@@ -1,32 +1,33 @@
+import { CommonModule } from '@angular/common';
 import {
+  ChangeDetectionStrategy,
   Component,
-  EventEmitter,
-  Input,
   OnChanges,
-  Output,
   SimpleChanges,
+  input,
+  model,
+  output,
 } from '@angular/core';
 import { IonIconComponent } from '../../icon';
+import { IonSidebarItemComponent } from '../public-api';
 import { SidebarGroup } from '../types';
 import { selectItemByIndex, unselectAllItems } from '../utils';
-import { CommonModule } from '@angular/common';
-import { IonSidebarItemComponent } from '../public-api';
 
 @Component({
-  standalone: true,
   imports: [CommonModule, IonSidebarItemComponent, IonIconComponent],
   selector: 'ion-sidebar-group',
   templateUrl: './sidebar-group.component.html',
   styleUrls: ['./sidebar-group.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IonSidebarGroupComponent implements OnChanges {
-  @Input() title: SidebarGroup['title'] = '';
-  @Input({ required: true }) icon!: SidebarGroup['icon'];
-  @Input() items: SidebarGroup['items'] = [];
-  @Input() selected: SidebarGroup['selected'] = false;
-  @Input() haveGroupAction: SidebarGroup['haveGroupAction'] = false;
-  @Output() ionOnClick = new EventEmitter();
-  @Output() ionOnGroupClick = new EventEmitter();
+  title = input<SidebarGroup['title']>('');
+  icon = input.required<SidebarGroup['icon']>();
+  items = input<SidebarGroup['items']>([]);
+  selected = model<SidebarGroup['selected']>(false);
+  haveGroupAction = input<SidebarGroup['haveGroupAction']>(false);
+  selectedChange = output<boolean>();
+  groupSelectedChanged = output();
 
   public closed = true;
 
@@ -35,18 +36,18 @@ export class IonSidebarGroupComponent implements OnChanges {
   }
 
   public itemSelected(itemIndex: number): void {
-    this.selected = true;
-    selectItemByIndex(this.items, itemIndex);
-    this.ionOnClick.emit();
+    this.selected.set(true);
+    selectItemByIndex(this.items(), itemIndex);
+    this.selectedChange.emit(true);
   }
 
   public groupSelected(): void {
-    this.ionOnGroupClick.emit();
+    this.groupSelectedChanged.emit();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (this.selectedChangedToFalse(changes)) {
-      unselectAllItems(this.items);
+      unselectAllItems(this.items());
     }
   }
 

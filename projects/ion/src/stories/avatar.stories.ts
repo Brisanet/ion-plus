@@ -1,13 +1,14 @@
+/* eslint-disable */
 import type { Meta, StoryObj } from '@storybook/angular';
 
-import { AvatarType, IonAvatarComponent } from '../lib/avatar';
+import { IonAvatarComponent } from '../lib/avatar';
 import { DefaultImageDirective } from '../lib/avatar/defaultImage.directive';
 
 const meta: Meta<IonAvatarComponent> = {
   title: 'Ion/Data Display/Avatar',
   component: IonAvatarComponent,
   tags: ['autodocs'],
-  render: (args: IonAvatarComponent) => ({
+  render: args => ({
     props: {
       ...args,
     },
@@ -56,7 +57,7 @@ type Story = StoryObj<IonAvatarComponent>;
 
 export const Initials: Story = {
   args: {
-    type: AvatarType.initials,
+    type: 'initials',
     size: 'md',
     value: 'Anakin Skywalker',
   },
@@ -64,7 +65,7 @@ export const Initials: Story = {
 
 export const Photo: Story = {
   args: {
-    type: AvatarType.photo,
+    type: 'photo',
     size: 'md',
     image:
       'https://hips.hearstapps.com/hmg-prod/images/is-anakin-skywalker-in-ahsoka-hayden-christensen-star-wars-news-64e37d3227aec.png?crop=0.468xw:0.827xh;0.532xw,0.0510xh&resize=1200:*',
@@ -73,7 +74,7 @@ export const Photo: Story = {
 
 export const Icon: Story = {
   args: {
-    type: AvatarType.icon,
+    type: 'icon',
     size: 'md',
     icon: 'union',
   },
@@ -81,7 +82,7 @@ export const Icon: Story = {
 
 export const ErrorImage: Story = {
   args: {
-    type: AvatarType.photo,
+    type: 'photo',
     size: 'md',
     image:
       'https://hips..com/hmg-prod/images/is-anakin-skywalker-in-ahsoka-hayden-christensen-star-wars-news-64e37d3227aec.png?crop=0.468xw:0.827xh;0.532xw,0.0510xh&resize=1200:*',

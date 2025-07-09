@@ -1,13 +1,13 @@
 import { render, screen } from '@testing-library/angular';
 import { IonTagComponent } from './tag.component';
 import { IonIconComponent } from '../icon';
-import { IonTagInterface } from './types';
+import { IonTagProps } from './types';
 
-const tagDefault: IonTagInterface = {
+const tagDefault = {
   label: 'Texto aqui',
 };
 
-const tagStatus: IonTagInterface['status'][] = [
+const tagStatus: IonTagProps['status'][] = [
   'info',
   'negative',
   'neutral',
@@ -15,7 +15,7 @@ const tagStatus: IonTagInterface['status'][] = [
   'warning',
 ];
 
-const tagIcon: IonTagInterface['color'][] = [
+const tagIcon: IonTagProps['color'][] = [
   'access2',
   'alert',
   'box-plus',
@@ -25,10 +25,10 @@ const tagIcon: IonTagInterface['color'][] = [
 
 const tagColors = ['#be531c', '#ab2328', '#572d2d', '#6666ff', '#cc66ff'];
 
-const sut = async (props: IonTagInterface = tagDefault) => {
+const sut = async (props: Partial<IonTagProps> = tagDefault) => {
   return await render(IonTagComponent, {
     imports: [IonIconComponent],
-    componentProperties: { ...props },
+    componentInputs: { ...props },
   });
 };
 

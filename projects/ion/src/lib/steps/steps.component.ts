@@ -1,86 +1,71 @@
 import { CommonModule } from '@angular/common';
 import {
+  ChangeDetectionStrategy,
   Component,
-  EventEmitter,
-  Input,
-  OnChanges,
-  OnInit,
-  Output,
-  SimpleChanges,
+  computed,
+  effect,
+  input,
+  model,
+  output,
 } from '@angular/core';
 import { IonIconComponent } from '../icon';
-import { IonStepsProps, Status, Step, StepStatusType } from './types';
+import { IonStepsProps, Status, StatusType } from './types';
 
 @Component({
-  standalone: true,
   selector: 'ion-steps',
   imports: [CommonModule, IonIconComponent],
   templateUrl: './steps.component.html',
   styleUrls: ['./steps.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class IonStepsComponent implements OnInit, OnChanges {
-  @Input() current: IonStepsProps['current'] = 1;
-  @Input({ required: true }) steps!: IonStepsProps['steps'];
-  @Input() disabled: IonStepsProps['disabled'] = false;
-  @Input() clickable: IonStepsProps['clickable'] = false;
-  @Output() indexChange: IonStepsProps['indexChange'] =
-    new EventEmitter<number>();
+export class IonStepsComponent {
+  steps = input.required<IonStepsProps['steps']>();
+  current = model<IonStepsProps['current']>(1);
+  currentChange = output<IonStepsProps['current']>();
+  disabled = input<IonStepsProps['disabled']>(false);
+  clickable = input<IonStepsProps['clickable']>(false);
+
+  constructor() {
+    effect(
+      () => {
+        if (this.current() < this.FIRST_STEP) this.current.set(this.FIRST_STEP);
+        if (this.current() > this.steps().length)
+          this.current.set(this.steps().length);
+      },
+      { allowSignalWrites: true }
+    );
+  }
+
+  displaySteps = computed(() => {
+    const steps = this.steps().map((step, index) => ({
+      ...step,
+      index: index + 1,
+      status:
+        this.isFirstComputed && step.status
+          ? step.status
+          : this.stepStatus(index + 1, this.current()),
+    }));
+    this.isFirstComputed = false;
+    return steps;
+  });
+
   public FIRST_STEP = 1;
-  private firstCatchStatus = true;
+  public isFirstComputed = true;
 
-  ngOnInit(): void {
-    this.generateIndexesForStep();
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    const { current } = changes;
-    if (current && !current.firstChange) {
-      this.changeStep(current.currentValue);
-    }
-  }
-
-  public handleClick(index: number | undefined): void {
-    if (index && this.clickable && !this.disabled) {
+  public handleClick(index?: number): void {
+    if (index && this.clickable() && !this.disabled()) {
       this.goToStep(index);
     }
   }
 
   private goToStep(index: number) {
-    this.indexChange.emit(index);
-    this.changeStep(index);
+    this.current.set(index);
+    this.currentChange.emit(index);
   }
 
-  private stepStatus(step: Step, currentIndex: number): StepStatusType {
-    if (step.index && step.index < currentIndex) return Status.checked;
-    if (step.index === currentIndex) return Status.selected;
+  private stepStatus(stepIndex: number, currentIndex: number): StatusType {
+    if (stepIndex && stepIndex < currentIndex) return Status.checked;
+    if (stepIndex === currentIndex) return Status.selected;
     return Status.default;
-  }
-
-  private checkStartedStatus(step: Step, currentIndex: number): StepStatusType {
-    return step.status ? step.status : this.stepStatus(step, currentIndex);
-  }
-
-  private changeStep(currentIndex: number): void {
-    if (currentIndex < 1 || currentIndex > this.steps.length) {
-      return;
-    }
-
-    this.steps = this.steps.map(step => {
-      return {
-        ...step,
-        status: this.firstCatchStatus
-          ? this.checkStartedStatus(step, currentIndex)
-          : this.stepStatus(step, currentIndex),
-      };
-    });
-
-    this.firstCatchStatus = false;
-  }
-
-  private generateIndexesForStep(): void {
-    this.steps.forEach((step, index) => {
-      step.index = index + 1;
-    });
-    this.changeStep(this.current);
   }
 }

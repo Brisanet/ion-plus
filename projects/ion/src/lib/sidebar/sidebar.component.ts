@@ -1,13 +1,12 @@
-import { Component, Input } from '@angular/core';
-import { callItemAction, selectItemByIndex, unselectAllItems } from './utils';
-import { IonSidebarProps } from './types';
+import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { IonButtonComponent } from '../button';
 import { IonSidebarGroupComponent } from './sidebar-group/sidebar-group.component';
 import { IonSidebarItemComponent } from './sidebar-item/sidebar-item.component';
-import { CommonModule } from '@angular/common';
+import { IonSidebarProps } from './types';
+import { callItemAction, selectItemByIndex, unselectAllItems } from './utils';
 
 @Component({
-  standalone: true,
   imports: [
     IonButtonComponent,
     IonSidebarItemComponent,
@@ -17,12 +16,12 @@ import { CommonModule } from '@angular/common';
   selector: 'ion-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IonSidebarComponent {
-  @Input() logo!: IonSidebarProps['logo'];
-  @Input() logoAction?: IonSidebarProps['logoAction'];
-  @Input() items: IonSidebarProps['items'] = [];
-  @Input() closeOnSelect: IonSidebarProps['closeOnSelect'] = false;
+  logoConfig = input<IonSidebarProps['logoConfig']>();
+  items = input<IonSidebarProps['items']>([]);
+  closeOnSelect = input<IonSidebarProps['closeOnSelect']>(false);
 
   public closed = true;
 
@@ -31,30 +30,30 @@ export class IonSidebarComponent {
   }
 
   public itemSelected(itemIndex: number): void {
-    selectItemByIndex(this.items, itemIndex);
-    if (this.closeOnSelect) {
+    selectItemByIndex(this.items(), itemIndex);
+    if (this.closeOnSelect()) {
       this.toggleSidebarVisibility();
     }
   }
 
   public itemOnGroupSelected(groupIndex: number): void {
-    unselectAllItems(this.items, groupIndex);
-    if (this.closeOnSelect) {
+    unselectAllItems(this.items(), groupIndex);
+    if (this.closeOnSelect()) {
       this.toggleSidebarVisibility();
     }
   }
 
   public groupSelected(groupIndex: number): void {
-    unselectAllItems(this.items);
-    callItemAction(this.items, groupIndex);
+    unselectAllItems(this.items());
+    callItemAction(this.items(), groupIndex);
   }
 
   public handleLogoClick(): void {
-    if (this.logoAction) {
-      this.logoAction();
+    if (this.logoConfig()?.action) {
+      this.logoConfig()!.action();
     }
 
-    if (this.closeOnSelect) {
+    if (this.closeOnSelect()) {
       this.toggleSidebarVisibility();
     }
   }

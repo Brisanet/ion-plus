@@ -1,14 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 
+import { iconsPaths } from '../lib/icon';
 import { IonIconComponent } from '../lib/icon/icon.component';
-import type { IonIconProps } from '../lib/icon';
-import { Highlight, iconsPaths } from '../lib/icon';
 
 const meta: Meta<IonIconComponent> = {
   title: 'Ion/Design Tokens/Icons',
   component: IonIconComponent,
   tags: ['autodocs'],
-  render: (args: IonIconComponent) => ({
+  render: args => ({
     props: {
       ...args,
     },
@@ -34,7 +33,7 @@ const meta: Meta<IonIconComponent> = {
         'O parâmetro `color`  é opcional e permite personalizar a cor do ícone. Você pode passar um valor de cor diretamente, como um código hexadecimal (#RRGGBB) ou um nome de cor. Certifique-se de fornecer um valor válido para garantir que a cor seja aplicada corretamente.',
     },
     highlight: {
-      options: Highlight,
+      options: ['simple', 'double', 'none'],
       control: { type: 'select' },
       description:
         'O parâmetro `highlight` é opcional e destaca o ícone de alguma forma.',
@@ -50,6 +49,6 @@ export const Default: Story = {
     type: 'pencil',
     size: 24,
     color: '#282b33',
-    highlight: Highlight.NONE,
-  } as IonIconProps,
+    highlight: 'none',
+  },
 };

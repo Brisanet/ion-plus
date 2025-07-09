@@ -13,7 +13,7 @@ const meta: Meta<IonAlertComponent> = {
   title: 'Ion/Feedback/Alert',
   component: IonAlertComponent,
   tags: ['autodocs'],
-  render: (args: IonAlertComponent) => ({
+  render: args => ({
     props: {
       ...args,
     },
@@ -37,20 +37,17 @@ const meta: Meta<IonAlertComponent> = {
     closable: {
       defaultValue: { summary: 'true' },
       control: { type: 'boolean' },
-      options: true,
       description: 'O parâmetro `closable` indica se o alerta pode ser fechado',
     },
     hideBackground: {
       defaultValue: { summary: 'true' },
       control: { type: 'boolean' },
-      options: true,
       description:
         'O parâmetro `hideBackground` indica se deve esconder o background do alerta',
     },
     noRadius: {
       defaultValue: { summary: 'false' },
       control: { type: 'boolean' },
-      options: true,
       description:
         'O parâmetro `noRadius` indica se deve remover o border radius',
     },
@@ -61,7 +58,8 @@ export default meta;
 type Story = StoryObj<IonAlertComponent>;
 export const Default: Story = {
   args: {
-    message: 'Exemplo de Alerta',
+    message: 'Exemplo de Alerta teste',
+    type: 'info',
   },
 };
 

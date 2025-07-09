@@ -1,17 +1,17 @@
 <section
   data-testid="sidebar-group"
   class="sidebar-group"
-  [class.sidebar-group--selected]="selected"
+  [class.sidebar-group--selected]="selected()"
   [class.sidebar-group--opened]="!closed">
   <ng-container
     [ngTemplateOutlet]="
-      haveGroupAction ? headerWithAction : headerClickable
+      haveGroupAction() ? headerWithAction : headerClickable
     "></ng-container>
   <ul
     class="sidebar-group__items"
     data-testid="sidebar-group__items"
-    [hidden]="closed && !selected">
-    @for (item of items; let i = $index; track item.title) {
+    [hidden]="closed && !selected()">
+    @for (item of items(); let i = $index; track item.title) {
       <ion-sidebar-item
         [attr.data-testid]="'sidebar-group__item-' + i"
         [title]="item.title"
@@ -19,7 +19,7 @@
         [selected]="!!item.selected"
         [disabled]="!!item.disabled"
         [hidden]="closed && !item.selected"
-        (ionOnClick)="itemSelected(i)"></ion-sidebar-item>
+        (selectedChange)="itemSelected(i)"></ion-sidebar-item>
     }
   </ul>
 </section>
@@ -31,8 +31,8 @@
     <button (click)="groupSelected()">
       <ion-icon
         data-testid="sidebar-group__title-icon"
-        [type]="icon"></ion-icon>
-      <span data-testid="sidebar-group__title">{{ title }}</span>
+        [type]="icon()"></ion-icon>
+      <span data-testid="sidebar-group__title">{{ title() }}</span>
     </button>
     <ion-icon
       class="sidebar-group__toggle-icon"
@@ -51,8 +51,8 @@
     <div>
       <ion-icon
         data-testid="sidebar-group__title-icon"
-        [type]="icon"></ion-icon>
-      <span data-testid="sidebar-group__title">{{ title }}</span>
+        [type]="icon()"></ion-icon>
+      <span data-testid="sidebar-group__title">{{ title() }}</span>
     </div>
     <ion-icon
       class="sidebar-group__toggle-icon"

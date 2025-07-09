@@ -1,32 +1,56 @@
-# IonUp
+<img src="projects/ion/src/stories/assets/capa.svg">
+
+### Ion Plus
 
 <a href="https://codeclimate.com/github/Brisanet/ion-plus/maintainability"><img src="https://api.codeclimate.com/v1/badges/193c2285550e3150ca4c/maintainability" /></a>
 <a href="https://codeclimate.com/github/Brisanet/ion-plus/test_coverage"><img src="https://api.codeclimate.com/v1/badges/193c2285550e3150ca4c/test_coverage" /></a>
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.10.
+This project is a version of the [Ion](https://github.com/Brisanet/ion) with an updated Angular (v18.0.2).
 
-To run this project, you will need to use [node v.20.10.0](https://nodejs.org/en/)
+To run this project, you will need to use [Node v20.11.1](https://nodejs.org/en/)
 
-## Development server
+## Install in your project
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+```
+npm i @brisanet/ion-plus
+```
 
-## Code scaffolding
+## Install and run project
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+To run this project, You will need to use [Node v20.11.1](https://nodejs.org/en/)
 
-## Build
+- Run `git clone https://github.com/Brisanet/ion-plus.git` to get a copy of the repository;
+- Run `yarn install` to install all dependencies for the project;
+- Run `yarn run storybook` to open the storybook in your localhost.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Install, Configure and Use Prettier
 
-## Running unit tests
+Configure Prettier Extension by Vscode
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- Install Prettier - Code formatter extension;
+- Go to `Settings(JSON)` ;
+- Set `"editor.formatOnSave"` true;
+- Set `"prettier.eslintIntegration"` true.
 
-## Running end-to-end tests
+## Commit pattern
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Commits should follow the [convention](https://conventionalcommits.org/).
+We have the following types:
 
-## Further help
+- feat: A new feature;
+- fix: A bug fix;
+- docs: Documentation only changes;
+- style: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc);
+- refactor: A code change that neither fixes a bug nor adds a feature;
+- test: Adding missing tests or correcting existing ones;
+- chore: Changes to the build process or auxiliary tools and libraries such as documentation generation;
+- perf: A code that improves performance;
+- ci: Changes to the CI/CD process;
+- build: Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm);
+- temp: Temporary commits that won't be included in your CHANGELOG.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Example: `feat: add feature #issue_id`
+
+## Deploy 🚀
+
+<a href="https://main--65b90016a3e44767de916261.chromatic.com/"> Storybook </a>

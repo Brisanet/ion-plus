@@ -1,9 +1,9 @@
 import { fireEvent, render, screen } from '@testing-library/angular';
 
+import { IonIconComponent } from '../icon';
+import { SafeAny } from '../utils/safe-any';
 import { IonBreadcrumbComponent } from './breadcrumb.component';
 import { BreadcrumbItem, BreadcrumbProps } from './types';
-import { SafeAny } from '../utils/safe-any';
-import { IonIconComponent } from '../icon';
 
 const selectEvent = jest.fn();
 
@@ -29,10 +29,14 @@ const sut = async (
     },
   } as SafeAny
 ): Promise<void> => {
+  const { selected, ...rest } = customProps;
   await render(IonBreadcrumbComponent, {
-    componentProperties: {
+    componentInputs: {
       breadcrumbs: items,
-      ...customProps,
+      ...rest,
+    },
+    componentOutputs: {
+      selected: selected as SafeAny,
     },
     imports: [IonIconComponent],
   });
@@ -44,13 +48,13 @@ describe('BreadcrumbComponent', () => {
   });
 
   it.each(items)(
-    'should render %s in breadcrumb',
+    'should render $label in breadcrumb',
     async (link: BreadcrumbItem) => {
       expect(screen.getByText(link.label)).toBeInTheDocument();
     }
   );
 
-  it('should render recursos in breadcrmb', async () => {
+  it("should render 'recursos' in breadcrumbs", async () => {
     expect(screen.getByText('Recursos')).toHaveClass('ion-breadcrumbs__item');
   });
 

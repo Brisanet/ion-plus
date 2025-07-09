@@ -1,1 +1,22 @@
-<span>{{ label }}</span>
+@if (dot()) {
+  <div
+    data-testid="ion-dot-badge"
+    class="dot"
+    [attr.dot-status]="status()"
+    [style.width.px]="showIcon() ? iconSize() : defaultDotSize"
+    [style.height.px]="showIcon() ? iconSize() : defaultDotSize"
+    [style.background-color]="customColor()"
+    [class.has-icon]="showIcon()">
+    @if (showIcon()) {
+      <ion-icon
+        [type]="icon()!"
+        [size]="iconSize()"
+        [color]="defaultIconColor" />
+    }
+  </div>
+  @if (showLabel()) {
+    <span>{{ label() }}</span>
+  }
+} @else {
+  <span>{{ displayLabel() }}</span>
+}

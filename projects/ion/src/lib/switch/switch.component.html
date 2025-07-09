@@ -1,11 +1,11 @@
 <button
-  [id]="key"
+  [id]="key()"
   data-testid="ion-switch"
   class="ion-switch"
-  [attr.name]="key"
-  [class.ion-switch--active]="value"
-  [class.ion-switch--inactive]="!value"
-  [disabled]="disabled"
-  (click)="handleClick(value)">
+  [attr.name]="key()"
+  [class.ion-switch--active]="value()"
+  [class.ion-switch--inactive]="!value()"
+  [disabled]="disabled()"
+  (click)="handleClick()">
   {{ '' }}
 </button>

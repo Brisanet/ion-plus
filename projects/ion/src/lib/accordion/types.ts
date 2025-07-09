@@ -25,7 +25,7 @@ export interface IonAccordionItemProps {
    * @example
    * <ion-accordion-item [data] = `data` />
    */
-  data?: Record<string, SafeAny>;
+  data: Record<string, SafeAny>;
 
   /**
    * Accordion show.
@@ -35,7 +35,7 @@ export interface IonAccordionItemProps {
    * @example
    * <ion-accordion-item show = false />
    */
-  show?: boolean;
+  show: boolean;
 
   /**
    * Accordion activeChange
@@ -84,7 +84,7 @@ export interface IonAccordionProps {
    * @example
    * <ion-accordion-item modeAccordion = true />
    */
-  modeAccordion?: boolean;
+  modeAccordion: boolean;
 
   /**
    * Accordion activeChange

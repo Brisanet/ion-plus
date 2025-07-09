@@ -1,8 +1,8 @@
 import { ComponentFixture } from '@angular/core/testing';
-import { IonAlertComponent, alertIconTypes } from './alert.component';
-import { IonAlertProps, IonAlertStatus } from './types';
 import { fireEvent, render, screen } from '@testing-library/angular';
+import { IonAlertComponent, alertIconTypes } from './alert.component';
 import { AlertCustomBodyComponent } from './mocks/alert-custom-body.component';
+import { IonAlertProps, IonAlertStatus } from './types';
 
 const types: Array<IonAlertStatus> = ['info', 'negative', 'success', 'warning'];
 
@@ -11,10 +11,10 @@ const defaultAlertConfig = {
 };
 
 const sut = async (
-  customProps: IonAlertProps
+  customProps: Partial<IonAlertProps>
 ): Promise<ComponentFixture<IonAlertComponent>> => {
   const { fixture } = await render(IonAlertComponent, {
-    componentProperties: { ...customProps },
+    componentInputs: { ...customProps },
   });
 
   return fixture;

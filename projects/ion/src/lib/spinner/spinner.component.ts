@@ -1,19 +1,19 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 import { IonSpinnerProps } from './types';
 
 @Component({
-  standalone: true,
   selector: 'ion-spinner',
   imports: [CommonModule],
   templateUrl: './spinner.component.html',
   styleUrls: ['./spinner.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IonSpinnerComponent {
-  @Input() size?: IonSpinnerProps['size'] = 24;
-  @Input() color: IonSpinnerProps['color'] = 'primary';
-  @Input() customColor?: IonSpinnerProps['customColor'];
-  @Input() text?: IonSpinnerProps['text'] = '';
-  @Input() textSize?: IonSpinnerProps['textSize'] = 'sm';
+  size = input<IonSpinnerProps['size']>(24);
+  color = input<IonSpinnerProps['color']>('primary');
+  customColor = input<IonSpinnerProps['customColor']>();
+  text = input<IonSpinnerProps['text']>('');
+  textSize = input<IonSpinnerProps['textSize']>('sm');
 }

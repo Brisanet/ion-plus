@@ -6,7 +6,7 @@ const meta: Meta<IonNoDataComponent> = {
   title: 'Ion/Data Display/No Data',
   component: IonNoDataComponent,
   tags: ['autodocs'],
-  render: (args: IonNoDataComponent) => ({
+  render: args => ({
     props: {
       ...args,
     },
@@ -31,6 +31,4 @@ const meta: Meta<IonNoDataComponent> = {
 
 export default meta;
 type Story = StoryObj<IonNoDataComponent>;
-export const Default: Story = {
-  args: {} as IonNoDataComponent,
-};
+export const Default: Story = {};

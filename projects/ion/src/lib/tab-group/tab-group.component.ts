@@ -1,51 +1,52 @@
 import { CommonModule } from '@angular/common';
 import {
+  ChangeDetectionStrategy,
   Component,
-  EventEmitter,
-  Input,
   OnChanges,
   OnInit,
-  Output,
   SimpleChanges,
+  input,
+  model,
+  output,
 } from '@angular/core';
 import { IonTabComponent } from '../tab/tab.component';
 import { BorderDirectionType } from '../utils/commonTypes';
 import { IonTabGroupProps, TabInGroup } from './types';
 
 @Component({
-  standalone: true,
   selector: 'ion-tab-group',
   imports: [CommonModule, IonTabComponent],
   templateUrl: './tab-group.component.html',
   styleUrls: ['./tab-group.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IonTabGroupComponent implements OnInit, OnChanges {
-  @Input({ required: true }) tabs!: IonTabGroupProps['tabs'];
-  @Input() direction: IonTabGroupProps['direction'] = 'horizontal';
-  @Input() border: IonTabGroupProps['border'] = 'bottom';
-  @Input() size: IonTabGroupProps['size'] = 'sm';
-  @Output() selected: IonTabGroupProps['selected'] =
-    new EventEmitter<TabInGroup>();
+  tabs = input.required<IonTabGroupProps['tabs']>();
+  direction = model<IonTabGroupProps['direction']>('horizontal');
+  border = model<IonTabGroupProps['border']>('bottom');
+  size = input<IonTabGroupProps['size']>('sm');
+
+  tabSelected = output<TabInGroup>();
 
   ngOnInit(): void {
-    this.border = this.getBorderByDirection(this.direction || 'horizontal');
-    this.direction = this.getDirectionByBorder(this.border);
+    this.border.set(this.getBorderByDirection(this.direction()));
+    this.direction.set(this.getDirectionByBorder(this.border()));
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     const { direction, border } = changes;
     if (direction) {
-      this.border = this.getBorderByDirection(this.direction || 'horizontal');
+      this.border.set(this.getBorderByDirection(this.direction()));
     }
     if (border) {
-      this.direction = this.getDirectionByBorder(this.border);
+      this.direction.set(this.getDirectionByBorder(this.border()));
     }
   }
 
-  public handleClick(tabSelected: TabInGroup): void {
+  public handleSelectedTab(tabSelected: TabInGroup): void {
     this.clearTabs();
     tabSelected.selected = true;
-    this.selected.emit(tabSelected);
+    this.tabSelected.emit(tabSelected);
   }
 
   private getBorderByDirection(
@@ -59,7 +60,7 @@ export class IonTabGroupComponent implements OnInit, OnChanges {
     };
 
     if (this.isBorderDirectionCorrect(direction)) {
-      return this.border;
+      return this.border();
     }
 
     return directions[direction];
@@ -77,25 +78,22 @@ export class IonTabGroupComponent implements OnInit, OnChanges {
       bottom: 'horizontal',
     };
 
-    return directions[border || 'bottom'];
+    return directions[border];
   }
 
   private isBorderDirectionCorrect(
     direction: IonTabGroupProps['direction']
   ): boolean {
-    if (!this.border) {
-      return false;
-    }
     const directions = {
-      horizontal: ['top', 'bottom'].includes(this.border),
-      vertical: ['left', 'right'].includes(this.border),
+      horizontal: ['top', 'bottom'].includes(this.border()),
+      vertical: ['left', 'right'].includes(this.border()),
     };
 
     return directions[direction];
   }
 
   private clearTabs(): void {
-    this.tabs.forEach(tab => {
+    this.tabs().forEach(tab => {
       tab.selected = false;
     });
   }

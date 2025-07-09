@@ -27,7 +27,7 @@ export interface IonButtonProps {
    * @example
    * <ion-button type = `secondary`/>
    */
-  type?: Type;
+  type: Type;
 
   /**
    * Button danger.
@@ -37,7 +37,7 @@ export interface IonButtonProps {
    * @example
    * <ion-button [danger] = false />
    */
-  danger?: boolean;
+  danger: boolean;
 
   /**
    * Button disabled
@@ -47,7 +47,7 @@ export interface IonButtonProps {
    * @example
    * <ion-button [disabled] = false />
    */
-  disabled?: boolean;
+  disabled: boolean;
 
   /**
    * Button loading
@@ -57,7 +57,7 @@ export interface IonButtonProps {
    * @example
    * <ion-button loading = false />
    */
-  loading?: boolean;
+  loading: boolean;
 
   /**
    * Button size.
@@ -67,7 +67,7 @@ export interface IonButtonProps {
    * @example
    * <ion-button size = `md`/>
    */
-  size?: Size;
+  size: Size;
 
   /**
    * Button icon
@@ -78,7 +78,7 @@ export interface IonButtonProps {
    * @example
    * <ion-button [icon]="{type: 'play', rightPosition: false}" />
    */
-  icon?: Icon;
+  icon: Icon;
 
   /**
    * Button shape
@@ -88,7 +88,7 @@ export interface IonButtonProps {
    * @example
    * <ion-button shape = `normal` />
    */
-  shape?: Shape;
+  shape: Shape;
 
   /**
    * Button ionOnClick

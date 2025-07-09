@@ -1,13 +1,13 @@
 <div data-testid="ion-avatar" class="ion-avatar">
-  @switch (type) {
+  @switch (type()) {
     @case ('initials') {
-      <span> {{ initials }}</span>
+      <span> {{ initials() }}</span>
     }
     @case ('icon') {
-      <ion-icon [type]="icon!"></ion-icon>
+      <ion-icon [type]="icon()"></ion-icon>
     }
     @case ('photo') {
-      <img [src]="image!" [default]="onErrorImage!" alt="avatar" />
+      <img [src]="image()" [default]="onErrorImage()" alt="avatar" />
     }
   }
 </div>

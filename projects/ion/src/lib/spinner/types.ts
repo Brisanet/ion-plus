@@ -14,31 +14,31 @@ export interface IonSpinnerProps {
    * @type {number}
    * @default 24
    * */
-  size?: number;
+  size: number;
 
   /**
    * Spinner color. Can be 'primary', 'secondary' or 'danger'.
    * @type {IonSpinnerColor}
    * @default 'primary'
    * */
-  color?: IonSpinnerColor;
+  color: IonSpinnerColor;
 
   /**
    * Custom spinner color.
    * @type {string}
    * */
-  customColor?: string;
+  customColor: string;
 
   /**
    * Spinner text.
    * @type {string}
    * */
-  text?: string;
+  text: string;
 
   /**
    * Spinner text size. Can be 'sm', 'md' or 'lg'.
    * @type {IonSpinnerTextSize}
    * @default 'sm'
    * */
-  textSize?: IonSpinnerTextSize;
+  textSize: IonSpinnerTextSize;
 }

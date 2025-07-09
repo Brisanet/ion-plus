@@ -1,14 +1,23 @@
+import { action } from '@storybook/addon-actions';
 import type { Meta, StoryObj } from '@storybook/angular';
 
 import { IonButtonComponent } from '../lib/button';
+
+export const actionsData = {
+  args: {
+    label: 'Button',
+  },
+  ionOnClick: action('ionOnClick'),
+};
 
 const meta: Meta<IonButtonComponent> = {
   title: 'Ion/Navigation/Button',
   component: IonButtonComponent,
   tags: ['autodocs'],
-  render: (args: IonButtonComponent) => ({
+  render: args => ({
     props: {
       ...args,
+      ionOnClick: actionsData.ionOnClick,
     },
   }),
   argTypes: {
@@ -16,7 +25,7 @@ const meta: Meta<IonButtonComponent> = {
       control: {
         type: 'text',
       },
-      description: 'Rótulo do botão. Obrigatório.',
+      description: 'Rótulo do botão.',
     },
     type: {
       control: {
@@ -84,14 +93,14 @@ type Story = StoryObj<IonButtonComponent>;
 export const Default: Story = {
   args: {
     label: 'Primary',
-  } as IonButtonComponent,
+  },
 };
 
 export const Secondary: Story = {
   args: {
     label: 'Secondary',
     type: 'secondary',
-  } as IonButtonComponent,
+  },
 };
 
 export const SecondaryWithIcon: Story = {
@@ -101,49 +110,49 @@ export const SecondaryWithIcon: Story = {
     icon: {
       type: 'left3',
     },
-  } as IonButtonComponent,
+  },
 };
 
 export const Ghost: Story = {
   args: {
     label: 'Ghost',
     type: 'ghost',
-  } as IonButtonComponent,
+  },
 };
 
 export const Dashed: Story = {
   args: {
     label: 'Dashed',
     type: 'dashed',
-  } as IonButtonComponent,
+  },
 };
 
 export const SizeSm: Story = {
   args: {
     label: 'Small',
     size: 'sm',
-  } as IonButtonComponent,
+  },
 };
 
 export const SizeMd: Story = {
   args: {
     label: 'Medium',
     size: 'md',
-  } as IonButtonComponent,
+  },
 };
 
 export const SizeLg: Story = {
   args: {
     label: 'Large',
     size: 'lg',
-  } as IonButtonComponent,
+  },
 };
 
 export const SizeXl: Story = {
   args: {
     label: 'Extra large',
     size: 'xl',
-  } as IonButtonComponent,
+  },
 };
 
 export const IconOnly: Story = {
@@ -151,7 +160,7 @@ export const IconOnly: Story = {
     icon: {
       type: 'pencil',
     },
-  } as IonButtonComponent,
+  },
 };
 
 export const DangerIconOnly: Story = {
@@ -160,17 +169,17 @@ export const DangerIconOnly: Story = {
       type: 'pencil',
     },
     danger: true,
-  } as IonButtonComponent,
+  },
 };
 
 export const LgSizeWithIcon: Story = {
   args: {
-    label: 'Delet',
+    label: 'Delete',
     icon: {
       type: 'trash',
     },
     size: 'lg',
-  } as IonButtonComponent,
+  },
 };
 
 export const OnlyIconLoading: Story = {
@@ -180,7 +189,7 @@ export const OnlyIconLoading: Story = {
     },
     shape: 'circle',
     loading: true,
-  } as IonButtonComponent,
+  },
 };
 
 export const WithIconLoading: Story = {
@@ -190,17 +199,17 @@ export const WithIconLoading: Story = {
       type: 'pencil',
     },
     loading: true,
-  } as IonButtonComponent,
+  },
 };
 
 export const DangerWithIcon: Story = {
   args: {
-    label: 'Delet',
+    label: 'Delete',
     icon: {
       type: 'trash',
     },
     danger: true,
-  } as IonButtonComponent,
+  },
 };
 
 export const WithRightSideIcon: Story = {
@@ -211,7 +220,7 @@ export const WithRightSideIcon: Story = {
       rightPosition: true,
     },
     danger: true,
-  } as IonButtonComponent,
+  },
 };
 
 export const NormalShape: Story = {
@@ -222,7 +231,7 @@ export const NormalShape: Story = {
       rightPosition: true,
     },
     shape: 'normal',
-  } as IonButtonComponent,
+  },
 };
 
 export const CircularShape: Story = {
@@ -233,7 +242,7 @@ export const CircularShape: Story = {
       rightPosition: true,
     },
     shape: 'circle',
-  } as IonButtonComponent,
+  },
 };
 
 export const RoundedShape: Story = {
@@ -244,5 +253,5 @@ export const RoundedShape: Story = {
       rightPosition: true,
     },
     shape: 'rounded',
-  } as IonButtonComponent,
+  },
 };

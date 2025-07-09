@@ -21,7 +21,7 @@ export interface IonTabProps {
    * @example
    * <ion-tab size = `sm`/>
    */
-  tabSize?: TabSize;
+  tabSize: TabSize;
 
   /**
    * Tab disabled
@@ -31,7 +31,7 @@ export interface IonTabProps {
    * @example
    * <ion-tab [disabled] = false />
    */
-  disabled?: boolean;
+  disabled: boolean;
 
   /**
    * Tab selected
@@ -41,7 +41,7 @@ export interface IonTabProps {
    * @example
    * <ion-tab [selected] = false />
    */
-  selected?: boolean;
+  selected: boolean;
 
   /**
    * Tab direction
@@ -51,7 +51,7 @@ export interface IonTabProps {
    * @example
    * <ion-tab [direction] = 'bottom' />
    */
-  direction?: Direction;
+  direction: Direction;
 
   /**
    * Tab icon
@@ -60,7 +60,7 @@ export interface IonTabProps {
    * @example
    * <ion-tab [iconType]="play" />
    */
-  iconType?: IconType;
+  iconType: IconType;
 
   /**
    * Tab with badge
@@ -69,5 +69,5 @@ export interface IonTabProps {
    * @example
    * <ion-tab [badge] = '5' />
    */
-  badge?: number;
+  badge: number;
 }

@@ -1,6 +1,6 @@
-import { EventEmitter } from '@angular/core';
+import { OutputEmitterRef } from '@angular/core';
 
-export type StepStatusType = 'default' | 'selected' | 'checked' | 'error';
+export type StatusType = 'default' | 'selected' | 'checked' | 'error';
 export type LineType = 'initial' | 'final';
 
 export enum Status {
@@ -45,7 +45,7 @@ export interface Step {
    * @example
    * <ion-steps steps = [{label: `label text`, status: `selected`}] />
    */
-  status?: StepStatusType;
+  status?: StatusType;
 }
 
 export type IonStepsProps = {
@@ -67,7 +67,7 @@ export type IonStepsProps = {
    * @example
    * <ion-steps [disabled] = false />
    */
-  disabled?: boolean;
+  disabled: boolean;
 
   /**
    * Set of steps
@@ -86,7 +86,7 @@ export type IonStepsProps = {
    * @example
    * <ion-steps [clickable] = false />
    */
-  clickable?: boolean;
+  clickable: boolean;
 
   /**
    * Steps indexChange
@@ -96,5 +96,5 @@ export type IonStepsProps = {
    * @example
    * <ion-steps (ionOnClik) = "yourFunction()"/>
    */
-  indexChange: EventEmitter<number>;
+  currentChange: OutputEmitterRef<number>;
 };

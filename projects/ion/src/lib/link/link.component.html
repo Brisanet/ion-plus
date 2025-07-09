@@ -1,11 +1,11 @@
-<span class="link-container" [class.link-container--disabled]="disabled">
-  @if (!link) {
+<span class="link-container" [class.link-container--disabled]="disabled()">
+  @if (!link()) {
     <button
       data-testid="ion-link"
       class="ion-link"
-      [class.ion-link--left-icon]="iconSide === 'left'"
-      [class.ion-link--icon-only]="!label || label === ''"
-      [attr.disabled]="disabled"
+      [class.ion-link--left-icon]="iconSide() === 'left'"
+      [class.ion-link--icon-only]="!label() || label() === ''"
+      [attr.disabled]="disabled()"
       (click)="onClick()">
       <ng-template *ngTemplateOutlet="link_content"></ng-template>
     </button>
@@ -13,11 +13,11 @@
     <a
       data-testid="ion-link"
       class="ion-link"
-      [class.ion-link--left-icon]="iconSide === 'left'"
-      [class.ion-link--icon-only]="!label || label === ''"
-      [attr.disabled]="disabled"
-      [target]="target"
-      [href]="link"
+      [class.ion-link--left-icon]="iconSide() === 'left'"
+      [class.ion-link--icon-only]="!label() || label() === ''"
+      [attr.disabled]="disabled()"
+      [target]="target()"
+      [href]="link()"
       rel="noreferrer">
       <ng-template *ngTemplateOutlet="link_content"></ng-template>
     </a>
@@ -25,18 +25,18 @@
 </span>
 
 <ng-template #link_content>
-  @if (label && label.length) {
+  @if (label() && label()?.length) {
     <span
       data-testid="ion-link-label"
-      [class.ion-link__label--bold]="bold"
-      [ngClass]="'ion-link__label ion-link__label--' + size"
-      >{{ label }}
+      [class.ion-link__label--bold]="bold()"
+      [ngClass]="'ion-link__label ion-link__label--' + size()"
+      >{{ label() }}
     </span>
   }
-  @if (icon) {
+  @if (icon(); as icon) {
     <ion-icon
       data-testid="ion-link-icon"
       [type]="icon"
-      [size]="iconSize"></ion-icon>
+      [size]="iconSize()"></ion-icon>
   }
 </ng-template>

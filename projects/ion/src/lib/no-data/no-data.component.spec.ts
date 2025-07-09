@@ -5,16 +5,16 @@ import { IonNoDataProps } from './types';
 
 const customLabel = 'No data';
 
-const testCustomProps: IonNoDataComponent = {
+const testCustomProps: Partial<IonNoDataProps> = {
   label: customLabel,
   iconType: 'exclamation-solid',
 };
 
 const sut = async (
-  customProps?: IonNoDataProps
+  customProps?: Partial<IonNoDataProps>
 ): Promise<ComponentFixture<IonNoDataComponent>> => {
   const { fixture } = await render(IonNoDataComponent, {
-    componentProperties: customProps,
+    componentInputs: customProps,
   });
   return fixture;
 };
