@@ -1,0 +1,83 @@
+@import '../../styles/index.scss';
+
+.ion-card {
+  min-width: fit-content;
+  background: $neutral-1;
+  box-shadow: 0 4px 4px rgba(101, 108, 129, 0.2);
+  border-radius: 8px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  header {
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: $neutral-8;
+    h4 {
+      margin: 0;
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 28px;
+    }
+
+    ::ng-deep {
+      .icon-title svg {
+        fill: $neutral-8;
+      }
+
+      .icon-info svg {
+        fill: $neutral-6;
+      }
+    }
+  }
+
+  &-header-title {
+    display: flex;
+    flex-direction: row;
+    max-width: fit-content;
+    align-items: center;
+    gap: spacing(1);
+  }
+
+  &-header-container-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: space-between;
+  }
+
+  body {
+    margin: 0;
+  }
+
+  footer {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 16px 24px;
+  }
+
+  &-footer-container-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  &-footer-buttons {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+
+  ::ng-deep {
+    ion-divider {
+      hr {
+        margin: 0 !important;
+      }
+    }
+  }
+}
