@@ -5,7 +5,7 @@ const meta: Meta<IonPopConfirmComponent> = {
   title: 'Ion/Data Display/PopConfirm',
   component: IonPopConfirmComponent,
   tags: ['autodocs'],
-  render: (args: IonPopConfirmComponent) => ({
+  render: args => ({
     props: {
       ...args,
     },
@@ -56,7 +56,7 @@ type Story = StoryObj<IonPopConfirmComponent>;
 export const Default: Story = {
   args: {
     ionPopConfirmTitle: 'Você tem certeza?',
-  } as IonPopConfirmComponent,
+  },
 };
 
 export const withDescription: Story = {
