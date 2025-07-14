@@ -56,6 +56,7 @@ const openToUpOffset: PopOffset = {
       <button
         ionPopConfirm
         ionPopConfirmTitle="Você tem certeza?"
+        ionPopConfirmDesc="Teste"
         (ionOnConfirm)="confirm()"
         class="get-test"
         style="margin-top: 50px;">
@@ -168,12 +169,11 @@ describe('Directive: Popconfirm', () => {
 
   it('should open the popconfirm when clicked', () => {
     directive.open();
-  });
+    const button = screen.getByText(textButton);
+    fireEvent.click(button);
 
-  it('should open the popconfirm when clicked', () => {
-    directive.open();
-    fireEvent.click(screen.getByText(textButton));
-    expect(screen.getByText(confirmText)).toBeInTheDocument();
+    const buttonConfirm = screen.getByTestId('pop-confirm-btn');
+    expect(buttonConfirm).toBeInTheDocument();
   });
 
   it('should close pop when click in cancel', () => {

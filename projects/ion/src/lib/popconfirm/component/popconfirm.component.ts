@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { Subject } from 'rxjs';
 import { IonAlertComponent } from '../../alert';
 import { IonButtonComponent } from '../../button';
@@ -19,12 +19,13 @@ import { IonPopConfirmProps } from '../types';
   styleUrls: ['./popconfirm.component.scss'],
 })
 export class IonPopConfirmComponent {
-  @Input() ionPopConfirmTitle!: IonPopConfirmProps['ionPopConfirmTitle'];
-  @Input() ionPopConfirmDesc: IonPopConfirmProps['ionPopConfirmDesc'];
-  @Input() ionPopConfirmType: IonPopConfirmProps['ionPopConfirmType'] =
-    'warning';
-  @Input() ionConfirmText: IonPopConfirmProps['ionConfirmText'] = 'Confirmar';
-  @Input() ionCancelText: IonPopConfirmProps['ionCancelText'] = 'Cancelar';
+  public ionPopConfirmTitle = input<IonPopConfirmProps['ionPopConfirmTitle']>();
+  public ionPopConfirmDesc = input<IonPopConfirmProps['ionPopConfirmDesc']>('');
+  public ionPopConfirmType =
+    input<IonPopConfirmProps['ionPopConfirmType']>('warning');
+  public ionConfirmText =
+    input<IonPopConfirmProps['ionConfirmText']>('Confirmar');
+  public ionCancelText = input<IonPopConfirmProps['ionCancelText']>('Cancelar');
 
   readonly ionOnConfirm = new Subject<void>();
   readonly ionOnClose = new Subject<void>();

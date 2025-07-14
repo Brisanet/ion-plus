@@ -1,4 +1,3 @@
-import { ComponentFixture } from '@angular/core/testing';
 import { render, screen } from '@testing-library/angular';
 import { IonPopConfirmProps } from '../types';
 import { IonPopConfirmComponent } from './popconfirm.component';
@@ -7,11 +6,11 @@ const defaultProps: IonPopConfirmProps = {
   ionPopConfirmTitle: 'Title',
 };
 
-const sut = async (
-  customProps: IonPopConfirmProps = defaultProps
-): Promise<ComponentFixture<IonPopConfirmComponent>> => {
+const sut = async (customProps: IonPopConfirmProps = defaultProps) => {
   const { fixture } = await render(IonPopConfirmComponent, {
-    componentProperties: customProps,
+    inputs: {
+      ...customProps,
+    },
   });
   return fixture;
 };

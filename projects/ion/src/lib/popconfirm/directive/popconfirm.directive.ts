@@ -4,13 +4,12 @@ import {
   ComponentFactoryResolver,
   ComponentRef,
   Directive,
-  EventEmitter,
   HostListener,
   Inject,
   Injector,
-  Input,
+  input,
   OnDestroy,
-  Output,
+  output,
   ViewContainerRef,
 } from '@angular/core';
 
@@ -37,13 +36,16 @@ export interface PopOffset {
   selector: '[ionPopConfirm]',
 })
 export class IonPopConfirmDirective implements OnDestroy {
-  @Input() ionPopConfirmTitle = 'Tem certeza?';
-  @Input() ionPopConfirmDesc = '';
-  @Input() ionPopConfirmType: PopConfirmStatusType = 'warning';
-  @Input() ionConfirmText: IonPopConfirmProps['ionConfirmText'] = 'Confirmar';
-  @Input() ionCancelText: IonPopConfirmProps['ionCancelText'] = 'Cancelar';
-  @Output() ionOnConfirm = new EventEmitter<void>();
-  @Output() ionOnClose = new EventEmitter<void>();
+  public ionPopConfirmTitle =
+    input<IonPopConfirmProps['ionPopConfirmTitle']>('Tem certeza?');
+  public ionPopConfirmDesc = input<string>('');
+  public ionPopConfirmType = input<PopConfirmStatusType>('warning');
+  public ionConfirmText =
+    input<IonPopConfirmProps['ionConfirmText']>('Confirmar');
+  public ionCancelText = input<IonPopConfirmProps['ionCancelText']>('Cancelar');
+
+  public ionOnConfirm = output<void>();
+  public ionOnClose = output<void>();
 
   private IonPopConfirmComponentRef!: ComponentRef<IonPopConfirmComponent> | null;
   private isBottomIcon = false;
@@ -156,19 +158,29 @@ export class IonPopConfirmDirective implements OnDestroy {
 
     this.document.body.appendChild(popconfirmElement);
 
-    this.IonPopConfirmComponentRef.instance.ionPopConfirmTitle =
-      this.ionPopConfirmTitle;
+    this.IonPopConfirmComponentRef.setInput(
+      'ionPopConfirmTitle',
+      this.ionPopConfirmTitle()
+    );
+    this.IonPopConfirmComponentRef.setInput(
+      'ionPopConfirmDesc',
+      this.ionPopConfirmDesc
+    );
 
-    this.IonPopConfirmComponentRef.instance.ionPopConfirmDesc =
-      this.ionPopConfirmDesc;
+    this.IonPopConfirmComponentRef.setInput(
+      'ionPopConfirmType',
+      this.ionPopConfirmType
+    );
 
-    this.IonPopConfirmComponentRef.instance.ionPopConfirmType =
-      this.ionPopConfirmType;
+    this.IonPopConfirmComponentRef.setInput(
+      'ionConfirmText',
+      this.ionConfirmText
+    );
 
-    this.IonPopConfirmComponentRef.instance.ionConfirmText =
-      this.ionConfirmText;
-
-    this.IonPopConfirmComponentRef.instance.ionCancelText = this.ionCancelText;
+    this.IonPopConfirmComponentRef.setInput(
+      'ionCancelText',
+      this.ionCancelText
+    );
 
     this.IonPopConfirmComponentRef.instance.ionOnConfirm.subscribe(() => {
       this.closePopConfirm();
