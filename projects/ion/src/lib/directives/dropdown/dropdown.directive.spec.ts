@@ -122,4 +122,55 @@ describe('IonDropdownDirective', () => {
     fixture.detectChanges();
     expect(screen.getByTestId('no-data-component')).toBeVisible();
   });
+
+  it('should render as a normal button when no dropdown config is provided', async () => {
+    await sut();
+
+    const button = screen.getByTestId('ion-button-open dropdown');
+    fireEvent.click(button);
+
+    expect(screen.queryByTestId('ion-dropdown')).not.toBeInTheDocument();
+  });
+
+  it('should render the dropdown when dropdownConfig is provided', async () => {
+    await sut({
+      dropdownConfig: { shouldRender: true },
+    });
+
+    const button = screen.getByTestId('ion-button-open dropdown');
+    fireEvent.click(button);
+
+    expect(screen.getByTestId('ion-dropdown')).toBeVisible();
+  });
+
+  it('should show spinner when dropdownLoading is true', async () => {
+    const fixture = await sut({
+      dropdownConfig: { shouldRender: true },
+    });
+
+    fixture.componentInstance.dropdownLoading = true;
+    fireEvent.click(screen.getByTestId('ion-button-open dropdown'));
+
+    expect(screen.getByTestId('ion-spinner')).toBeVisible();
+  });
+
+  it('should render options when dropdownOptions is provided', async () => {
+    const fixture = await sut({
+      dropdownConfig: { shouldRender: true },
+    });
+
+    fixture.componentInstance.dropdownOptions = [
+      {
+        key: '1',
+        name: 'Option 1',
+        label: 'Option 1',
+        value: 'opcao1',
+        selected: false,
+      },
+    ];
+
+    fireEvent.click(screen.getByTestId('ion-button-open dropdown'));
+
+    expect(screen.getByText('Option 1')).toBeInTheDocument();
+  });
 });
