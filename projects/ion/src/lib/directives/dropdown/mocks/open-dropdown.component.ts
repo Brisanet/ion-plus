@@ -2,7 +2,6 @@ import { Component, input } from '@angular/core';
 import { IonDropdownConfig, IonDropdownOption } from '../types';
 import { IonButtonComponent } from '../../../button';
 import { IonDropdownDirective } from '../dropdown.directive';
-import { SafeAny } from '../../../utils/safe-any';
 
 export interface Character extends IonDropdownOption {
   name: string;
@@ -23,6 +22,4 @@ export class OpenDropdownComponent {
   dropdownConfig = input<IonDropdownConfig<Character>>({});
   dropdownLoading = false;
   dropdownOptions: Character[] = [];
-  dropdownEvent: SafeAny;
-  dropdownRef: SafeAny;
 }
