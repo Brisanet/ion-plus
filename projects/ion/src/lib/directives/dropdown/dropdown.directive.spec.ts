@@ -123,7 +123,7 @@ describe('IonDropdownDirective', () => {
     expect(screen.getByTestId('no-data-component')).toBeVisible();
   });
 
-  it('should render as a normal button when no dropdown config is provided', async () => {
+  it('should render normal button behavior when no dropdown configuration is provided', async () => {
     await sut();
 
     const button = screen.getByTestId('ion-button-open dropdown');
@@ -132,7 +132,7 @@ describe('IonDropdownDirective', () => {
     expect(screen.queryByTestId('ion-dropdown')).not.toBeInTheDocument();
   });
 
-  it('should render the dropdown when dropdownConfig is provided', async () => {
+  it('should render dropdown when dropdown configuration is provided', async () => {
     await sut({
       dropdownConfig: { shouldRender: true },
     });
@@ -173,4 +173,136 @@ describe('IonDropdownDirective', () => {
 
     expect(screen.getByText('Option 1')).toBeInTheDocument();
   });
+
+  it('should select an option when clicked', async () => {
+    const fixture = await sut({
+      dropdownConfig: { shouldRender: true },
+    });
+
+    fixture.componentInstance.dropdownOptions = [
+      {
+        key: '1',
+        name: 'Option 1',
+        label: 'Option 1',
+        value: 'opcao1',
+        selected: false,
+      },
+      {
+        key: '2',
+        name: 'Option 2',
+        label: 'Option 2',
+        value: 'opcao2',
+        selected: false,
+      },
+    ];
+
+    fireEvent.click(screen.getByTestId('ion-button-open dropdown'));
+    fireEvent.click(screen.getByText('Option 1'));
+
+    fixture.detectChanges();
+
+    expect(fixture.componentInstance.dropdownOptions[0].selected).toBe(true);
+  });
+
+  it('should not select a disabled option', async () => {
+    const fixture = await sut({
+      dropdownConfig: { shouldRender: true },
+    });
+
+    fixture.componentInstance.dropdownOptions = [
+      {
+        key: '1',
+        name: 'Option 1',
+        label: 'Option 1',
+        value: 'opcao1',
+        selected: false,
+        disabled: true,
+      },
+    ];
+
+    fireEvent.click(screen.getByTestId('ion-button-open dropdown'));
+    fireEvent.click(screen.getByText('Option 1'));
+
+    fixture.detectChanges();
+
+    expect(fixture.componentInstance.dropdownOptions[0].selected).toBe(false);
+  });
+});
+it('should allow multiple selections when multiple is true', async () => {
+  const fixture = await sut({
+    dropdownConfig: { shouldRender: true, multiple: true },
+  });
+
+  fixture.componentInstance.dropdownOptions = [
+    {
+      key: '1',
+      name: 'Option 1',
+      label: 'Option 1',
+      value: 'opcao1',
+      selected: false,
+    },
+    {
+      key: '2',
+      name: 'Option 2',
+      label: 'Option 2',
+      value: 'opcao2',
+      selected: false,
+    },
+    {
+      key: '3',
+      name: 'Option 3',
+      label: 'Option 3',
+      value: 'opcao3',
+      selected: false,
+    },
+  ];
+
+  fireEvent.click(screen.getByTestId('ion-button-open dropdown'));
+  fireEvent.click(screen.getByText('Option 1'));
+  fireEvent.click(screen.getByText('Option 2'));
+
+  fixture.detectChanges();
+
+  expect(fixture.componentInstance.dropdownOptions[0].selected).toBe(true);
+  expect(fixture.componentInstance.dropdownOptions[1].selected).toBe(true);
+  expect(fixture.componentInstance.dropdownOptions[2].selected).toBe(false);
+});
+it('should allow only one selection when multiple is false', async () => {
+  const fixture = await sut({
+    dropdownConfig: { shouldRender: true, multiple: false },
+  });
+
+  fixture.componentInstance.dropdownOptions = [
+    {
+      key: '1',
+      name: 'Option 1',
+      label: 'Option 1',
+      value: 'opcao1',
+      selected: false,
+    },
+    {
+      key: '2',
+      name: 'Option 2',
+      label: 'Option 2',
+      value: 'opcao2',
+      selected: false,
+    },
+    {
+      key: '3',
+      name: 'Option 3',
+      label: 'Option 3',
+      value: 'opcao3',
+      selected: false,
+    },
+  ];
+
+  fireEvent.click(screen.getByTestId('ion-button-open dropdown'));
+  fireEvent.click(screen.getByText('Option 1'));
+  fireEvent.click(screen.getByText('Option 2'));
+
+  fixture.detectChanges();
+
+  expect(fixture.componentInstance.dropdownOptions[0].selected).toBe(false);
+  expect(fixture.componentInstance.dropdownOptions[1].selected).toBe(true);
+  expect(fixture.componentInstance.dropdownOptions[2].selected).toBe(false);
 });
