@@ -1,0 +1,20 @@
+name: Review by Gandalf
+
+on:
+  pull_request:
+    types: [opened]
+    branches:
+      - main
+
+jobs:
+  send-pr-to-gandalf:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Gandalf Reviewer
+        run: |
+          curl --fail --show-error --silent -X POST ${{ secrets.WEBHOOK_REVIEWER }} \
+          -H "Content-Type: application/json" \
+          -d '{
+                "repository": "${{ github.repository }}",
+                "pr_id": ${{ github.event.pull_request.number }}
+              }'
